@@ -2,7 +2,7 @@ package com.example.studentapp.model;
 
 public class Rate {
     String classId;
-    int rate;
+    float rate;
     String comment;
     String date;
 
@@ -21,11 +21,11 @@ public class Rate {
         this.classId = classId;
     }
 
-    public int getRate() {
+    public float getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(float rate) {
         this.rate = rate;
     }
 

@@ -6,13 +6,15 @@ public class ClassObject {
     String tutorPhone;
     String studentPhone;
     String place;
-    String status;
+
+    // 0: Đang học, 1: Đã hoàn thành, 2: Đã đánh giá
+    int status;
     String fee;
     String dateTime;
     String startDate;
     String endDate;
 
-    public ClassObject(String id, String className, String tutorPhone, String studentPhone, String place, String status, String fee, String dateTime, String startDate, String endDate) {
+    public ClassObject(String id, String className, String tutorPhone, String studentPhone, String place, int status, String fee, String dateTime, String startDate, String endDate) {
         this.id = id;
         this.className = className;
         this.tutorPhone = tutorPhone;
@@ -65,11 +67,11 @@ public class ClassObject {
         this.place = place;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

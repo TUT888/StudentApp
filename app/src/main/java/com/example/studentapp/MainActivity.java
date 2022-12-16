@@ -12,7 +12,10 @@ import com.example.studentapp.R;
 import com.example.studentapp.adapter.ViewPagerAdapter;
 import com.example.studentapp.extra_fragment.AddNewPostFragment;
 import com.example.studentapp.extra_fragment.PostDetailFragment;
+import com.example.studentapp.extra_fragment.RateFragment;
+import com.example.studentapp.extra_fragment.RatingDetailFragment;
 import com.example.studentapp.model.Post;
+import com.example.studentapp.model.Rate;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -125,6 +128,21 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void goToRateDetailFragment(Rate rate, String previousFragment) {
+        //Example: previousFragment = MyPostFragment.class.getSimpleName() = "MyPostFragment"
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        RatingDetailFragment ratingDetailFragment = new RatingDetailFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("rate", (Serializable) rate);
+        bundle.putString("previous", previousFragment);
+
+        ratingDetailFragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.main_activity_content, ratingDetailFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     public void goToAddNewPostFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
@@ -136,5 +154,14 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void goToRateFragment() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        RateFragment rateFragment = new RateFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        rateFragment.setArguments(bundle);
 
+        fragmentTransaction.replace(R.id.main_activity_content, rateFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
 }

@@ -15,9 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.studentapp.app_interface.IClickBtnRating;
 import com.example.studentapp.extra_fragment.PostDetailFragment;
 import com.example.studentapp.R;
 import com.example.studentapp.model.ClassObject;
+import com.example.studentapp.model.Rate;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
@@ -25,9 +27,11 @@ import java.util.List;
 public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder>{
 
     private List<ClassObject> classes;
+    private IClickBtnRating iClickBtnRating;
 
-    public ClassAdapter (List<ClassObject> classesList) {
+    public ClassAdapter (List<ClassObject> classesList, IClickBtnRating iClickBtnRating) {
         this.classes = classesList;
+        this.iClickBtnRating = iClickBtnRating;
     }
 
     @NonNull
@@ -50,12 +54,30 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         holder.classFee.setText(mClass.getFee());
         holder.classStatus.setText(mClass.getStatus());
         holder.classTime.setText(mClass.getDateTime());
-        if (mClass.getStatus() == "Hoàn thành") {
+        if (mClass.getStatus() == 1) {
+            holder.classRate.setText("Đánh giá");
+            holder.classRate.setVisibility(View.VISIBLE);
+        }
+        else if (mClass.getStatus() == 2) {
+            holder.classRate.setText("Xem đánh giá");
             holder.classRate.setVisibility(View.VISIBLE);
         }
         else {
-            holder.classRate.setVisibility(View.INVISIBLE);
+            holder.classRate.setVisibility(View.GONE);
         }
+
+        holder.classRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mClass.getStatus() == 1) {
+                    iClickBtnRating.rateClass(mClass);
+                }
+                else {
+//                    Rate rate = getRateByClassId();
+//                    iClickBtnRating.seeRateDetail(rate);
+                }
+            }
+        });
     }
 
     @Override
