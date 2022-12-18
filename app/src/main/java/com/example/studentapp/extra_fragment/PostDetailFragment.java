@@ -23,7 +23,7 @@ public class PostDetailFragment extends Fragment {
     private View mView;
     private ImageButton ibBack, ibPostOption;
     private MaterialButton mbContact;
-    // Class
+    // Object Class
     private Post post;
     private String previousFragment; //MyPostFragment, SearchPostFragment,...
 

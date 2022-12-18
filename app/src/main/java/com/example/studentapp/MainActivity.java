@@ -147,6 +147,28 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void goToLoginFragment() {
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
+//        Bundle bundle = new Bundle();
+//        detailFragment.setArguments(bundle);
+//
+//        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+    }
+
+    public void goToRegisterFragment() {
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
+//        Bundle bundle = new Bundle();
+//        detailFragment.setArguments(bundle);
+//
+//        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+    }
+
     public User getCurrentLoginUser() {
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
 
