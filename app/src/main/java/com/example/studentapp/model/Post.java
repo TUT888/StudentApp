@@ -3,6 +3,12 @@ package com.example.studentapp.model;
 import java.io.Serializable;
 
 public class Post implements Serializable {
+
+    public static final int POST_STATUS_WAITING = 0;
+    public static final int POST_STATUS_CREATED_CLASS = 1;
+    public static final int POST_STATUS_CANCELLED = -1;
+    public static final int POST_STATUS_EDITED = 2;
+
     private String id;
     private String title;
     private int status; /// 0: waiting, 1: class created, -1: cancelled, 2: edited
