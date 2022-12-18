@@ -19,9 +19,11 @@ import com.example.studentapp.extra_fragment.PostDetailFragment;
 import com.example.studentapp.extra_fragment.RegisterFragment;
 import com.example.studentapp.extra_fragment.RateFragment;
 import com.example.studentapp.extra_fragment.RatingDetailFragment;
+import com.example.studentapp.extra_fragment.TutorDetailFragment;
 import com.example.studentapp.fragment.ClassFragment;
 import com.example.studentapp.model.Post;
 import com.example.studentapp.model.Rate;
+import com.example.studentapp.model.Tutor;
 import com.example.studentapp.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -232,5 +234,19 @@ public class MainActivity extends AppCompatActivity {
         User currentUser = gson.fromJson(jsonString, User.class);
 
         return currentUser;
+    }
+
+    public void goToTutorDetailFragment(Tutor tutor, String previousFragment){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        TutorDetailFragment detailFragment = new TutorDetailFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("tutor", (Serializable) tutor);
+        bundle.putString("previous", previousFragment);
+
+        detailFragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

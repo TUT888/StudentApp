@@ -1,7 +1,9 @@
 package com.example.studentapp.search;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,7 +16,9 @@ import android.widget.Toast;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
+import com.example.studentapp.adapter.FollowerPostAdapter;
 import com.example.studentapp.adapter.MyPostAdapter;
+import com.example.studentapp.adapter.SearchPostAdapter;
 import com.example.studentapp.app_interface.IClickPostObjectListener;
 import com.example.studentapp.model.Post;
 
@@ -27,12 +31,13 @@ public class SearchPostFragment extends Fragment {
 
     private RecyclerView rcvSearchPost;
     private ArrayList<Post> searchPostArrayList;
-    private MyPostAdapter searchPostAdapter;
+    private SearchPostAdapter searchPostAdapter;
     private SearchView svSearchPost;
 
     public SearchPostFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,7 +49,7 @@ public class SearchPostFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcvSearchPost.setLayoutManager(linearLayoutManager);
         searchPostArrayList = initPost();
-        searchPostAdapter = new MyPostAdapter(searchPostArrayList, new IClickPostObjectListener() {
+        searchPostAdapter = new SearchPostAdapter(searchPostArrayList, new IClickPostObjectListener() {
             @Override
             public void onClickPostObject(Post post) {
                 mMainActivity.goToPostDetailFragment(post, SearchPostFragment.class.getSimpleName());
@@ -52,6 +57,19 @@ public class SearchPostFragment extends Fragment {
 
             @Override
             public void onClickBtnHidePost(Post post) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Bạn có muốn ẩn bài post này không?")
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                searchPostAdapter.remove(post);
+                            }
+                        })
+                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder.show();
 
             }
         });
@@ -103,6 +121,6 @@ public class SearchPostFragment extends Fragment {
             }
 
         }
-        searchPostAdapter.setPostList(filteredList);
+        searchPostAdapter.setData(filteredList);
     }
 }

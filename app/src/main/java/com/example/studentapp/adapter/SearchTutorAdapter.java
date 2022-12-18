@@ -8,14 +8,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.studentapp.R;
+import com.example.studentapp.app_interface.IClickPostObjectListener;
+import com.example.studentapp.app_interface.IClickTutorObjectListener;
 import com.example.studentapp.model.Tutor;
 import java.util.ArrayList;
 public class SearchTutorAdapter extends RecyclerView.Adapter<SearchTutorAdapter.SearchTutorViewHolder> {
-    ArrayList<Tutor> tutorList;
+
+    private ArrayList<Tutor> tutorList;
+    private IClickTutorObjectListener mListener;
+
     public void setData(ArrayList<Tutor> tutorList){
         this.tutorList = tutorList;
         notifyDataSetChanged();
     }
+
+    public void remove(Tutor tutor){
+        tutorList.remove(tutor);
+        notifyDataSetChanged();
+    }
+
+    public SearchTutorAdapter(IClickTutorObjectListener mListener) {
+        this.mListener = mListener;
+    }
+
     @NonNull
     @Override
     public SearchTutorAdapter.SearchTutorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,6 +52,18 @@ public class SearchTutorAdapter extends RecyclerView.Adapter<SearchTutorAdapter.
         }
         holder.tvKhuVuc.setText(tutor.getAreas());
         holder.tvChuyenMon.setText(tutor.getFields());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onClickTutorObject(tutor);
+            }
+        });
+        holder.btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onClickBtnHideTutor(tutor);
+            }
+        });
     }
     @Override
     public int getItemCount() {

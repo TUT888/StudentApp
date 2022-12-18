@@ -1,6 +1,8 @@
 package com.example.studentapp.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     public static final int USER_STATUS_NOT_VERIFIED = 0;
     public static final int USER_STATUS_VERIFIED = 1;
