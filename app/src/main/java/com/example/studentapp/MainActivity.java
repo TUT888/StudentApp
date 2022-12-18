@@ -19,10 +19,14 @@ import com.example.studentapp.extra_fragment.PostDetailFragment;
 import com.example.studentapp.extra_fragment.RegisterFragment;
 import com.example.studentapp.extra_fragment.RateFragment;
 import com.example.studentapp.extra_fragment.RatingDetailFragment;
+import com.example.studentapp.extra_fragment.TutorDetailFragment;
 import com.example.studentapp.fragment.ClassFragment;
+
+
 import com.example.studentapp.fragment.ProfileFragment;
 import com.example.studentapp.model.Post;
 import com.example.studentapp.model.Rate;
+import com.example.studentapp.model.Tutor;
 import com.example.studentapp.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -235,6 +239,8 @@ public class MainActivity extends AppCompatActivity {
         return currentUser;
     }
 
+
+
     public void savedLoginUser(User user) {
         SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -262,5 +268,19 @@ public class MainActivity extends AppCompatActivity {
         String json = gson.toJson(null);
         editor.putString(KEY_USER_LOGIN_HISTORY, json);
         editor.apply();
+    }
+
+    public void goToTutorDetailFragment(Tutor tutor, String previousFragment){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        TutorDetailFragment detailFragment = new TutorDetailFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("tutor", (Serializable) tutor);
+        bundle.putString("previous", previousFragment);
+
+        detailFragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

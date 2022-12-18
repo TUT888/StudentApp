@@ -29,11 +29,6 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
         mIClickPostObjectListener = listener;
     }
 
-    public void setPostList(List<Post> listPosts) {
-        mPostList = listPosts;
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

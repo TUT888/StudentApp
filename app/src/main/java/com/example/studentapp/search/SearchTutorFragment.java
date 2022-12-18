@@ -1,7 +1,9 @@
 package com.example.studentapp.search;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +16,8 @@ import android.view.ViewGroup;
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
 import com.example.studentapp.adapter.SearchTutorAdapter;
+import com.example.studentapp.app_interface.IClickTutorObjectListener;
+import com.example.studentapp.fragment.MyPostFragment;
 import com.example.studentapp.model.Tutor;
 
 import java.util.ArrayList;
@@ -44,7 +48,29 @@ public class SearchTutorFragment extends Fragment {
         rcvSearchTutor.setLayoutManager(linearLayoutManager);
         svSearchTutor = mView.findViewById(R.id.svSearchTutor);
         searchTutorArrayList = initTutor();
-        searchTutorAdapter = new SearchTutorAdapter();
+        searchTutorAdapter = new SearchTutorAdapter(new IClickTutorObjectListener() {
+            @Override
+            public void onClickTutorObject(Tutor tutor) {
+                mMainActivity.goToTutorDetailFragment(tutor, SearchTutorFragment.class.getSimpleName());
+            }
+
+            @Override
+            public void onClickBtnHideTutor(Tutor tutor) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Bạn có muốn người dùng này không?")
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                searchTutorAdapter.remove(tutor);
+                            }
+                        })
+                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder.show();
+            }
+        });
         searchTutorAdapter.setData(searchTutorArrayList);
         rcvSearchTutor.setAdapter(searchTutorAdapter);
 

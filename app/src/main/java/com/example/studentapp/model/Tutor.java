@@ -1,6 +1,8 @@
 package com.example.studentapp.model;
 
-public class Tutor extends User {
+import java.io.Serializable;
+
+public class Tutor extends User implements Serializable {
     private String school;
     private String academicLevel;
     private String fields;
