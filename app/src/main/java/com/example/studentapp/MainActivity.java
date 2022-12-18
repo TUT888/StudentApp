@@ -22,6 +22,7 @@ import com.example.studentapp.extra_fragment.RateFragment;
 import com.example.studentapp.extra_fragment.RatingDetailFragment;
 import com.example.studentapp.extra_fragment.TutorDetailFragment;
 import com.example.studentapp.fragment.ClassFragment;
+import com.example.studentapp.model.ClassObject;
 import com.example.studentapp.model.Post;
 import com.example.studentapp.model.Rate;
 import com.example.studentapp.model.Tutor;
