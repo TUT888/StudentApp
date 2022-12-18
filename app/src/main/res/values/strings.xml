@@ -5,4 +5,5 @@
     <string name="yes">Có</string>
     <string name="no">Không</string>
     <string name="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</string>
+    <string name="login_to_use">Đăng nhập để sử dụng chức năng của hệ thống</string>
 </resources>

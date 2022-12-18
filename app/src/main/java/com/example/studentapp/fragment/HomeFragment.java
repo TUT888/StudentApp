@@ -1,5 +1,7 @@
 package com.example.studentapp.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,13 +11,20 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.studentapp.R;
 import com.example.studentapp.adapter.HomeViewPagerAdapter;
+import com.example.studentapp.model.User;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
-
     TabLayout homeTabLayout;
     ViewPager homeViewPager;
     View mView;

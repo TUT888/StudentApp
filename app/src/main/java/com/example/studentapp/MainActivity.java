@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.studentapp.R;
 import com.example.studentapp.adapter.ViewPagerAdapter;
@@ -16,12 +19,15 @@ import com.example.studentapp.extra_fragment.RateFragment;
 import com.example.studentapp.extra_fragment.RatingDetailFragment;
 import com.example.studentapp.model.Post;
 import com.example.studentapp.model.Rate;
+import com.example.studentapp.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.gson.Gson;
 
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String KEY_USER_LOGIN_HISTORY = "KEY_USER_LOGIN_HISTORY";
     public static final String[] PLACES_TO_CHOOSE = {
             "Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6",
             "Quận 7", "Quận 8", "Quận 9", "Quận 10", "Quận 11", "Quận 12",
@@ -45,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
         setUpViewPager();
         setUpBottomNavigationView();
+
+        User u = getCurrentLoginUser();
+        if (u == null) {
+            Toast.makeText(this, "You did not login", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //ViewPager settings
@@ -128,6 +139,17 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void goToAddNewPostFragment() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        detailFragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     public void goToRateDetailFragment(Rate rate, String previousFragment) {
         //Example: previousFragment = MyPostFragment.class.getSimpleName() = "MyPostFragment"
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -143,17 +165,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void goToAddNewPostFragment() {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
-        Bundle bundle = new Bundle();
-        detailFragment.setArguments(bundle);
-
-        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
-
     public void goToRateFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         RateFragment rateFragment = new RateFragment(); //Child fragment
@@ -163,5 +174,37 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_activity_content, rateFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    public void goToLoginFragment() {
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
+//        Bundle bundle = new Bundle();
+//        detailFragment.setArguments(bundle);
+//
+//        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+    }
+
+    public void goToRegisterFragment() {
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
+//        Bundle bundle = new Bundle();
+//        detailFragment.setArguments(bundle);
+//
+//        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+    }
+
+    public User getCurrentLoginUser() {
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+
+        Gson gson = new Gson();
+        String jsonString = sharedPref.getString(KEY_USER_LOGIN_HISTORY, null);
+        User currentUser = gson.fromJson(jsonString, User.class);
+
+        return currentUser;
     }
 }

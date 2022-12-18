@@ -1,20 +1,25 @@
 package com.example.studentapp.model;
 
 public class ClassObject {
+    public static final int CLASS_STATUS_AVAILABLE = 0;
+    public static final int CLASS_STATUS_ARCHIVED = 1;
+    public static final int CLASS_STATUS_RATED = -1;
     String id;
     String className;
     String tutorPhone;
     String studentPhone;
     String place;
-
-    // 0: Đang học, 1: Đã hoàn thành, 2: Đã đánh giá
+    // 0: Đang học, 1: Đã lưu trữ (đã hoàn thành), -1: Đã đánh giá
     int status;
-    String fee;
+    int fee;
     String dateTime;
     String startDate;
     String endDate;
+    private String method; // online or offline
+    private String subject;
+    private String field;
 
-    public ClassObject(String id, String className, String tutorPhone, String studentPhone, String place, int status, String fee, String dateTime, String startDate, String endDate) {
+    public ClassObject(String id, String className, String tutorPhone, String studentPhone, String place, int status, int fee, String dateTime, String startDate, String endDate, String method, String subject, String field) {
         this.id = id;
         this.className = className;
         this.tutorPhone = tutorPhone;
@@ -25,6 +30,9 @@ public class ClassObject {
         this.dateTime = dateTime;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.method = method;
+        this.subject = subject;
+        this.field = field;
     }
 
     public String getId() {
@@ -75,11 +83,11 @@ public class ClassObject {
         this.status = status;
     }
 
-    public String getFee() {
+    public int getFee() {
         return fee;
     }
 
-    public void setFee(String fee) {
+    public void setFee(int fee) {
         this.fee = fee;
     }
 
@@ -105,5 +113,29 @@ public class ClassObject {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
     }
 }

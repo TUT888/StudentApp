@@ -3,15 +3,35 @@ package com.example.studentapp.model;
 public class Tutor extends User {
     private String school;
     private String academicLevel;
+    private String fields;
+    private String areas;
 
     public Tutor() {
 
     }
 
-    public Tutor(String phoneNumber, String name, int status, String address, int gender, String birthday, String email, int avatar, String password) {
+    public Tutor(String phoneNumber, String name, int status, String address, int gender, String birthday, String email, int avatar, String password, String school, String academicLevel, String fields, String areas) {
         super(phoneNumber, name, status, address, gender, birthday, email, avatar, password);
-        this.school = "";
-        this.academicLevel = "";
+        this.school = school;
+        this.academicLevel = academicLevel;
+        this.fields = fields;
+        this.areas = areas;
+    }
+
+    public String getFields() {
+        return fields;
+    }
+
+    public void setFields(String fields) {
+        this.fields = fields;
+    }
+
+    public String getAreas() {
+        return areas;
+    }
+
+    public void setAreas(String areas) {
+        this.areas = areas;
     }
 
     public String getSchool() {

@@ -3,16 +3,21 @@ package com.example.studentapp.model;
 import java.io.Serializable;
 
 public class Post implements Serializable {
+
+    public static final int POST_STATUS_WAITING = 0;
+    public static final int POST_STATUS_CREATED_CLASS = 1;
+    public static final int POST_STATUS_CANCELLED = -1;
+    public static final int POST_STATUS_EDITED = 2;
+
     private String id;
     private String title;
     private int status; /// 0: waiting, 1: class created, -1: cancelled, 2: edited
-    private User user;
+    private String idUser;
     //private Subject subject;
     private String subject;
     //private Field field;
     private String field;
-    private String learningTimes;
-    private String learningDates;
+    private String dateTimesLearning;
     private String learningPlaces;
     private String method; // online or offline
     private int tuition;
@@ -20,15 +25,14 @@ public class Post implements Serializable {
     private String postDate;
     private String hideFrom;
 
-    public Post(String id, String title, int status, User user, String subject, String field, String learningTimes, String learningDates, String learningPlaces, String method, int tuition, String description, String postDate, String hideFrom) {
+    public Post(String id, String title, int status, String idUser, String subject, String field, String dateTimesLearning, String learningPlaces, String method, int tuition, String description, String postDate, String hideFrom) {
         this.id = id;
         this.title = title;
         this.status = status;
-        this.user = user;
+        this.idUser = idUser;
         this.subject = subject;
         this.field = field;
-        this.learningTimes = learningTimes;
-        this.learningDates = learningDates;
+        this.dateTimesLearning = dateTimesLearning;
         this.learningPlaces = learningPlaces;
         this.method = method;
         this.tuition = tuition;
@@ -77,28 +81,28 @@ public class Post implements Serializable {
         this.status = status;
     }
 
-    public User getUser() {
-        return user;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
-    public String getLearningTimes() {
-        return learningTimes;
+    public String getHideFrom() {
+        return hideFrom;
     }
 
-    public void setLearningTimes(String learningTimes) {
-        this.learningTimes = learningTimes;
+    public void setHideFrom(String hideFrom) {
+        this.hideFrom = hideFrom;
     }
 
-    public String getLearningDates() {
-        return learningDates;
+    public String getDateTimesLearning() {
+        return dateTimesLearning;
     }
 
-    public void setLearningDates(String learningDates) {
-        this.learningDates = learningDates;
+    public void setDateTimesLearning(String dateTimesLearning) {
+        this.dateTimesLearning = dateTimesLearning;
     }
 
     public String getLearningPlaces() {

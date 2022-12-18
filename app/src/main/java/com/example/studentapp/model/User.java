@@ -1,6 +1,11 @@
 package com.example.studentapp.model;
 
 public class User {
+
+    public static final int USER_STATUS_NOT_VERIFIED = 0;
+    public static final int USER_STATUS_VERIFIED = 1;
+    public static final int USER_STATUS_LOCKED = -1;
+
     private String phoneNumber;
     private String name;
     private int status;
