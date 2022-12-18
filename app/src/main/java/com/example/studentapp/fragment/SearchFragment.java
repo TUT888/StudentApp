@@ -10,9 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.studentapp.search.SearchPostFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.example.studentapp.R;
 import com.example.studentapp.adapter.SearchViewPagerAdapter;
+
+import java.util.List;
 
 public class SearchFragment extends Fragment {
 
@@ -43,4 +46,6 @@ public class SearchFragment extends Fragment {
 
         return mView;
     }
+
+
 }
