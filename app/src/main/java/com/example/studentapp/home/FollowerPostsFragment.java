@@ -62,7 +62,7 @@ public class FollowerPostsFragment extends Fragment {
             @Override
             public void onClickBtnHidePost(Post post) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
-                builder.setMessage("Bạn có muốn ẩn bài post này không?")
+                builder.setMessage("Bạn có muốn ẩn bài đăng này không?")
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 //                                post.addHide(currentUser.getPhoneNumber());

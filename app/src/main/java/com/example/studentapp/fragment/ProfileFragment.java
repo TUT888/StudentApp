@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +26,9 @@ public class ProfileFragment extends Fragment {
     private LinearLayout loginLayoutProfileContent, logoutLayoutProfileContent;
     private Button btnLogin, btnRegister;
     TextView tvClasses, tvFollowing, tvAccountSetting, tvChangePassword, tvLogout;
-    // Object Class
+    // Object Class & variables
     private User currentUser;
+    private boolean fromLoginFragment;
 
     public ProfileFragment() {
         currentUser = null;
@@ -60,7 +62,8 @@ public class ProfileFragment extends Fragment {
         tvLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Log out
+                mMainActivity.logOut();
+                setUserInteractUI();
             }
         });
         tvClasses.setOnClickListener(new View.OnClickListener() {
@@ -107,10 +110,10 @@ public class ProfileFragment extends Fragment {
         currentUser = mMainActivity.getCurrentLoginUser();
         if (currentUser==null) {
             loginLayoutProfileHeading.setVisibility(View.GONE);
-            loginLayoutProfileContent.setVisibility(View.VISIBLE);
+            loginLayoutProfileContent.setVisibility(View.GONE);
 
             logoutLayoutProfileHeading.setVisibility(View.VISIBLE);
-            logoutLayoutProfileContent.setVisibility(View.GONE);
+            logoutLayoutProfileContent.setVisibility(View.VISIBLE);
         } else {
             // Hiện layout đã đăng nhập
             loginLayoutProfileHeading.setVisibility(View.VISIBLE);
@@ -119,5 +122,26 @@ public class ProfileFragment extends Fragment {
             logoutLayoutProfileHeading.setVisibility(View.GONE);
             logoutLayoutProfileContent.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("ProfileFragment", "On Pause");
+        fromLoginFragment = true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("ProfileFragment", "On Resume");
+        if (fromLoginFragment) {
+            setUserInteractUI();
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 }
