@@ -290,7 +290,6 @@ public class AddNewPostFragment extends Fragment {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("ddmmyy-hhmmss");
             String id = "P"+dtf.format(LocalDateTime.now());
             //Post newPost = new Post(id, );
-
         }
     }
 

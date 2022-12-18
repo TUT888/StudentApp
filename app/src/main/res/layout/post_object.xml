@@ -182,13 +182,25 @@
                 </TableRow>
             </TableLayout>
         </LinearLayout>
+        <ImageButton
+            android:id="@+id/ibPostOption"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_view_option_menu"
+            android:scaleX="1.6"
+            android:scaleY="1.6"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitCenter"
+            android:visibility="gone"/>
         <ImageView
             android:id="@+id/btnAnBaiDang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_close_button"
             android:layout_gravity="right"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:visibility="visible"/>
     </FrameLayout>
 
 </com.google.android.material.card.MaterialCardView>
