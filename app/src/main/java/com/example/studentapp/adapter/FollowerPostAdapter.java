@@ -58,8 +58,9 @@ public class FollowerPostAdapter extends RecyclerView.Adapter<FollowerPostAdapte
         holder.tvTitle.setText(post.getTitle());
         holder.tvMonHoc.setText(post.getSubject());
         holder.tvKhuVuc.setText(String.join(", ", post.getLearningPlaces()));
-        holder.tvThoiGian.setText(String.join(", ", post.getLearningTimes()));
-        holder.tvNgayHoc.setText(String.join(", ", post.getLearningDates()));
+
+        holder.tvNgayHoc.setText(post.getDateTimesLearning());
+
         holder.tvHinhThuc.setText(post.getMethod());
         holder.tvHocPhi.setText(String.valueOf(post.getTuition()));
         holder.tvNgayDang.setText(post.getPostDate());
@@ -92,8 +93,8 @@ public class FollowerPostAdapter extends RecyclerView.Adapter<FollowerPostAdapte
     public class FollowerPostViewHolder extends RecyclerView.ViewHolder {
         ImageView imgAvatar;
         TextView tvName, tvRole, tvTitle,
-                tvMonHoc, tvKhuVuc, tvThoiGian,
-                tvNgayHoc, tvHinhThuc, tvHocPhi, tvNgayDang;
+                tvMonHoc, tvKhuVuc, tvNgayHoc,
+                tvHinhThuc, tvHocPhi, tvNgayDang;
         Button btnAnBaiDang;
 
         public FollowerPostViewHolder(@NonNull View itemView) {
@@ -105,7 +106,6 @@ public class FollowerPostAdapter extends RecyclerView.Adapter<FollowerPostAdapte
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvMonHoc = itemView.findViewById(R.id.tvMonHoc);
             tvKhuVuc = itemView.findViewById(R.id.tvKhuVuc);
-            tvThoiGian = itemView.findViewById(R.id.tvThoiGian);
             tvNgayHoc = itemView.findViewById(R.id.tvNgayHoc);
             tvHinhThuc = itemView.findViewById(R.id.tvHinhThuc);
             tvHocPhi = itemView.findViewById(R.id.tvHocPhi);

@@ -55,8 +55,7 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
         holder.tvTitle.setText(post.getTitle());
         holder.tvMonHoc.setText(post.getSubject());
         holder.tvKhuVuc.setText(String.join(", ", post.getLearningPlaces()));
-        holder.tvThoiGian.setText(String.join(", ", post.getLearningTimes()));
-        holder.tvNgayHoc.setText(String.join(", ", post.getLearningDates()));
+        holder.tvNgayHoc.setText(String.join(", ", post.getDateTimesLearning()));
         holder.tvHinhThuc.setText(post.getMethod());
         holder.tvHocPhi.setText(String.valueOf(post.getTuition()));
         holder.tvNgayDang.setText(post.getPostDate());
@@ -105,8 +104,8 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
     public class PostViewHolder extends RecyclerView.ViewHolder {
         ImageView imgAvatar;
         TextView tvName, tvRole, tvTitle,
-                tvMonHoc, tvKhuVuc, tvThoiGian,
-                tvNgayHoc, tvHinhThuc, tvHocPhi, tvNgayDang;
+                tvMonHoc, tvKhuVuc, tvNgayHoc,
+                tvHinhThuc, tvHocPhi, tvNgayDang;
         ImageButton ibPostOption;
         ImageView btnAnBaiDang;
 
@@ -119,7 +118,6 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvMonHoc = itemView.findViewById(R.id.tvMonHoc);
             tvKhuVuc = itemView.findViewById(R.id.tvKhuVuc);
-            tvThoiGian = itemView.findViewById(R.id.tvThoiGian);
             tvNgayHoc = itemView.findViewById(R.id.tvNgayHoc);
             tvHinhThuc = itemView.findViewById(R.id.tvHinhThuc);
             tvHocPhi = itemView.findViewById(R.id.tvHocPhi);

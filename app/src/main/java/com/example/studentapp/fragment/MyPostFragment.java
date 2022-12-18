@@ -81,12 +81,12 @@ public class MyPostFragment extends Fragment {
         arrayList.add(new Post("01", "Tìm gia sư toán", 0,
                 "0998776755",
                 "Toan lop 12", "Toán",
-                "9h-12h, 15h-17h", "Thứ 2, Thứ 3, Thứ 5", "Q1, Q2",
+                "Thứ 2:9h-12h, Thứ 3: 15h-17h", "Q1, Q2",
                 "offline", 200000, "Hoc Toan bao dau dai hoc", "12/12/2022", ""));
         arrayList.add(new Post("02", "Tìm gia sư văn", 0,
                 "0998876654",
                 "Văn lớp 12", "Văn",
-                "9h-12h, 15h-17h", "Thứ 2, Thứ 3, Thứ 5", "Q1, Q2",
+                "Thứ 2:9h-12h, Thứ 3: 15h-17h", "Q1, Q2",
                 "offline", 200000, "Hoc Toan bao dau dai hoc", "12/12/2022", ""));
         return arrayList;
     }

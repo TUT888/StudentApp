@@ -118,7 +118,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ngày học: "
+                        android:text="Ngày giờ học: "
                         android:textColor="@color/primary_color"
                         android:textSize="@dimen/largeFontSize"
                         android:textStyle="bold" />
@@ -126,7 +126,7 @@
                         android:id="@+id/tvNgayHoc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Thứ 2, Thứ 4, Chủ nhật"
+                        android:text="Thứ 2:9h-12h, Thứ 4:15h-17h30"
                         android:textSize="@dimen/largeFontSize"
                         android:textColor="@color/text_color"/>
                 </TableRow>
@@ -164,22 +164,6 @@
                         android:textColor="@color/text_color"/>
                 </TableRow>
 
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Thời gian học: "
-                        android:textColor="@color/primary_color"
-                        android:textSize="@dimen/largeFontSize"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/tvThoiGian"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="9h-11h, 1h30-3h30"
-                        android:textSize="@dimen/largeFontSize"
-                        android:textColor="@color/text_color"/>
-                </TableRow>
             </TableLayout>
         </LinearLayout>
         <ImageButton
