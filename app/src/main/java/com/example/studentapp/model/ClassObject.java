@@ -6,13 +6,13 @@ public class ClassObject {
     String tutorPhone;
     String studentPhone;
     String place;
-    String status;
-    String fee;
+    int status; ///0: available, 1: archived
+    int fee;
     String dateTime;
     String startDate;
     String endDate;
 
-    public ClassObject(String id, String className, String tutorPhone, String studentPhone, String place, String status, String fee, String dateTime, String startDate, String endDate) {
+    public ClassObject(String id, String className, String tutorPhone, String studentPhone, String place, int status, int fee, String dateTime, String startDate, String endDate) {
         this.id = id;
         this.className = className;
         this.tutorPhone = tutorPhone;
@@ -65,19 +65,19 @@ public class ClassObject {
         this.place = place;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public String getFee() {
+    public int getFee() {
         return fee;
     }
 
-    public void setFee(String fee) {
+    public void setFee(int fee) {
         this.fee = fee;
     }
 

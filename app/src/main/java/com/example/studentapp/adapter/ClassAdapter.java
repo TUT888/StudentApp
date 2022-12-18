@@ -50,7 +50,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         holder.classFee.setText(mClass.getFee());
         holder.classStatus.setText(mClass.getStatus());
         holder.classTime.setText(mClass.getDateTime());
-        if (mClass.getStatus() == "Hoàn thành") {
+        if (mClass.getStatus() == 1) {
             holder.classRate.setVisibility(View.VISIBLE);
         }
         else {
