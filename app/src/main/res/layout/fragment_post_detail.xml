@@ -5,12 +5,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".extra_fragment.PostDetailFragment">
+    tools:context=".extra_fragment.PostDetailFragment"
+    android:fillViewport="true">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_marginTop="@dimen/mediumSpace"
+        android:layout_marginBottom="@dimen/mediumSpace"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,9 +50,11 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
+            android:layout_marginHorizontal="@dimen/smallSpace"
+            android:layout_marginBottom="@dimen/largeSpace"
             app:strokeColor="@color/primary_color"
-            app:strokeWidth="2dip">
+            app:strokeWidth="2dip"
+            app:cardUseCompatPadding="true">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -248,7 +252,7 @@
                     android:background="@color/primary_color"/>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:padding="5dp">
                     <TextView
@@ -260,7 +264,7 @@
                         android:textColor="@color/primary_color"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:textSize="20sp"
                         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                         android:textColor="@color/text_color"

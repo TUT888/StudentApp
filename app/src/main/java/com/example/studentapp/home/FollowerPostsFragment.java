@@ -56,7 +56,7 @@ public class FollowerPostsFragment extends Fragment {
             @Override
             public void onClickPostObject(Post post) {
                 Log.d("Fragment", "set on clicked");
-                mainActivity.goToPostDetailFragment(post, MyPostFragment.class.getSimpleName());
+                mainActivity.goToPostDetailFragment(post, FollowerPostsFragment.class.getSimpleName());
             }
 
             @Override
