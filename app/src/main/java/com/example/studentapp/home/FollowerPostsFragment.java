@@ -22,6 +22,7 @@ import com.example.studentapp.adapter.FollowerPostAdapter;
 import com.example.studentapp.app_interface.IClickPostObjectListener;
 import com.example.studentapp.fragment.MyPostFragment;
 import com.example.studentapp.model.Post;
+import com.example.studentapp.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +49,7 @@ public class FollowerPostsFragment extends Fragment {
 
         MainActivity mainActivity = (MainActivity) getActivity();
 
-//        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
-//        String phoneNumber = sharedPreferences.getString(PHONE_NUMBER,"");
+//        User currentUser = mainActivity.getCurrentLoginUser();
 
         getData();
         followerPostAdapter = new FollowerPostAdapter(postList, new IClickPostObjectListener() {
@@ -65,7 +65,7 @@ public class FollowerPostsFragment extends Fragment {
                 builder.setMessage("Bạn có muốn ẩn bài post này không?")
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-//                                post.addHide(phoneNumber);
+//                                post.addHide(currentUser.getPhoneNumber());
                             }
                         })
                         .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -81,6 +81,15 @@ public class FollowerPostsFragment extends Fragment {
     }
 
     private void getData() {
-        // posts = getPosts();
+        postList.add(new Post("01", "Tìm gia sư toán", 0,
+                "0998776755",
+                "Toan lop 12", "Toán",
+                "Thứ 2:9h-12h, Thứ 3: 15h-17h", "Q1, Q2",
+                "offline", 200000, "Hoc Toan bao dau dai hoc", "12/12/2022", ""));
+        postList.add(new Post("02", "Tìm gia sư văn", 0,
+                "0998876654",
+                "Văn lớp 12", "Văn",
+                "Thứ 2:9h-12h, Thứ 3: 15h-17h", "Q1, Q2",
+                "offline", 200000, "Hoc Toan bao dau dai hoc", "12/12/2022", ""));
     }
 }
