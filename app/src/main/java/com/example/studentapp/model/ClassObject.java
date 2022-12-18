@@ -3,7 +3,7 @@ package com.example.studentapp.model;
 public class ClassObject {
     public static final int CLASS_STATUS_AVAILABLE = 0;
     public static final int CLASS_STATUS_ARCHIVED = 1;
-    public static final int CLASS_STATUS_RATED = -1;
+    public static final int CLASS_STATUS_RATED = 2;
     String id;
     String className;
     String tutorPhone;

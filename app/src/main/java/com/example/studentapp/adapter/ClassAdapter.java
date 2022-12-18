@@ -58,7 +58,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
             holder.classRate.setText("Đánh giá");
             holder.classRate.setVisibility(View.VISIBLE);
         }
-        else if (mClass.getStatus() == -1) {
+        else if (mClass.getStatus() == 2) {
             holder.classRate.setText("Xem đánh giá");
             holder.classRate.setVisibility(View.VISIBLE);
         }
