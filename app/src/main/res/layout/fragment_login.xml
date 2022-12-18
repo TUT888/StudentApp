@@ -34,12 +34,13 @@
             android:layout_centerInParent="true"/>
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/largeSpace"
         android:paddingTop="25dp"
         android:paddingBottom="100dp"
+        android:orientation="vertical"
         android:background="@drawable/bg_add_post">
         <TextView
             android:id="@+id/tvPhoneNumber"
@@ -49,9 +50,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/primary_color"
-            android:text="Số điện thoại"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"/>
+            android:text="Số điện thoại"/>
         <EditText
             android:id="@+id/etPhoneNumber"
             android:layout_width="match_parent"
@@ -60,8 +59,7 @@
             android:textColor="@color/text_color"
             android:padding="@dimen/mediumSpace"
             android:hint="Số điện thoại"
-            android:inputType="number"
-            android:layout_below="@+id/tvPhoneNumber"/>
+            android:inputType="number"/>
         <TextView
             android:id="@+id/tvPassword"
             android:layout_marginTop="@dimen/mediumSpace"
@@ -70,8 +68,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/primary_color"
-            android:text="Mật khẩu"
-            android:layout_below="@id/etPhoneNumber"/>
+            android:text="Mật khẩu"/>
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
@@ -80,8 +77,7 @@
             android:textColor="@color/text_color"
             android:padding="@dimen/mediumSpace"
             android:inputType="textPassword"
-            android:hint="Mật khẩu"
-            android:layout_below="@id/tvPassword"/>
+            android:hint="Mật khẩu"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogin"
@@ -90,10 +86,10 @@
             app:cornerRadius="@dimen/largeSpace"
             android:textColor="@color/white"
             android:textSize="@dimen/largeFontSize"
+            android:layout_marginTop="180dp"
             android:paddingVertical="@dimen/mediumSpace"
             android:layout_marginHorizontal="@dimen/mediumSpace"
-            android:text="Đăng nhập"
-            android:layout_above="@+id/tvForgotPassword" />
+            android:text="Đăng nhập"/>
         <TextView
             android:id="@+id/tvForgotPassword"
             android:layout_width="wrap_content"
@@ -101,15 +97,13 @@
             android:textSize="@dimen/mediumFontSize"
             android:text="@string/forgot_passord"
             android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:layout_above="@+id/layoutRegister"/>
+            android:layout_gravity="center"/>
         <LinearLayout
             android:id="@+id/layoutRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true">
+            android:layout_gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -124,5 +118,5 @@
                 android:text="@string/register"/>
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

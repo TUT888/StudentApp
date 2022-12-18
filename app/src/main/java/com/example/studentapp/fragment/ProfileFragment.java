@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
@@ -23,6 +24,7 @@ public class ProfileFragment extends Fragment {
     private LinearLayout loginLayoutProfileHeading, logoutLayoutProfileHeading;
     private LinearLayout loginLayoutProfileContent, logoutLayoutProfileContent;
     private Button btnLogin, btnRegister;
+    TextView tvClasses, tvFollowing, tvAccountSetting, tvChangePassword, tvLogout;
     // Object Class
     private User currentUser;
 
@@ -43,10 +45,48 @@ public class ProfileFragment extends Fragment {
         logoutLayoutProfileHeading = mView.findViewById(R.id.logoutLayoutProfileHeading);
         loginLayoutProfileContent = mView.findViewById(R.id.loginLayoutProfileContent);
         logoutLayoutProfileContent = mView.findViewById(R.id.logoutLayoutProfileContent);
-        setUserInteractUI();
+        setUserInteractUI(); // Tùy theo đăng nhập hoặc chưa đăng nhập để hiện UI tương ứng
+
+        tvClasses = mView.findViewById(R.id.tvClasses);
+        tvFollowing = mView.findViewById(R.id.tvFollowing);
+        tvAccountSetting = mView.findViewById(R.id.tvAccountSetting);
+        tvChangePassword = mView.findViewById(R.id.tvChangePassword);
+        tvLogout = mView.findViewById(R.id.tvLogout);
 
         btnLogin = mView.findViewById(R.id.btnLogin);
         btnRegister = mView.findViewById(R.id.btnRegister);
+
+        // Set OnClickListener
+        tvLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Log out
+            }
+        });
+        tvClasses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMainActivity.goToClassFragment();
+            }
+        });
+        tvFollowing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMainActivity.goToFollowingFragment();
+            }
+        });
+        tvAccountSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMainActivity.goToAccountSettingFragment();
+            }
+        });
+        tvChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMainActivity.goToChangePasswordFragment();
+            }
+        });
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,12 +107,15 @@ public class ProfileFragment extends Fragment {
         currentUser = mMainActivity.getCurrentLoginUser();
         if (currentUser==null) {
             loginLayoutProfileHeading.setVisibility(View.GONE);
-            loginLayoutProfileContent.setVisibility(View.GONE);
+            loginLayoutProfileContent.setVisibility(View.VISIBLE);
+
             logoutLayoutProfileHeading.setVisibility(View.VISIBLE);
-            logoutLayoutProfileContent.setVisibility(View.VISIBLE);
+            logoutLayoutProfileContent.setVisibility(View.GONE);
         } else {
+            // Hiện layout đã đăng nhập
             loginLayoutProfileHeading.setVisibility(View.VISIBLE);
             loginLayoutProfileContent.setVisibility(View.VISIBLE);
+            // Ẩn layout chưa đăng nhập
             logoutLayoutProfileHeading.setVisibility(View.GONE);
             logoutLayoutProfileContent.setVisibility(View.GONE);
         }
