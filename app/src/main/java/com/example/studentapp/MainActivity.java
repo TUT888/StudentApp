@@ -20,6 +20,7 @@ import com.example.studentapp.extra_fragment.RegisterFragment;
 import com.example.studentapp.extra_fragment.RateFragment;
 import com.example.studentapp.extra_fragment.RatingDetailFragment;
 import com.example.studentapp.fragment.ClassFragment;
+import com.example.studentapp.fragment.ProfileFragment;
 import com.example.studentapp.model.Post;
 import com.example.studentapp.model.Rate;
 import com.example.studentapp.model.User;
@@ -232,5 +233,34 @@ public class MainActivity extends AppCompatActivity {
         User currentUser = gson.fromJson(jsonString, User.class);
 
         return currentUser;
+    }
+
+    public void savedLoginUser(User user) {
+        SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        editor.putString(KEY_USER_LOGIN_HISTORY, json);
+        editor.apply();
+
+        //For reset
+        /*
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        List<DownloadFile> tmp = new ArrayList<>();
+        String json = gson.toJson(tmp);
+        editor.putString(KEY_DOWNLOAD_HISTORY, json);
+        editor.apply();
+         */
+    }
+
+    public void logOut() {
+        SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(null);
+        editor.putString(KEY_USER_LOGIN_HISTORY, json);
+        editor.apply();
     }
 }
