@@ -2,65 +2,88 @@ package com.example.studentapp.search;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
+import com.example.studentapp.adapter.SearchTutorAdapter;
+import com.example.studentapp.model.Tutor;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchTutorFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class SearchTutorFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private View mView;
+    private MainActivity mMainActivity;
+    private RecyclerView rcvSearchTutor;
+    private SearchView svSearchTutor;
+    private SearchTutorAdapter searchTutorAdapter;
+    private ArrayList<Tutor> searchTutorArrayList;
 
     public SearchTutorFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchTutorFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchTutorFragment newInstance(String param1, String param2) {
-        SearchTutorFragment fragment = new SearchTutorFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_tutor, container, false);
+        mView = inflater.inflate(R.layout.fragment_search_tutor, container, false);
+        mMainActivity = (MainActivity) getActivity();
+        rcvSearchTutor = mView.findViewById(R.id.rcvSearchTutor);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rcvSearchTutor.setLayoutManager(linearLayoutManager);
+        svSearchTutor = mView.findViewById(R.id.svSearchTutor);
+        searchTutorArrayList = initTutor();
+        searchTutorAdapter = new SearchTutorAdapter();
+        searchTutorAdapter.setData(searchTutorArrayList);
+        rcvSearchTutor.setAdapter(searchTutorAdapter);
+
+        svSearchTutor.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
+        return mView;
+    }
+
+    private ArrayList<Tutor> initTutor() {
+        ArrayList <Tutor> tutors = new ArrayList<>();
+        tutors.add(new Tutor("0916876678", "Nguyễn Trần Trung Quân", 1, "Quận 1", 0, "12/09/1990", "nttq@gmail.com", 1, "nttq1998", "Đại học Tôn Đức Thắng", "Thạc Sĩ", "Công nghệ Thông Tin, Toán", "Quận 1, Quận 2, Quận 3"));
+        tutors.add(new Tutor("0887665431", "Lan Hương", 1, "Quận Tân Bình", 1, "08/09/2001", "lh@gmail.com", 1, "ln@@@", "Đại học KHHH và Nhân Văn", "Sinh Viên", "Ngoại ngữ", "Quận Tân Bình, Quận Thủ Đức"));
+        return tutors;
+    }
+
+    private void filterList(String newText) {
+        ArrayList<Tutor> filteredList = new ArrayList<>();
+        for (Tutor tutor : searchTutorArrayList) {
+            if (tutor.getName().toLowerCase().contains(newText.toLowerCase())) {
+                filteredList.add(tutor);
+            }
+            else if (tutor.getFields().toLowerCase().contains(newText.toLowerCase())) {
+                filteredList.add(tutor);
+            }
+
+            else if (tutor.getAreas().toLowerCase().contains(newText.toLowerCase())) {
+                filteredList.add(tutor);
+            }
+        }
+        searchTutorAdapter.setData(filteredList);
     }
 }
