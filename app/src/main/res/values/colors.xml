@@ -19,6 +19,7 @@
 
     <color name="on_primary_color">#FFFFA9</color> <!--New-->
     <color name="bottomNav_selected">#FFFFA9</color> <!--New-->
+    <color name="add_post_input_faded">#ECECEC</color>
 
     <color name="bottomNav_deselected">#393939</color>
 </resources>

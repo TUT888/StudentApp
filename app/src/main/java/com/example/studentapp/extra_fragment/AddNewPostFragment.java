@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
@@ -32,10 +34,11 @@ public class AddNewPostFragment extends Fragment {
     private ImageButton ibBack;
     private MaterialButton btnPost;
 
-    private EditText etTitle, etField, etSubject, etTime, etPlace, etTuition;
+    private EditText etTitle, etField, etSubject, etPlace, etTuition;
     private RadioGroup rgMethod;
     //private RadioButton rbOnline, rbOffline;
     private CheckBox cbMonday, cbTuesday, cbWednesday, cbThursday, cbFriday, cbSaturday, cbSunday;
+    private EditText etTimeMonday, etTimeTuesday, etTimeWednesday, etTimeThursday, etTimeFriday, etTimeSaturday, etTimeSunday;
 
     // Data
     private User currentUser;
@@ -44,8 +47,7 @@ public class AddNewPostFragment extends Fragment {
     private String[] selectedPlaces = new String[choiceOfPlaces.length];
 
     private String[] choiceOfFields = MainActivity.FIELDS_TO_CHOOSE;
-    private boolean[] checkedFields = new boolean[choiceOfFields.length];
-    private String[] selectedFields = new String[choiceOfFields.length];
+    int checkedField = 0;
 
     public AddNewPostFragment() {
         // Required empty public constructor
@@ -67,7 +69,6 @@ public class AddNewPostFragment extends Fragment {
         etTitle = mView.findViewById(R.id.etTitle);
         etField = mView.findViewById(R.id.etField);
         etSubject = mView.findViewById(R.id.etSubject);
-        etTime = mView.findViewById(R.id.etTime);
         etPlace = mView.findViewById(R.id.etPlace);
         etTuition = mView.findViewById(R.id.etTuition);
 
@@ -79,6 +80,14 @@ public class AddNewPostFragment extends Fragment {
         cbFriday = mView.findViewById(R.id.cbFriday);
         cbSaturday = mView.findViewById(R.id.cbSaturday);
         cbSunday = mView.findViewById(R.id.cbSunday);
+
+        etTimeMonday = mView.findViewById(R.id.etTimeMonday);
+        etTimeTuesday = mView.findViewById(R.id.etTimeTuesday);
+        etTimeWednesday = mView.findViewById(R.id.etTimeWednesday);
+        etTimeThursday = mView.findViewById(R.id.etTimeThursday);
+        etTimeFriday = mView.findViewById(R.id.etTimeFriday);
+        etTimeSaturday = mView.findViewById(R.id.etTimeSaturday);
+        etTimeSunday = mView.findViewById(R.id.etTimeSunday);
 
         etField.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +103,8 @@ public class AddNewPostFragment extends Fragment {
         });
 
 
-        // Buttons
+        // Set On Click Listener
+        setCheckboxListeners();
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,6 +117,67 @@ public class AddNewPostFragment extends Fragment {
                 addNewPost(view);
             }
         });
+    }
+
+    private void setCheckboxListeners() {
+        cbMonday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                changeInputTimePermission(etTimeMonday, b);
+            }
+        });
+        cbTuesday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                changeInputTimePermission(etTimeTuesday, b);
+            }
+        });
+        cbWednesday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                changeInputTimePermission(etTimeWednesday, b);
+            }
+        });
+        cbThursday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                changeInputTimePermission(etTimeThursday, b);
+            }
+        });
+        cbFriday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                changeInputTimePermission(etTimeFriday, b);
+            }
+        });
+        cbSaturday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                changeInputTimePermission(etTimeSaturday, b);
+            }
+        });
+        cbSunday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                changeInputTimePermission(etTimeSunday, b);
+            }
+        });
+    }
+
+    private void changeInputTimePermission(EditText editTime, boolean isEnabled) {
+        if (isEnabled) {
+            editTime.setFocusable(true);
+            editTime.setFocusableInTouchMode(true);
+            editTime.setHint("15h-17h30");
+            editTime.setCursorVisible(true);
+            editTime.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_add_post_input));
+        } else {
+            editTime.setFocusable(false);
+            editTime.setFocusableInTouchMode(false);
+            editTime.setHint("Hãy chọn ngày học");
+            editTime.setCursorVisible(false);
+            editTime.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_add_post_input_faded));
+        }
     }
 
     private void showChoicesOfPlaces() {
@@ -128,6 +199,7 @@ public class AddNewPostFragment extends Fragment {
                     selectedPlaces[i] = null;
                     checkedPlaces[i] = false;
                 }
+                Toast.makeText(getContext(), String.valueOf(selectedPlaces.length), Toast.LENGTH_SHORT).show();
             }
         });
         alertBuilder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
@@ -142,6 +214,7 @@ public class AddNewPostFragment extends Fragment {
                     etPlace.setText("");
                 } else {
                     etPlace.setText(placeString);
+                    Toast.makeText(getContext(), placeString, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -159,37 +232,21 @@ public class AddNewPostFragment extends Fragment {
         hideSoftKeyboard();
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
         alertBuilder.setTitle("Chọn lĩnh vực dạy");
-
+        
         if (etField.getText().toString().isEmpty()) {
-            etField.setText(choiceOfFields[0]);    //default
+            etField.setText(choiceOfFields[checkedField]);    //default
         }
 
-        alertBuilder.setMultiChoiceItems(choiceOfFields, checkedFields, new DialogInterface.OnMultiChoiceClickListener() {
+        alertBuilder.setSingleChoiceItems(choiceOfFields, checkedField, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-                if (b) {
-                    selectedFields[i] = choiceOfFields[i];
-                    checkedFields[i] = true;
-                } else {
-                    selectedFields[i] = null;
-                    checkedFields[i] = false;
-                }
+            public void onClick(DialogInterface dialogInterface, int i) {
+                checkedField = i;
             }
         });
         alertBuilder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-                String fieldString = String.join(", ", selectedFields);
-                fieldString = fieldString.replaceAll(", null", "");
-                fieldString = fieldString.replaceAll("null, ", "");
-
-                if (fieldString.equals("null")) {
-                    etPlace.setText("");
-                } else {
-                    etPlace.setText(fieldString);
-                }
-
+                etField.setText(choiceOfFields[checkedField]);
             }
         });
         alertBuilder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
@@ -207,41 +264,108 @@ public class AddNewPostFragment extends Fragment {
         String inputField = etField.getText().toString();
         String inputSubject = etSubject.getText().toString();
         String inputMethod = getInputMethodString();
-        String inputDate = getInputMethodString();
-        String inputTime = etTime.getText().toString();
+        String inputDateTime = getInputDateTimeString();
         String inputPlace = etPlace.getText().toString();
-        int inputTuition = Integer.parseInt(etTuition.getText().toString());
+        int inputTuition;
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("ddmmyy-hhmmss");
-        String id = "P"+dtf.format(LocalDateTime.now());
-        //Post newPost = new Post(id, );
+        if (inputTitle.equals("")) {
+            Toast.makeText(getContext(), "Hãy nhập tiêu đề", Toast.LENGTH_SHORT).show();
+        } else if (inputField.equals("")) {
+            Toast.makeText(getContext(), "Hãy chọn lĩnh vực", Toast.LENGTH_SHORT).show();
+        } else if (inputSubject.equals("")) {
+            Toast.makeText(getContext(), "Hãy nhập môn học", Toast.LENGTH_SHORT).show();
+        } else if (inputMethod.equals("")) {
+            Toast.makeText(getContext(), "Hãy chọn hình thức học", Toast.LENGTH_SHORT).show();
+        } else if (inputDateTime.equals("null")) {
+            Toast.makeText(getContext(), "Hãy chọn ngày học", Toast.LENGTH_SHORT).show();
+        } else if (inputDateTime.equals("")) {
+            //Toast.makeText(getContext(), "Hãy nhập giờ học của ngày học đã chọn", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (inputPlace.equals("")) {
+            Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+        } else if (etTuition.getText().toString().equals("")) {
+            Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+        } else {
+            inputTuition = Integer.parseInt(etTuition.getText().toString());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("ddmmyy-hhmmss");
+            String id = "P"+dtf.format(LocalDateTime.now());
+            //Post newPost = new Post(id, );
 
-        Toast.makeText(getContext(), inputMethod + "\n" + inputDate, Toast.LENGTH_LONG).show();
+        }
     }
 
-    private String getInputDateString() {
-        String[] selectedDates = new String[7];
-        if (cbMonday.isChecked())
-            selectedDates[0] = "Thứ 2";
-        if (cbTuesday.isChecked())
-            selectedDates[1] = "Thứ 3";
-        if (cbWednesday.isChecked())
-            selectedDates[2] = "Thứ 4";
-        if (cbThursday.isChecked())
-            selectedDates[3] = "Thứ 5";
-        if (cbFriday.isChecked())
-            selectedDates[4] = "Thứ 6";
-        if (cbSaturday.isChecked())
-            selectedDates[5] = "Thứ 7";
-        if (cbSunday.isChecked())
-            selectedDates[6] = "Chủ nhật";
-        String dateString = String.join(", ", selectedDates);
-        dateString = dateString.replaceAll(", null", "");
-        dateString = dateString.replaceAll("null, ", "");
-        if (dateString.equals("null")) {
-            return "";
+    private String getInputDateTimeString() {
+        String[] selectedDateTimes = new String[7];
+        String errorMess = "";
+        if (cbMonday.isChecked()) {
+            if (etTimeMonday.getText().toString().isEmpty()) {
+                errorMess = "Hãy nhập giờ học của thứ 2";
+                Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
+                return "";
+            } else {
+                selectedDateTimes[0] = "Thứ 2:" + etTimeMonday.getText().toString();
+            }
         }
-        return dateString;
+        if (cbTuesday.isChecked()) {
+            if (etTimeTuesday.getText().toString().isEmpty()) {
+                errorMess = "Hãy nhập giờ học của thứ 3";
+                Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
+                return "";
+            } else {
+                selectedDateTimes[0] = "Thứ 3:" + etTimeTuesday.getText().toString();
+            }
+        }
+        if (cbWednesday.isChecked()) {
+            if (etTimeWednesday.getText().toString().isEmpty()) {
+                errorMess = "Hãy nhập giờ học của thứ 4";
+                Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
+                return "";
+            } else {
+                selectedDateTimes[0] = "Thứ 4:" + etTimeWednesday.getText().toString();
+            }
+        }
+        if (cbThursday.isChecked()) {
+            if (etTimeThursday.getText().toString().isEmpty()) {
+                errorMess = "Hãy nhập giờ học của thứ 5";
+                Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
+                return "";
+            } else {
+                selectedDateTimes[0] = "Thứ 5:" + etTimeThursday.getText().toString();
+            }
+        }
+        if (cbFriday.isChecked()) {
+            if (etTimeFriday.getText().toString().isEmpty()) {
+                errorMess = "Hãy nhập giờ học của thứ 6";
+                Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
+                return "";
+            } else {
+                selectedDateTimes[0] = "Thứ 6:" + etTimeFriday.getText().toString();
+            }
+        }
+        if (cbSaturday.isChecked()) {
+            if (etTimeSaturday.getText().toString().isEmpty()) {
+                errorMess = "Hãy nhập giờ học của thứ 7";
+                Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
+                return "";
+            } else {
+                selectedDateTimes[0] = "Thứ 7:" + etTimeSaturday.getText().toString();
+            }
+        }
+        if (cbSunday.isChecked()) {
+            if (etTimeSunday.getText().toString().isEmpty()) {
+                errorMess = "Hãy nhập giờ học của chủ nhật";
+                Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
+                return "";
+            } else {
+                selectedDateTimes[0] = "Chủ nhật:" + etTimeSunday.getText().toString();
+            }
+        }
+
+        String dateTimeString = String.join(", ", selectedDateTimes);
+        dateTimeString = dateTimeString.replaceAll(", null", "");
+        dateTimeString = dateTimeString.replaceAll("null, ", "");
+
+        return dateTimeString;
     }
 
     private String getInputMethodString() {
@@ -255,6 +379,7 @@ public class AddNewPostFragment extends Fragment {
                 return "";
         }
     }
+    
 
     // Ẩn bàn phím sau khi nhập dữ liệu
     public void hideSoftKeyboard() {
