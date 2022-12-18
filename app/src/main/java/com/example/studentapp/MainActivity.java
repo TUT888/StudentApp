@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.studentapp.R;
 import com.example.studentapp.adapter.ViewPagerAdapter;
+import com.example.studentapp.app_interface.IClickBtnSaveRating;
 import com.example.studentapp.extra_fragment.AddNewPostFragment;
 import com.example.studentapp.extra_fragment.LoginFragment;
 import com.example.studentapp.extra_fragment.PostDetailFragment;
@@ -20,6 +21,7 @@ import com.example.studentapp.extra_fragment.RegisterFragment;
 import com.example.studentapp.extra_fragment.RateFragment;
 import com.example.studentapp.extra_fragment.RatingDetailFragment;
 import com.example.studentapp.fragment.ClassFragment;
+import com.example.studentapp.model.ClassObject;
 import com.example.studentapp.model.Post;
 import com.example.studentapp.model.Rate;
 import com.example.studentapp.model.User;
@@ -168,10 +170,30 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void goToRateFragment() {
+    public void returnToClassFragment(int adapterPosition) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        RateFragment rateFragment = new RateFragment(); //Child fragment
+        ClassFragment classFragment = new ClassFragment(); //Child fragment
         Bundle bundle = new Bundle();
+        bundle.putInt("adapter_position", adapterPosition);
+
+        classFragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.main_activity_content, classFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    public void goToRateFragment(ClassObject classObject, int adapterPosition) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        RateFragment rateFragment = new RateFragment(new IClickBtnSaveRating() {
+            @Override
+            public void saveAndReturnToClassFragment() {
+                returnToClassFragment(adapterPosition);
+            }
+        }); //Child fragment
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("class_object", (Serializable) classObject);
+
         rateFragment.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.main_activity_content, rateFragment);
@@ -205,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         ClassFragment classFragment = new ClassFragment(); //Child fragment
         Bundle bundle = new Bundle();
+        bundle.putInt("adapter_position", -1);
         classFragment.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.main_activity_content, classFragment);

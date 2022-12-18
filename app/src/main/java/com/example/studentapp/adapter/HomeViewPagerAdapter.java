@@ -36,7 +36,7 @@ public class HomeViewPagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Thời khóa biểu";
+                return "Lịch học";
             case 1:
                 return "Bài đăng theo dõi";
             default:

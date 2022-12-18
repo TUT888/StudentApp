@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,6 +24,7 @@
             android:orientation="vertical"
             android:layout_gravity="center_vertical">
             <TextView
+                android:id="@+id/ratedClassName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tên khóa học"
@@ -40,6 +42,7 @@
                     android:textColor="@color/primary_color"
                     android:textStyle="bold"/>
                 <TextView
+                    android:id="@+id/ratedClassTutor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nguyễn Văn A"
@@ -64,31 +67,18 @@
             android:text="Đánh giá: "
             android:textColor="@color/primary_color"
             android:textStyle="bold" />
-        <LinearLayout
+        <RatingBar
+            android:id="@+id/ratedBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_rating_full_star" />
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_rating_full_star"/>
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_rating_full_star"/>
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_rating_full_star"/>
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_rating_full_star"/>
-        </LinearLayout>
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/star_color"
+            android:numStars="5"
+            android:progressTint="@color/star_color"
+            android:rating="0"
+            android:secondaryProgressTint="@android:color/transparent"
+            android:stepSize="0.5"
+            android:isIndicator="false"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
@@ -96,14 +86,16 @@
         android:text="Bình luận: "
         android:textColor="@color/primary_color"
         android:textStyle="bold"/>
-    <EditText
+    <TextView
+        android:id="@+id/ratedCmt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Thêm bình luận"
+        android:hint="Không có bình luận"
         android:inputType="textMultiLine"
         android:gravity="top"
         android:background="@drawable/bg_cmt"
-        android:padding="5dp"
-        android:layout_marginBottom="5dp"/>
+        android:padding="10dp"
+        android:layout_marginBottom="5dp"
+        android:justificationMode="inter_word"/>
 
 </LinearLayout>

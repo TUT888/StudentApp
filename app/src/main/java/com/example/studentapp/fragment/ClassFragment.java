@@ -13,10 +13,8 @@ import android.view.ViewGroup;
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
 import com.example.studentapp.adapter.ClassAdapter;
-import com.example.studentapp.adapter.FollowerPostAdapter;
 import com.example.studentapp.app_interface.IClickBtnRating;
 import com.example.studentapp.model.ClassObject;
-import com.example.studentapp.model.Post;
 import com.example.studentapp.model.Rate;
 
 import java.util.ArrayList;
@@ -28,6 +26,7 @@ public class ClassFragment extends Fragment {
     ClassAdapter classAdapter;
     List<ClassObject> classObjects = new ArrayList<>();
     MainActivity mainActivity;
+    int adapterPosition;
 
     public ClassFragment() {
         // Required empty public constructor
@@ -39,7 +38,12 @@ public class ClassFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = (View) inflater.inflate(R.layout.fragment_class, container, false);
 
-        rvClasses = view.findViewById(R.id.rvFlPosts);
+        rvClasses = view.findViewById(R.id.rvClasses);
+
+        Bundle bundle = getArguments();
+        if (bundle != null){
+            adapterPosition = (int) bundle.getInt("adapter_position");
+        }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
         rvClasses.setLayoutManager(linearLayoutManager);
 
@@ -48,8 +52,8 @@ public class ClassFragment extends Fragment {
         getData();
         classAdapter = new ClassAdapter(classObjects, new IClickBtnRating() {
             @Override
-            public void rateClass(ClassObject classObject) {
-                mainActivity.goToRateFragment();
+            public void rateClass(ClassObject classObject, int adapterPosition) {
+                mainActivity.goToRateFragment(classObject, adapterPosition);
             }
 
             @Override
@@ -58,11 +62,41 @@ public class ClassFragment extends Fragment {
             }
         });
         rvClasses.setAdapter(classAdapter);
+        if (adapterPosition != -1) {
+            rvClasses.scrollToPosition(adapterPosition);
+            classAdapter.changeClassStatus(adapterPosition);
+        }
 
         return view;
     }
 
     void getData() {
-
+        classObjects.add(new ClassObject("01", "Name1", "012888813", "054683123", "TP.HCM",
+                0, 200000, "23h31p 18/12/2022", "18/12/2022", "24/12/2022", "Online",
+                "CNTT", "CNTT"));
+        classObjects.add(new ClassObject("02", "Name1", "012888813", "054683123", "TP.HCM",
+                1, 200000, "23h31p 18/12/2022", "18/12/2022", "24/12/2022", "Online",
+                "CNTT", "CNTT"));
+        classObjects.add(new ClassObject("02", "Name1", "012888813", "054683123", "TP.HCM",
+                2, 200000, "23h31p 18/12/2022", "18/12/2022", "18/12/2022", "Online",
+                "CNTT", "CNTT"));
+        classObjects.add(new ClassObject("01", "Name1", "012888813", "054683123", "TP.HCM",
+                0, 200000, "23h31p 18/12/2022", "18/12/2022", "18/12/2022", "Online",
+                "CNTT", "CNTT"));
+        classObjects.add(new ClassObject("02", "Name1", "012888813", "054683123", "TP.HCM",
+                1, 200000, "23h31p 18/12/2022", "18/12/2022", "18/12/2022", "Online",
+                "CNTT", "CNTT"));
+        classObjects.add(new ClassObject("02", "Name1", "012888813", "054683123", "TP.HCM",
+                2, 200000, "23h31p 18/12/2022", "18/12/2022", "18/12/2022", "Online",
+                "CNTT", "CNTT"));
+        classObjects.add(new ClassObject("01", "Name1", "012888813", "054683123", "TP.HCM",
+                0, 200000, "23h31p 18/12/2022", "18/12/2022", "19/12/2022", "Online",
+                "CNTT", "CNTT"));
+        classObjects.add(new ClassObject("02", "Name1", "012888813", "054683123", "TP.HCM",
+                1, 200000, "23h31p 18/12/2022", "18/12/2022", "18/12/2022", "Online",
+                "CNTT", "CNTT"));
+        classObjects.add(new ClassObject("02", "Name1", "012888813", "054683123", "TP.HCM",
+                2, 200000, "23h31p 18/12/2022", "18/12/2022", "18/12/2022", "Online",
+                "CNTT", "CNTT"));
     }
 }

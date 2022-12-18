@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Gia sư: "
                 android:textColor="@color/primary_color"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Địa điểm: "
                 android:textColor="@color/primary_color"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Thời gian: "
                 android:textColor="@color/primary_color"
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Trạng thái: "
                 android:textColor="@color/primary_color"
@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Học phí: "
                 android:textColor="@color/primary_color"
@@ -133,7 +133,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Ngày bắt đầu: "
                 android:textColor="@color/primary_color"
@@ -151,7 +151,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Ngày kết thúc: "
                 android:textColor="@color/primary_color"
@@ -161,6 +161,61 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="05/02/2021"
+                android:textColor="@color/text_color"
+                android:justificationMode="inter_word"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="Phương thức học: "
+                android:textColor="@color/primary_color"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/classMethod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Online"
+                android:textColor="@color/text_color"
+                android:justificationMode="inter_word"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="Môn học: "
+                android:textColor="@color/primary_color"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/classSubject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Môn Toán"
+                android:textColor="@color/text_color"
+                android:justificationMode="inter_word"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:text="Lĩnh vực: "
+                android:textColor="@color/primary_color"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/classField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CNTT"
                 android:textColor="@color/text_color"
                 android:justificationMode="inter_word"/>
         </LinearLayout>

@@ -1,6 +1,8 @@
 package com.example.studentapp.model;
 
-public class ClassObject {
+import java.io.Serializable;
+
+public class ClassObject implements Serializable {
     public static final int CLASS_STATUS_AVAILABLE = 0;
     public static final int CLASS_STATUS_ARCHIVED = 1;
     public static final int CLASS_STATUS_RATED = 2;

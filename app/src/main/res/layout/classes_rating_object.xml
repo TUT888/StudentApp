@@ -29,26 +29,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="5dp">
-                <ImageView
+                <RatingBar
+                    android:id="@+id/ratingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_rating_full_star"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_rating_full_star"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_rating_full_star"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_rating_full_star"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_rating_full_star"/>
+                    android:layout_gravity="center_horizontal"
+                    android:backgroundTint="@color/star_color"
+                    android:numStars="5"
+                    android:progressTint="@color/star_color"
+                    android:rating="0"
+                    android:secondaryProgressTint="@android:color/transparent"
+                    android:stepSize="0.5"
+                    android:isIndicator="false"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"/>
             </LinearLayout>
         </FrameLayout>
         <LinearLayout
