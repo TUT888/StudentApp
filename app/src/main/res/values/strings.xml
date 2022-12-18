@@ -6,4 +6,8 @@
     <string name="no">Không</string>
     <string name="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</string>
     <string name="login_to_use">Đăng nhập để sử dụng chức năng của hệ thống</string>
+
+    <string name="forgot_passord"><u>Quên mật khẩu?</u></string>
+    <string name="register"><u>Đăng ký</u></string>
+    <string name="login"><u>Đăng nhập</u></string>
 </resources>

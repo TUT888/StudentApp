@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="@dimen/mediumSpace"
+    tools:context=".extra_fragment.LoginFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/ibBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitCenter"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ĐĂNG KÝ"
+            android:textColor="@color/primary_color"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:paddingVertical="@dimen/mediumSpace"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/largeSpace"
+        android:paddingVertical="25dp"
+        android:background="@drawable/bg_add_post">
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_marginTop="@dimen/mediumSpace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_color"
+            android:text="Họ và tên"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"/>
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_add_post_input"
+            android:textColor="@color/text_color"
+            android:padding="@dimen/mediumSpace"
+            android:hint="Họ và tên"
+            android:layout_below="@+id/tvName"/>
+        <TextView
+            android:id="@+id/tvPhoneNumber"
+            android:layout_marginTop="@dimen/mediumSpace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_color"
+            android:text="Số điện thoại"
+            android:layout_below="@id/etName"/>
+        <EditText
+            android:id="@+id/etPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_add_post_input"
+            android:textColor="@color/text_color"
+            android:padding="@dimen/mediumSpace"
+            android:inputType="number"
+            android:hint="Số điện thoại"
+            android:layout_below="@+id/tvPhoneNumber"/>
+        <TextView
+            android:id="@+id/tvPassword"
+            android:layout_marginTop="@dimen/mediumSpace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_color"
+            android:text="Mật khẩu"
+            android:layout_below="@id/etPhoneNumber"/>
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_add_post_input"
+            android:textColor="@color/text_color"
+            android:padding="@dimen/mediumSpace"
+            android:inputType="textPassword"
+            android:hint="Mật khẩu"
+            android:layout_below="@id/tvPassword"/>
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_marginTop="@dimen/mediumSpace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_color"
+            android:text="Email"
+            android:layout_below="@id/etPassword"/>
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_add_post_input"
+            android:textColor="@color/text_color"
+            android:padding="@dimen/mediumSpace"
+            android:inputType="textEmailAddress"
+            android:hint="Email"
+            android:layout_below="@id/tvEmail"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cornerRadius="@dimen/largeSpace"
+            android:textColor="@color/white"
+            android:textSize="@dimen/largeFontSize"
+            android:paddingVertical="@dimen/mediumSpace"
+            android:layout_marginHorizontal="@dimen/mediumSpace"
+            android:text="Đăng ký"
+            android:layout_above="@+id/layoutLogin" />
+
+        <LinearLayout
+            android:id="@+id/layoutLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/mediumFontSize"
+                android:text="Đã có tài khoản? "/>
+            <TextView
+                android:id="@+id/tvRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/mediumFontSize"
+                android:textStyle="bold"
+                android:text="@string/login"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -19,9 +19,9 @@ import com.example.studentapp.model.User;
 public class ProfileFragment extends Fragment {
     // Resources
     private View mView;
+    private MainActivity mMainActivity;
     private LinearLayout loginLayoutProfileHeading, logoutLayoutProfileHeading;
     private LinearLayout loginLayoutProfileContent, logoutLayoutProfileContent;
-    private MainActivity mMainActivity;
     private Button btnLogin, btnRegister;
     // Object Class
     private User currentUser;
@@ -38,12 +38,12 @@ public class ProfileFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_profile, container, false);
         mMainActivity = (MainActivity) getActivity();
         // Check login/logout ==> display corresponding view
-        setUserInteractUI();
 
         loginLayoutProfileHeading = mView.findViewById(R.id.loginLayoutProfileHeading);
         logoutLayoutProfileHeading = mView.findViewById(R.id.logoutLayoutProfileHeading);
         loginLayoutProfileContent = mView.findViewById(R.id.loginLayoutProfileContent);
         logoutLayoutProfileContent = mView.findViewById(R.id.logoutLayoutProfileContent);
+        setUserInteractUI();
 
         btnLogin = mView.findViewById(R.id.btnLogin);
         btnRegister = mView.findViewById(R.id.btnRegister);

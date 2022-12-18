@@ -14,7 +14,9 @@ import android.widget.Toast;
 import com.example.studentapp.R;
 import com.example.studentapp.adapter.ViewPagerAdapter;
 import com.example.studentapp.extra_fragment.AddNewPostFragment;
+import com.example.studentapp.extra_fragment.LoginFragment;
 import com.example.studentapp.extra_fragment.PostDetailFragment;
+import com.example.studentapp.extra_fragment.RegisterFragment;
 import com.example.studentapp.extra_fragment.RateFragment;
 import com.example.studentapp.extra_fragment.RatingDetailFragment;
 import com.example.studentapp.model.Post;
@@ -177,25 +179,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToLoginFragment() {
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
-//        Bundle bundle = new Bundle();
-//        detailFragment.setArguments(bundle);
-//
-//        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        LoginFragment loginFragment = new LoginFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        loginFragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.main_activity_content, loginFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     public void goToRegisterFragment() {
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
-//        Bundle bundle = new Bundle();
-//        detailFragment.setArguments(bundle);
-//
-//        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        RegisterFragment registerFragment = new RegisterFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        registerFragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.main_activity_content, registerFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     public User getCurrentLoginUser() {
