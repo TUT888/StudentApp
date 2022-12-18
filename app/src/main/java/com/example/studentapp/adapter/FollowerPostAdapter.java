@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import com.example.studentapp.R;
 import com.example.studentapp.app_interface.IClickPostObjectListener;
 import com.example.studentapp.model.Post;
 import com.example.studentapp.model.User;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -95,7 +97,7 @@ public class FollowerPostAdapter extends RecyclerView.Adapter<FollowerPostAdapte
         TextView tvName, tvRole, tvTitle,
                 tvMonHoc, tvKhuVuc, tvNgayHoc,
                 tvHinhThuc, tvHocPhi, tvNgayDang;
-        Button btnAnBaiDang;
+        ImageButton btnAnBaiDang;
 
         public FollowerPostViewHolder(@NonNull View itemView) {
             super(itemView);
