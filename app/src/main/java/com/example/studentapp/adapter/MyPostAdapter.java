@@ -43,7 +43,7 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
             return;
         }
         //holder.imgAvatar.setImageResource(post.getUser().getAvatar());
-        holder.tvName.setText(post.getUser().getName());
+        holder.tvName.setText(post.getId());
 
         holder.tvRole.setText("Học viên");
         holder.tvTitle.setText(post.getTitle());

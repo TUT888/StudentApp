@@ -52,7 +52,7 @@ public class FollowerPostAdapter extends RecyclerView.Adapter<FollowerPostAdapte
             return;
         }
         //holder.imgAvatar.setImageResource(post.getUser().getAvatar());
-        holder.tvName.setText(post.getUser().getName());
+        holder.tvName.setText(post.getId());
 
         holder.tvRole.setText("Gia sư");
         holder.tvTitle.setText(post.getTitle());

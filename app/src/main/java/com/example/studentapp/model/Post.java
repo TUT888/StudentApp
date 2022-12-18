@@ -6,7 +6,7 @@ public class Post implements Serializable {
     private String id;
     private String title;
     private int status; /// 0: waiting, 1: class created, -1: cancelled, 2: edited
-    private User user;
+    private String idUser;
     //private Subject subject;
     private String subject;
     //private Field field;
@@ -20,11 +20,11 @@ public class Post implements Serializable {
     private String postDate;
     private String hideFrom;
 
-    public Post(String id, String title, int status, User user, String subject, String field, String learningTimes, String learningDates, String learningPlaces, String method, int tuition, String description, String postDate, String hideFrom) {
+    public Post(String id, String title, int status, String idUser, String subject, String field, String learningTimes, String learningDates, String learningPlaces, String method, int tuition, String description, String postDate, String hideFrom) {
         this.id = id;
         this.title = title;
         this.status = status;
-        this.user = user;
+        this.idUser = idUser;
         this.subject = subject;
         this.field = field;
         this.learningTimes = learningTimes;
@@ -77,12 +77,20 @@ public class Post implements Serializable {
         this.status = status;
     }
 
-    public User getUser() {
-        return user;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getHideFrom() {
+        return hideFrom;
+    }
+
+    public void setHideFrom(String hideFrom) {
+        this.hideFrom = hideFrom;
     }
 
     public String getLearningTimes() {
