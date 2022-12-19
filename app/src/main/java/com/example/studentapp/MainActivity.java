@@ -34,6 +34,10 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String PROFILE_FRAGMENT_TAG = "PROFILE_FRAGMENT_TAG";
+    public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT_TAG";
+
+
     public static final String KEY_USER_LOGIN_HISTORY = "KEY_USER_LOGIN_HISTORY";
     public static final String[] PLACES_TO_CHOOSE = {
             "Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6",
@@ -302,5 +306,10 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    public void resetViewPagerUI(int pagePosition) {
+        setUpViewPager();
+        mViewPager.setCurrentItem(pagePosition);
     }
 }

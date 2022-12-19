@@ -1,11 +1,9 @@
 package com.example.studentapp.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,6 +88,7 @@ public class ProfileFragment extends Fragment {
                 mMainActivity.goToChangePasswordFragment();
             }
         });
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,26 +121,5 @@ public class ProfileFragment extends Fragment {
             logoutLayoutProfileHeading.setVisibility(View.GONE);
             logoutLayoutProfileContent.setVisibility(View.GONE);
         }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d("ProfileFragment", "On Pause");
-        fromLoginFragment = true;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("ProfileFragment", "On Resume");
-        if (fromLoginFragment) {
-            setUserInteractUI();
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 }

@@ -1,7 +1,5 @@
 package com.example.studentapp.extra_fragment;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -18,7 +15,6 @@ import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
 import com.example.studentapp.model.User;
 import com.google.android.material.button.MaterialButton;
-import com.google.gson.Gson;
 
 
 public class LoginFragment extends Fragment {
@@ -33,7 +29,7 @@ public class LoginFragment extends Fragment {
 
     public LoginFragment() {
         userData = null;
-        // Required empty public constructor
+
     }
 
     @Override
@@ -79,7 +75,9 @@ public class LoginFragment extends Fragment {
             if (userData!=null) {
                 // Save SharedPreference
                 mMainActivity.savedLoginUser(userData);
-                getFragmentManager().popBackStack();
+                // Back stack & reset UI
+                getActivity().getSupportFragmentManager().popBackStack();
+                mMainActivity.resetViewPagerUI(4); // Restart view pager, viewing Profile page
             }
         }
     }
