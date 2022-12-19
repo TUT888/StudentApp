@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String PROFILE_FRAGMENT_TAG = "PROFILE_FRAGMENT_TAG";
     public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT_TAG";
 
+    public final static String url = "http://10.35.48.79"; ///Tien url
 
     public static final String KEY_USER_LOGIN_HISTORY = "KEY_USER_LOGIN_HISTORY";
     public static final String[] PLACES_TO_CHOOSE = {
