@@ -21,7 +21,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/mediumSpace">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgAvatar"
@@ -166,25 +167,39 @@
 
             </TableLayout>
         </LinearLayout>
-        <ImageButton
-            android:id="@+id/ibPostOption"
-            android:layout_gravity="right"
+
+        <LinearLayout
+            android:id="@+id/layoutPostOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_view_option_menu"
-            android:scaleX="1.6"
-            android:scaleY="1.6"
-            android:backgroundTint="@color/white"
-            android:scaleType="fitCenter"
-            android:visibility="gone"/>
+            android:orientation="vertical"
+            android:layout_gravity="right"
+            android:visibility="visible">
+            <ImageButton
+                android:id="@+id/ibPostOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_view_option_menu"
+                android:scaleX="1.6"
+                android:scaleY="1.6"
+                android:backgroundTint="@color/white"
+                android:scaleType="fitCenter"/>
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="status"
+                android:padding="@dimen/smallSpace"
+                android:background="@color/active"
+                android:textColor="@color/white"/>
+        </LinearLayout>
         <ImageButton
             android:id="@+id/btnAnBaiDang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_close_button"
             android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:backgroundTint="@color/white"/>
     </FrameLayout>
 

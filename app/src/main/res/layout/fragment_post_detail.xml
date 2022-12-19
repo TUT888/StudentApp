@@ -67,13 +67,12 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="@dimen/mediumSpace">
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
                             android:src="@mipmap/ic_launcher"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -98,17 +97,33 @@
 
                     </LinearLayout>
 
-                    <ImageButton
-                        android:id="@+id/ibPostOption"
-                        android:layout_gravity="right|center_vertical"
+                    <LinearLayout
+                        android:id="@+id/layoutPostOption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_view_option_menu"
-                        android:scaleX="1.6"
-                        android:scaleY="1.6"
-                        android:backgroundTint="@color/white"
-                        android:scaleType="fitCenter"
-                        android:visibility="gone"/>
+                        android:orientation="vertical"
+                        android:layout_gravity="right"
+                        android:visibility="gone">
+                        <ImageButton
+                            android:id="@+id/ibPostOption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_view_option_menu"
+                            android:scaleX="1.6"
+                            android:scaleY="1.6"
+                            android:backgroundTint="@color/white"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tvStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="status"
+                            android:padding="@dimen/smallSpace"
+                            android:background="@color/active"
+                            android:textColor="@color/white"/>
+                    </LinearLayout>
+
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/mbContact"
                         android:layout_width="wrap_content"

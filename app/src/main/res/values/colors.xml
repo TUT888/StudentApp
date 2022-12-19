@@ -21,5 +21,10 @@
     <color name="bottomNav_selected">#FFFFA9</color> <!--New-->
     <color name="add_post_input_faded">#ECECEC</color>
 
+    <color name="post_waiting">#D6A800</color>
+    <color name="post_created_class">#4CAF50</color>
+    <color name="post_edited">#FF5722</color>
+    <color name="post_cancelled">#535353</color>
+
     <color name="bottomNav_deselected">#393939</color>
 </resources>

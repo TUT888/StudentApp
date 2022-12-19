@@ -8,16 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.studentapp.R;
 import com.example.studentapp.app_interface.IClickPostObjectListener;
 import com.example.studentapp.model.Post;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHolder> {
@@ -47,7 +50,7 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
             return;
         }
         holder.btnAnBaiDang.setVisibility(View.GONE);
-        holder.ibPostOption.setVisibility(View.VISIBLE);
+        holder.layoutPostOption.setVisibility(View.VISIBLE);
         //holder.imgAvatar.setImageResource(post.getUser().getAvatar());
         holder.tvName.setText(post.getId());
 
@@ -59,6 +62,24 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
         holder.tvHinhThuc.setText(post.getMethod());
         holder.tvHocPhi.setText(String.valueOf(post.getTuition()));
         holder.tvNgayDang.setText(post.getPostDate());
+        switch (post.getStatus()) {
+            case ( Post.POST_STATUS_CREATED_CLASS ):
+                holder.tvStatus.setText("Đã tạo lớp");
+                holder.tvStatus.setBackgroundColor(ContextCompat.getColor(holder.tvStatus.getContext(), R.color.post_created_class));
+                break;
+            case ( Post.POST_STATUS_EDITED ):
+                holder.tvStatus.setText("Đã chỉnh sửa");
+                holder.tvStatus.setBackgroundColor(ContextCompat.getColor(holder.tvStatus.getContext(), R.color.post_edited));
+                break;
+            case ( Post.POST_STATUS_CANCELLED ):
+                holder.tvStatus.setText("Đã hủy");
+                holder.tvStatus.setBackgroundColor(ContextCompat.getColor(holder.tvStatus.getContext(), R.color.post_cancelled));
+                break;
+            default:
+                holder.tvStatus.setText("Đang đợi");
+                holder.tvStatus.setBackgroundColor(ContextCompat.getColor(holder.tvStatus.getContext(), R.color.post_waiting));
+                break;
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +98,9 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
+                            case R.id.create_class:
+                                Toast.makeText(view.getContext(), "Create class", Toast.LENGTH_SHORT).show();
+                                return true;
                             case R.id.edit_post:
                                 Toast.makeText(view.getContext(), "Edited", Toast.LENGTH_SHORT).show();
                                 return true;
@@ -102,15 +126,19 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
     }
 
     public class PostViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout layoutPostOption;
         ImageView imgAvatar;
         TextView tvName, tvRole, tvTitle,
                 tvMonHoc, tvKhuVuc, tvNgayHoc,
-                tvHinhThuc, tvHocPhi, tvNgayDang;
+                tvHinhThuc, tvHocPhi, tvNgayDang,
+                tvStatus;
         ImageButton ibPostOption;
         ImageView btnAnBaiDang;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            layoutPostOption = itemView.findViewById(R.id.layoutPostOption);
 
             imgAvatar = itemView.findViewById(R.id.imgAvatar);
             tvName = itemView.findViewById(R.id.tvName);
@@ -122,6 +150,7 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
             tvHinhThuc = itemView.findViewById(R.id.tvHinhThuc);
             tvHocPhi = itemView.findViewById(R.id.tvHocPhi);
             tvNgayDang = itemView.findViewById(R.id.tvNgayDang);
+            tvStatus = itemView.findViewById(R.id.tvStatus);
 
             ibPostOption = itemView.findViewById(R.id.ibPostOption);
             btnAnBaiDang = itemView.findViewById(R.id.btnAnBaiDang);

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/mediumSpace">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nhập số điện thoại của người dùng muốn thêm vào lớp"
+        android:textSize="18sp"
+        android:textColor="@color/text_color"/>
+    <EditText
+        android:id="@+id/etUserPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Số điện thoại"
+        android:background="@drawable/bg_add_post"
+        android:padding="@dimen/mediumSpace"
+        android:inputType="phone"/>
+
+
+</LinearLayout>
