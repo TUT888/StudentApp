@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,25 +47,7 @@ public class AllRatingAdapter extends RecyclerView.Adapter<AllRatingAdapter.Rati
         holder.rateCmt.setText("");
         holder.rateDate.setText("");
         holder.rateStarNum.setText("" + rating.getRate());
-
-        int j = 1;
-        for (int i = 0; i < holder.rateStars.getChildCount(); i++) {
-            if (rating.getRate() % 1 != 0) {
-                if (j <= Math.floor(rating.getRate())) {
-                    ImageView imageView = (ImageView) holder.rateStars.getChildAt(i);
-                    imageView.setImageResource(R.drawable.ic_rating_full_star);
-                }
-                else if (j == Math.floor(rating.getRate())+1) {
-                    ImageView imageView = (ImageView) holder.rateStars.getChildAt(i);
-                    imageView.setImageResource(R.drawable.ic_rating_half_star);
-                }
-                else {
-                    ImageView imageView = (ImageView) holder.rateStars.getChildAt(i);
-                    imageView.setImageResource(R.drawable.ic_rating_no_star);
-                }
-                j++;
-            }
-        }
+        holder.ratedBar.setRating((float)0.0);
     }
 
     @Override
@@ -77,7 +60,7 @@ public class AllRatingAdapter extends RecyclerView.Adapter<AllRatingAdapter.Rati
 
     public class RatingViewHolder extends RecyclerView.ViewHolder {
         private TextView rateClassName, rateTutor, rateStarNum, rateCmt, rateDate;
-        private LinearLayout rateStars;
+        private RatingBar ratedBar;
 
         public RatingViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,7 +70,7 @@ public class AllRatingAdapter extends RecyclerView.Adapter<AllRatingAdapter.Rati
             rateStarNum = itemView.findViewById(R.id.rateStarNum);
             rateCmt = itemView.findViewById(R.id.rateCmt);
             rateDate = itemView.findViewById(R.id.rateDate);
-            rateStars = itemView.findViewById(R.id.rateStars);
+            ratedBar = itemView.findViewById(R.id.ratedBar);
         }
     }
 }

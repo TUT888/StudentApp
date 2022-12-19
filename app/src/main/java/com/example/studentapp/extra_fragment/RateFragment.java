@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ public class RateFragment extends Fragment {
     MaterialButton btnSaveRate;
     MainActivity mainActivity;
     IClickBtnSaveRating iClickBtnSaveRating;
+    ImageButton ibBack;
 
     public RateFragment(IClickBtnSaveRating iClickBtnSaveRating) {
         this.iClickBtnSaveRating = iClickBtnSaveRating;
@@ -45,6 +47,13 @@ public class RateFragment extends Fragment {
         ratingBar = view.findViewById(R.id.ratingBar);
         rtCmt = view.findViewById(R.id.rtCmt);
         btnSaveRate = view.findViewById(R.id.btnSaveRate);
+        ibBack = view.findViewById(R.id.ibBack);
+        ibBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().popBackStack();
+            }
+        });
 
         mainActivity = (MainActivity) getActivity();
 
