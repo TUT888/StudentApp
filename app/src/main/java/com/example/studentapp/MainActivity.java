@@ -163,6 +163,19 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void goToAddNewPostFragment(Post newPost, String action) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("post", (Serializable) newPost);
+        bundle.putString("action", action);
+        detailFragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     public void goToRateDetailFragment(Rate rate, String previousFragment) {
         //Example: previousFragment = MyPostFragment.class.getSimpleName() = "MyPostFragment"
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

@@ -88,36 +88,6 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
                 mIClickPostObjectListener.onClickPostObject(post);
             }
         });
-
-        holder.ibPostOption.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopupMenu pm = new PopupMenu(view.getContext(), view);
-                pm.getMenuInflater().inflate(R.menu.mypost_popup_menu, pm.getMenu());
-                pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.create_class:
-                                Toast.makeText(view.getContext(), "Create class", Toast.LENGTH_SHORT).show();
-                                return true;
-                            case R.id.edit_post:
-                                Toast.makeText(view.getContext(), "Edited", Toast.LENGTH_SHORT).show();
-                                return true;
-                            case R.id.repost:
-                                Toast.makeText(view.getContext(), "Repost", Toast.LENGTH_SHORT).show();
-                                return true;
-                            case R.id.delete_post:
-                                Toast.makeText(view.getContext(), "Delete", Toast.LENGTH_SHORT).show();
-                                return true;
-                            default:
-                                return true;
-                        }
-                    }
-                });
-                pm.show();
-            }
-        });
     }
 
     @Override
@@ -132,7 +102,6 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
                 tvMonHoc, tvKhuVuc, tvNgayHoc,
                 tvHinhThuc, tvHocPhi, tvNgayDang,
                 tvStatus;
-        ImageButton ibPostOption;
         ImageView btnAnBaiDang;
 
         public PostViewHolder(@NonNull View itemView) {
@@ -152,7 +121,6 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
             tvNgayDang = itemView.findViewById(R.id.tvNgayDang);
             tvStatus = itemView.findViewById(R.id.tvStatus);
 
-            ibPostOption = itemView.findViewById(R.id.ibPostOption);
             btnAnBaiDang = itemView.findViewById(R.id.btnAnBaiDang);
         }
     }
