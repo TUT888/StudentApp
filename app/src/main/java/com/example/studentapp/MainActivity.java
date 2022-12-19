@@ -16,6 +16,7 @@ import com.example.studentapp.adapter.ViewPagerAdapter;
 import com.example.studentapp.app_interface.IClickBtnSaveRating;
 import com.example.studentapp.extra_fragment.AccountInfoFragment;
 import com.example.studentapp.extra_fragment.AddNewPostFragment;
+import com.example.studentapp.extra_fragment.ChangePasswordFragment;
 import com.example.studentapp.extra_fragment.LoginFragment;
 import com.example.studentapp.extra_fragment.PostDetailFragment;
 import com.example.studentapp.extra_fragment.RegisterFragment;
@@ -267,7 +268,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToChangePasswordFragment() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        changePasswordFragment.setArguments(bundle);
 
+        fragmentTransaction.replace(R.id.main_activity_content, changePasswordFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     public User getCurrentLoginUser() {
