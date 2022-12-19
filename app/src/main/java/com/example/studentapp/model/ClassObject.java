@@ -3,6 +3,7 @@ package com.example.studentapp.model;
 import java.io.Serializable;
 
 public class ClassObject implements Serializable {
+    public static final int CLASS_STATUS_PENDING = -1;
     public static final int CLASS_STATUS_AVAILABLE = 0;
     public static final int CLASS_STATUS_ARCHIVED = 1;
     public static final int CLASS_STATUS_RATED = 2;

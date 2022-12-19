@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         mBottomNavigationView.getMenu().findItem(R.id.bottomNav_post).setChecked(true);
                         break;
                     case 3:
-                        mBottomNavigationView.getMenu().findItem(R.id.bottomNav_chat).setChecked(true);
+                        mBottomNavigationView.getMenu().findItem(R.id.bottomNav_pending_class).setChecked(true);
                         break;
                     case 4:
                         mBottomNavigationView.getMenu().findItem(R.id.bottomNav_profile).setChecked(true);
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.bottomNav_post:
                         mViewPager.setCurrentItem(2);
                         break;
-                    case R.id.bottomNav_chat:
+                    case R.id.bottomNav_pending_class:
                         mViewPager.setCurrentItem(3);
                         break;
                     case R.id.bottomNav_profile:

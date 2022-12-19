@@ -69,7 +69,6 @@ public class SearchPostAdapter extends RecyclerView.Adapter<SearchPostAdapter.Se
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Adapter", "clicked");
                 mIClickPostObjectListener.onClickPostObject(post);
             }
         });

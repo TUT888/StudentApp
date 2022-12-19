@@ -27,4 +27,7 @@
     <color name="post_cancelled">#535353</color>
 
     <color name="bottomNav_deselected">#393939</color>
+    <color name="cancel">#CC0202</color>
+    <color name="accept">#a2e665</color>
+
 </resources>

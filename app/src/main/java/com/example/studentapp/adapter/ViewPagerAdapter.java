@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.studentapp.fragment.ChatFragment;
+import com.example.studentapp.fragment.PendingClassFragment;
 import com.example.studentapp.fragment.HomeFragment;
 import com.example.studentapp.fragment.MyPostFragment;
 import com.example.studentapp.fragment.ProfileFragment;
@@ -26,7 +26,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
             case 2:
                 return new MyPostFragment();
             case 3:
-                return new ChatFragment();
+                return new PendingClassFragment();
             case 4:
                 return new ProfileFragment();
             default:

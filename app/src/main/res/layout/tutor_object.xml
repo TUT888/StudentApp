@@ -27,6 +27,7 @@
                     android:id="@+id/imgAvatar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:src="@mipmap/ic_launcher"/>
 
                 <LinearLayout
@@ -43,7 +44,7 @@
                         android:textColor="@color/primary_color"
                         android:textSize="20sp"
                         android:textStyle="bold" />
-                   <TextView
+                    <TextView
                         android:id="@+id/tvRole"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -64,7 +65,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Nam"/>
-                            </TableRow>
+                        </TableRow>
                         <TableRow>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -84,21 +85,21 @@
                                 android:text= "Chuyên môn: "
                                 android:textStyle="bold"/>
                             <TextView
-                            android:id="@+id/tvChuyenMon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Toán, Lý, Hóa"/>
+                                android:id="@+id/tvChuyenMon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Toán, Lý, Hóa"/>
                         </TableRow>
                     </TableLayout>
                 </LinearLayout>
             </LinearLayout>
-    </LinearLayout>
-    <ImageView
-        android:id="@+id/btnClose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_close_button"
-        android:layout_gravity="right"
-        android:layout_marginRight="10dp"/>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close_button"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"/>
     </FrameLayout>
 </com.google.android.material.card.MaterialCardView>

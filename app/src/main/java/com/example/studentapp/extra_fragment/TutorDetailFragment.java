@@ -48,7 +48,7 @@ public class TutorDetailFragment extends Fragment {
         tvKhuVuc = mView.findViewById(R.id.tvKhuVuc);
         tvHocVan = mView.findViewById(R.id.tvHocVan);
         tvTruong = mView.findViewById(R.id.tvTruong);
-        mbFollow = mView.findViewById(R.id.mbFollow);
+        mbFollow = mView.findViewById(R.id.mbContact);
         ibBack = mView.findViewById(R.id.ibBack);
 
         ibBack.setOnClickListener(new View.OnClickListener() {
