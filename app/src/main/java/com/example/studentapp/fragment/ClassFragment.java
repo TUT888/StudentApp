@@ -77,7 +77,6 @@ public class ClassFragment extends Fragment {
                     adapterPosition = classObjects.indexOf(classObject1);
                 }
             }
-            Toast.makeText(mainActivity, ""+adapterPosition, Toast.LENGTH_SHORT).show();
             if (adapterPosition != -1) {
                 rvClasses.scrollToPosition(adapterPosition);
             }

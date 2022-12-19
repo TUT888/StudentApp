@@ -56,6 +56,9 @@ public class HomeFragment extends Fragment {
         classes.add(new ClassObject("02", "Name2", "012888813", "054683123", "TP.HCM",
                 0, 200000, "Thứ 2: 9h - 10h", "18/12/2022", "24/12/2022", "Online",
                 "CNTT", "CNTT"));
+        classes.add(new ClassObject("03", "Name2", "012888813", "054683123", "TP.HCM",
+                0, 200000, "Thứ 3: 9h - 10h", "18/12/2022", "24/12/2022", "Online",
+                "CNTT", "CNTT"));
         if (classes.size() != 0) {
             linearLayoutHome.setVisibility(View.VISIBLE);
             txtViewHome.setVisibility(View.GONE);
@@ -79,6 +82,7 @@ public class HomeFragment extends Fragment {
         String date = dateTime.split(": ")[0];
         String time = dateTime.split(": ")[1];
         if (date.contains("Thứ 2")) {
+            thu2.setVisibility(View.VISIBLE);
             int childNum = thu2.getChildCount();
             TableRow tbr = new TableRow(mainActivity);
             TextView tg = new TextView(mainActivity);
@@ -109,10 +113,11 @@ public class HomeFragment extends Fragment {
             thu2.addView(tbr, childNum);
         }
         if (date.contains("Thứ 3")) {
+            thu3.setVisibility(View.VISIBLE);
             int childNum = thu3.getChildCount();
             TableRow tbr = new TableRow(mainActivity);
             TextView tg = new TextView(mainActivity);
-            tg.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 4.0f));
+            tg.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 3.0f));
             tg.setText(time);
             tg.setTextSize(20);
             tg.setGravity(Gravity.CENTER);
@@ -121,9 +126,9 @@ public class HomeFragment extends Fragment {
             tg.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg);
             TextView tg2 = new TextView(mainActivity);
-            tg2.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 8.0f));
+            tg2.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 8.0f));
             tg2.setTextSize(20);
-            tg2.setGravity(Gravity.CENTER_VERTICAL);
+            tg2.setGravity(Gravity.CENTER);
             tg2.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
             tg2.setText(classObject.getClassName());
             tg2.setTextColor(ContextCompat.getColor(mainActivity, R.color.text_color));
@@ -139,10 +144,11 @@ public class HomeFragment extends Fragment {
             thu3.addView(tbr, childNum);
         }
         if (date.contains("Thứ 4")) {
+            thu4.setVisibility(View.VISIBLE);
             int childNum = thu4.getChildCount();
             TableRow tbr = new TableRow(mainActivity);
             TextView tg = new TextView(mainActivity);
-            tg.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 3.0f));
+            tg.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 3.0f));
             tg.setText(time);
             tg.setTextSize(20);
             tg.setGravity(Gravity.CENTER);
@@ -151,9 +157,9 @@ public class HomeFragment extends Fragment {
             tg.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg);
             TextView tg2 = new TextView(mainActivity);
-            tg2.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 8.0f));
+            tg2.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 8.0f));
             tg2.setTextSize(20);
-            tg2.setGravity(Gravity.CENTER_VERTICAL);
+            tg2.setGravity(Gravity.CENTER);
             tg2.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
             tg2.setText(classObject.getClassName());
             tg2.setTextColor(ContextCompat.getColor(mainActivity, R.color.text_color));
@@ -169,10 +175,11 @@ public class HomeFragment extends Fragment {
             thu4.addView(tbr, childNum);
         }
         if (date.contains("Thứ 5")) {
+            thu5.setVisibility(View.VISIBLE);
             int childNum = thu5.getChildCount();
             TableRow tbr = new TableRow(mainActivity);
             TextView tg = new TextView(mainActivity);
-            tg.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 3.0f));
+            tg.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 3.0f));
             tg.setText(time);
             tg.setTextSize(20);
             tg.setGravity(Gravity.CENTER);
@@ -181,9 +188,9 @@ public class HomeFragment extends Fragment {
             tg.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg);
             TextView tg2 = new TextView(mainActivity);
-            tg2.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 8.0f));
+            tg2.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 8.0f));
             tg2.setTextSize(20);
-            tg2.setGravity(Gravity.CENTER_VERTICAL);
+            tg2.setGravity(Gravity.CENTER);
             tg2.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
             tg2.setText(classObject.getClassName());
             tg2.setTextColor(ContextCompat.getColor(mainActivity, R.color.text_color));
@@ -199,10 +206,11 @@ public class HomeFragment extends Fragment {
             thu5.addView(tbr, childNum);
         }
         if (date.contains("Thứ 6")) {
+            thu6.setVisibility(View.VISIBLE);
             int childNum = thu6.getChildCount();
             TableRow tbr = new TableRow(mainActivity);
             TextView tg = new TextView(mainActivity);
-            tg.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 3.0f));
+            tg.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 3.0f));
             tg.setText(time);
             tg.setTextSize(20);
             tg.setGravity(Gravity.CENTER);
@@ -211,9 +219,9 @@ public class HomeFragment extends Fragment {
             tg.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg);
             TextView tg2 = new TextView(mainActivity);
-            tg2.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 8.0f));
+            tg2.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 8.0f));
             tg2.setTextSize(20);
-            tg2.setGravity(Gravity.CENTER_VERTICAL);
+            tg2.setGravity(Gravity.CENTER);
             tg2.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
             tg2.setText(classObject.getClassName());
             tg2.setTextColor(ContextCompat.getColor(mainActivity, R.color.text_color));
@@ -229,10 +237,11 @@ public class HomeFragment extends Fragment {
             thu6.addView(tbr, childNum);
         }
         if (date.contains("Thứ 7")) {
+            thu7.setVisibility(View.VISIBLE);
             int childNum = thu7.getChildCount();
             TableRow tbr = new TableRow(mainActivity);
             TextView tg = new TextView(mainActivity);
-            tg.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 3.0f));
+            tg.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 3.0f));
             tg.setText(time);
             tg.setTextSize(20);
             tg.setGravity(Gravity.CENTER);
@@ -241,9 +250,9 @@ public class HomeFragment extends Fragment {
             tg.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg);
             TextView tg2 = new TextView(mainActivity);
-            tg2.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 8.0f));
+            tg2.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 8.0f));
             tg2.setTextSize(20);
-            tg2.setGravity(Gravity.CENTER_VERTICAL);
+            tg2.setGravity(Gravity.CENTER);
             tg2.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
             tg2.setText(classObject.getClassName());
             tg2.setTextColor(ContextCompat.getColor(mainActivity, R.color.text_color));
@@ -259,10 +268,11 @@ public class HomeFragment extends Fragment {
             thu7.addView(tbr, childNum);
         }
         if (date.contains("Chủ nhật")) {
+            cn.setVisibility(View.VISIBLE);
             int childNum = cn.getChildCount();
             TableRow tbr = new TableRow(mainActivity);
             TextView tg = new TextView(mainActivity);
-            tg.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 3.0f));
+            tg.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 3.0f));
             tg.setText(time);
             tg.setTextSize(20);
             tg.setGravity(Gravity.CENTER);
@@ -271,9 +281,9 @@ public class HomeFragment extends Fragment {
             tg.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg);
             TextView tg2 = new TextView(mainActivity);
-            tg2.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 8.0f));
+            tg2.setLayoutParams(new TableRow.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 8.0f));
             tg2.setTextSize(20);
-            tg2.setGravity(Gravity.CENTER_VERTICAL);
+            tg2.setGravity(Gravity.CENTER);
             tg2.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
             tg2.setText(classObject.getClassName());
             tg2.setTextColor(ContextCompat.getColor(mainActivity, R.color.text_color));
