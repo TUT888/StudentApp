@@ -104,37 +104,26 @@
             android:drawableRight="@drawable/ic_arrow_right"
             android:drawableTint="@color/text_color"
             android:textColor="@color/text_color"
-            android:textSize="20sp"/>
+            android:textSize="26sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/primary_color"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/primary_color"/>
         <TextView
-            android:id="@+id/tvFollowing"
+            android:id="@+id/tvAccountInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/mediumSpace"
-            android:text="\tĐang theo dõi"
-            android:drawableLeft="@drawable/ic_following"
-            android:drawableRight="@drawable/ic_arrow_right"
-            android:drawableTint="@color/text_color"
-            android:textColor="@color/text_color"
-            android:textSize="20sp"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/primary_color"/>
-        <TextView
-            android:id="@+id/tvAccountSetting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/mediumSpace"
-            android:text="\tThiết lập tài khoản"
+            android:text="\tThông tin tài khoản"
             android:drawableLeft="@drawable/ic_default_user"
             android:drawableRight="@drawable/ic_arrow_right"
             android:drawableTint="@color/text_color"
             android:textColor="@color/text_color"
-            android:textSize="20sp"/>
+            android:textSize="26sp"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -149,7 +138,7 @@
             android:drawableRight="@drawable/ic_arrow_right"
             android:drawableTint="@color/text_color"
             android:textColor="@color/text_color"
-            android:textSize="20sp"/>
+            android:textSize="26sp"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -164,7 +153,7 @@
             android:drawableRight="@drawable/ic_arrow_right"
             android:drawableTint="@color/text_color"
             android:textColor="@color/text_color"
-            android:textSize="20sp"/>
+            android:textSize="26sp"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

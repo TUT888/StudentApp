@@ -10,4 +10,7 @@
     <string name="forgot_passord"><u>Quên mật khẩu?</u></string>
     <string name="register"><u>Đăng ký</u></string>
     <string name="login"><u>Đăng nhập</u></string>
+
+    <string name="current_role">Học viên</string>
+    <string name="view_role">Học viên</string>
 </resources>

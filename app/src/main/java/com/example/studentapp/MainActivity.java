@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.studentapp.R;
 import com.example.studentapp.adapter.ViewPagerAdapter;
 import com.example.studentapp.app_interface.IClickBtnSaveRating;
+import com.example.studentapp.extra_fragment.AccountInfoFragment;
 import com.example.studentapp.extra_fragment.AddNewPostFragment;
 import com.example.studentapp.extra_fragment.LoginFragment;
 import com.example.studentapp.extra_fragment.PostDetailFragment;
@@ -241,12 +242,15 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void goToFollowingFragment() {
+    public void goToAccountInfoFragment() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        AccountInfoFragment accountInfoFragment = new AccountInfoFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        accountInfoFragment.setArguments(bundle);
 
-    }
-
-    public void goToAccountSettingFragment() {
-
+        fragmentTransaction.replace(R.id.main_activity_content, accountInfoFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     public void goToChangePasswordFragment() {
