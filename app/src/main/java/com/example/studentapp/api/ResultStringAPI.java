@@ -1,4 +1,4 @@
-package com.example.studentapp.app_interface;
+package com.example.studentapp.api;
 
 public class ResultStringAPI {
     private int code;

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
+import com.example.studentapp.app_interface.IClickTimeTableObject;
 import com.example.studentapp.model.ClassObject;
 
 import org.w3c.dom.Text;
@@ -31,9 +32,10 @@ public class HomeFragment extends Fragment {
     TextView txtViewHome;
     LinearLayout linearLayoutHome;
     TableLayout thu2, thu3, thu4, thu5, thu6, thu7, cn;
+    IClickTimeTableObject iClickTimeTableObject;
 
-    public HomeFragment() {
-        // Required empty public constructor
+    public HomeFragment(IClickTimeTableObject iClickTimeTableObject) {
+        this.iClickTimeTableObject = iClickTimeTableObject;
     }
 
     @Override
@@ -51,24 +53,22 @@ public class HomeFragment extends Fragment {
         thu6 = view.findViewById(R.id.thu6);
         thu7 = view.findViewById(R.id.thu7);
         cn = view.findViewById(R.id.cn);
-        classes.add(new ClassObject("01", "Toán 1", "012888813", "054683123", "TP.HCM",
+        classes.add(new ClassObject("02", "Name2", "012888813", "054683123", "TP.HCM",
                 0, 200000, "Thứ 2: 9h - 10h", "18/12/2022", "24/12/2022", "Online",
-                "CNTT", "CNTT"));;
+                "CNTT", "CNTT"));
         if (classes.size() != 0) {
             linearLayoutHome.setVisibility(View.VISIBLE);
             txtViewHome.setVisibility(View.GONE);
             for (ClassObject classObject : classes) {
-                if (classObject.getStatus() == 0) {
-                    String classTime = classObject.getDateTime();
-                    if (classTime.contains (", ")) {
-                        String[] classDate = classTime.split(", ");
-                        for (String dateTime : classDate) {
-                            addSchedule(dateTime, classObject);
-                        }
+                String classTime = classObject.getDateTime();
+                if (classTime.contains (", ")) {
+                    String[] classDate = classTime.split(", ");
+                    for (String dateTime : classDate) {
+                        addSchedule(dateTime, classObject);
                     }
-                    else {
-                        addSchedule(classTime, classObject);
-                    }
+                }
+                else {
+                    addSchedule(classTime, classObject);
                 }
             }
         }
@@ -100,6 +100,12 @@ public class HomeFragment extends Fragment {
             tg2.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg2);
             tbr.setVisibility(View.VISIBLE);
+            tbr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    iClickTimeTableObject.switchToClassFragment(classObject);
+                }
+            });
             thu2.addView(tbr, childNum);
         }
         if (date.contains("Thứ 3")) {
@@ -124,6 +130,12 @@ public class HomeFragment extends Fragment {
             tg2.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg2);
             tbr.setVisibility(View.VISIBLE);
+            tbr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    iClickTimeTableObject.switchToClassFragment(classObject);
+                }
+            });
             thu3.addView(tbr, childNum);
         }
         if (date.contains("Thứ 4")) {
@@ -148,6 +160,12 @@ public class HomeFragment extends Fragment {
             tg2.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg2);
             tbr.setVisibility(View.VISIBLE);
+            tbr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    iClickTimeTableObject.switchToClassFragment(classObject);
+                }
+            });
             thu4.addView(tbr, childNum);
         }
         if (date.contains("Thứ 5")) {
@@ -172,6 +190,12 @@ public class HomeFragment extends Fragment {
             tg2.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg2);
             tbr.setVisibility(View.VISIBLE);
+            tbr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    iClickTimeTableObject.switchToClassFragment(classObject);
+                }
+            });
             thu5.addView(tbr, childNum);
         }
         if (date.contains("Thứ 6")) {
@@ -196,6 +220,12 @@ public class HomeFragment extends Fragment {
             tg2.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg2);
             tbr.setVisibility(View.VISIBLE);
+            tbr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    iClickTimeTableObject.switchToClassFragment(classObject);
+                }
+            });
             thu6.addView(tbr, childNum);
         }
         if (date.contains("Thứ 7")) {
@@ -220,6 +250,12 @@ public class HomeFragment extends Fragment {
             tg2.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg2);
             tbr.setVisibility(View.VISIBLE);
+            tbr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    iClickTimeTableObject.switchToClassFragment(classObject);
+                }
+            });
             thu7.addView(tbr, childNum);
         }
         if (date.contains("Chủ nhật")) {
@@ -244,6 +280,12 @@ public class HomeFragment extends Fragment {
             tg2.setBackgroundDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.bg_time_table));
             tbr.addView(tg2);
             tbr.setVisibility(View.VISIBLE);
+            tbr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    iClickTimeTableObject.switchToClassFragment(classObject);
+                }
+            });
             cn.addView(tbr, childNum);
         }
     }

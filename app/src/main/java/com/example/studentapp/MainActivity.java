@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     //ViewPager settings
     private void setUpViewPager() {
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle());
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle(), this);
         mViewPager.setAdapter(viewPagerAdapter);
 
         mViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -238,11 +238,13 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void goToClassFragment() {
+    public void goToClassFragment(ClassObject classObject) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         ClassFragment classFragment = new ClassFragment(); //Child fragment
         Bundle bundle = new Bundle();
-        bundle.putInt("adapter_position", -1);
+        if (classObject != null) {
+            bundle.putSerializable("class", classObject);
+        }
         classFragment.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.main_activity_content, classFragment);
