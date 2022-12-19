@@ -23,7 +23,7 @@ public class ProfileFragment extends Fragment {
     private LinearLayout loginLayoutProfileHeading, logoutLayoutProfileHeading;
     private LinearLayout loginLayoutProfileContent, logoutLayoutProfileContent;
     private Button btnLogin, btnRegister;
-    TextView tvClasses, tvFollowing, tvAccountSetting, tvChangePassword, tvLogout;
+    TextView tvClasses, tvAccountInfo, tvChangePassword, tvLogout;
     // Object Class & variables
     private User currentUser;
     private boolean fromLoginFragment;
@@ -48,8 +48,7 @@ public class ProfileFragment extends Fragment {
         setUserInteractUI(); // Tùy theo đăng nhập hoặc chưa đăng nhập để hiện UI tương ứng
 
         tvClasses = mView.findViewById(R.id.tvClasses);
-        tvFollowing = mView.findViewById(R.id.tvFollowing);
-        tvAccountSetting = mView.findViewById(R.id.tvAccountSetting);
+        tvAccountInfo = mView.findViewById(R.id.tvAccountInfo);
         tvChangePassword = mView.findViewById(R.id.tvChangePassword);
         tvLogout = mView.findViewById(R.id.tvLogout);
 
@@ -70,16 +69,10 @@ public class ProfileFragment extends Fragment {
                 mMainActivity.goToClassFragment();
             }
         });
-        tvFollowing.setOnClickListener(new View.OnClickListener() {
+        tvAccountInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mMainActivity.goToFollowingFragment();
-            }
-        });
-        tvAccountSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mMainActivity.goToAccountSettingFragment();
+                mMainActivity.goToAccountInfoFragment();
             }
         });
         tvChangePassword.setOnClickListener(new View.OnClickListener() {
