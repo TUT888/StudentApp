@@ -21,6 +21,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
 import com.example.studentapp.fragment.MyPostFragment;
 import com.example.studentapp.model.Post;
@@ -28,6 +29,7 @@ import com.google.android.material.button.MaterialButton;
 
 public class PostDetailFragment extends Fragment {
     // Resources
+    private MainActivity mMainActivity;
     private LinearLayout layoutPostOption;
     private View mView;
     private ImageButton ibBack, ibPostOption;
@@ -46,6 +48,7 @@ public class PostDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_post_detail, container, false);
+        mMainActivity = (MainActivity) getActivity();
 
         // Bind View
         layoutPostOption = mView.findViewById(R.id.layoutPostOption);
@@ -99,6 +102,10 @@ public class PostDetailFragment extends Fragment {
             public void onClick(View view) {
                 PopupMenu pm = new PopupMenu(view.getContext(), view);
                 pm.getMenuInflater().inflate(R.menu.mypost_popup_menu, pm.getMenu());
+                if (post.getStatus()==Post.POST_STATUS_CREATED_CLASS) {
+                    pm.getMenu().removeItem(R.id.delete_post);
+                    pm.getMenu().removeItem(R.id.edit_post);
+                }
                 pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
@@ -107,13 +114,21 @@ public class PostDetailFragment extends Fragment {
                                 createClassFromPost();
                                 return true;
                             case R.id.edit_post:
-                                Toast.makeText(view.getContext(), "Edited", Toast.LENGTH_SHORT).show();
+                                if (post.getStatus()!=Post.POST_STATUS_CREATED_CLASS) {
+                                    mMainActivity.goToAddNewPostFragment(post, "update");
+                                } else {
+                                    Toast.makeText(view.getContext(), "Bài viết đã tạo lớp, không thể sửa", Toast.LENGTH_SHORT).show();
+                                }
                                 return true;
                             case R.id.repost:
-                                Toast.makeText(view.getContext(), "Repost", Toast.LENGTH_SHORT).show();
+                                mMainActivity.goToAddNewPostFragment(post, "add");
                                 return true;
                             case R.id.delete_post:
-                                Toast.makeText(view.getContext(), "Delete", Toast.LENGTH_SHORT).show();
+                                if (post.getStatus()!=Post.POST_STATUS_CREATED_CLASS) {
+                                    deletePost();
+                                } else {
+                                    Toast.makeText(view.getContext(), "Bài viết đã tạo lớp, không thể xóa", Toast.LENGTH_SHORT).show();
+                                }
                                 return true;
                             default:
                                 return true;
@@ -147,10 +162,36 @@ public class PostDetailFragment extends Fragment {
                     - If exists, change the status of post & class
                      */
                     Toast.makeText(getContext(), "Đã tạo lớp, đợi đối phương chấp nhận", Toast.LENGTH_SHORT).show();
+                    getChildFragmentManager().popBackStack();
+                    mMainActivity.resetViewPagerUI(2);
                 }
             }
         });
         alertBuilder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
+    }
+
+    private void deletePost() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
+        alertBuilder.setTitle("Xác nhận xóa bài viết");
+        alertBuilder.setMessage("Bạn có chắc muốn hủy bài viết này?");
+
+        alertBuilder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Call API xóa bài
+                Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
+                getChildFragmentManager().popBackStack();
+                mMainActivity.resetViewPagerUI(2);
+            }
+        });
+        alertBuilder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();

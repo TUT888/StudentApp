@@ -35,10 +35,11 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
-    public final static String URL = "http://192.168.1.9:8080";
+    public final static String URL = "http://192.168.1.9:8080"; // San url
     public static final String PROFILE_FRAGMENT_TAG = "PROFILE_FRAGMENT_TAG";
     public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT_TAG";
 
+    public final static String url = "http://10.35.48.79"; ///Tien url
 
     public static final String KEY_USER_LOGIN_HISTORY = "KEY_USER_LOGIN_HISTORY";
     public static final String[] PLACES_TO_CHOOSE = {
@@ -163,6 +164,19 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void goToAddNewPostFragment(Post newPost, String action) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("post", (Serializable) newPost);
+        bundle.putString("action", action);
+        detailFragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     public void goToRateDetailFragment(Rate rate) {
         //Example: previousFragment = MyPostFragment.class.getSimpleName() = "MyPostFragment"
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -194,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
         }); //Child fragment
         Bundle bundle = new Bundle();
         bundle.putSerializable("class_object", (Serializable) classObject);
+
         rateFragment.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.main_activity_content, rateFragment);
@@ -227,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         ClassFragment classFragment = new ClassFragment(); //Child fragment
         Bundle bundle = new Bundle();
+        bundle.putInt("adapter_position", -1);
         classFragment.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.main_activity_content, classFragment);
