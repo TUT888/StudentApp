@@ -1,12 +1,14 @@
 package com.example.studentapp.model;
 
-public class Rate {
+import java.io.Serializable;
+
+public class Rate implements Serializable {
     String classId;
     float rate;
     String comment;
     String date;
 
-    public Rate (String classId, int rate, String comment, String date) {
+    public Rate (String classId, float rate, String comment, String date) {
         this.classId = classId;
         this.rate = rate;
         this.comment = comment;

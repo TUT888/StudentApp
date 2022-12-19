@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
         tvClasses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mMainActivity.goToClassFragment();
+                mMainActivity.goToClassFragment(null);
             }
         });
         tvAccountInfo.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,7 @@
 package com.example.studentapp.model;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 
 public class ClassObject implements Serializable {
@@ -140,5 +142,9 @@ public class ClassObject implements Serializable {
 
     public void setField(String field) {
         this.field = field;
+    }
+
+    public boolean equalsTo(ClassObject classObject) {
+        return classObject.getId().equals(id);
     }
 }
