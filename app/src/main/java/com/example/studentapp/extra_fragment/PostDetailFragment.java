@@ -104,6 +104,7 @@ public class PostDetailFragment extends Fragment {
                 pm.getMenuInflater().inflate(R.menu.mypost_popup_menu, pm.getMenu());
                 if (post.getStatus()==Post.POST_STATUS_CREATED_CLASS) {
                     pm.getMenu().removeItem(R.id.delete_post);
+                    pm.getMenu().removeItem(R.id.edit_post);
                 }
                 pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -113,7 +114,11 @@ public class PostDetailFragment extends Fragment {
                                 createClassFromPost();
                                 return true;
                             case R.id.edit_post:
-                                mMainActivity.goToAddNewPostFragment(post, "update");
+                                if (post.getStatus()!=Post.POST_STATUS_CREATED_CLASS) {
+                                    mMainActivity.goToAddNewPostFragment(post, "update");
+                                } else {
+                                    Toast.makeText(view.getContext(), "Bài viết đã tạo lớp, không thể sửa", Toast.LENGTH_SHORT).show();
+                                }
                                 return true;
                             case R.id.repost:
                                 mMainActivity.goToAddNewPostFragment(post, "add");
