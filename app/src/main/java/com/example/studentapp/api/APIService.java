@@ -72,5 +72,8 @@ public interface APIService {
 
     @GET("post/get_my_posts.php")
     Call<ResultAPI> getMyPosts(@Query("phoneNumber") String phoneNumber);
+
+    @GET("class/get_pending_class.php")
+    Call<ResultAPI> getPendingClass(@Query("phoneNumber") String search);
 }
 
