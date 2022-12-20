@@ -12,4 +12,5 @@
     <dimen name="tableRowHeight">200dp</dimen>
     <dimen name="avatarImagePost">50dp</dimen>
     <dimen name="avatarImageTutor">200dp</dimen>
+    <dimen name="avatarImageTutorAdapter">80dp</dimen>
 </resources>

@@ -38,7 +38,9 @@ import java.io.Serializable;
 public class MainActivity extends AppCompatActivity {
     //    public final static String URL = "http://192.168.1.8:8282"; // Tam url
     //    public final static String url = "http://10.35.48.79"; ///Tien url
-    public final static String URL = "http://172.16.12.110"; ///Tien url
+//    public final static String URL = "http://172.16.212.73"; ///Tien url
+
+    public final static String URL_IMAGE = URL +  "/image/";
 
     public static final String PROFILE_FRAGMENT_TAG = "PROFILE_FRAGMENT_TAG";
     public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT_TAG";

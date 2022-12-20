@@ -61,5 +61,8 @@ public interface APIService {
     @POST("user/login.php")
     Call<ResultObjectAPI> userLogin(@Field("phoneNumber") String phoneNumber,
                                     @Field("password") String password);
+
+    @GET("tutor/get_search_tutor.php")
+    Call<ResultAPI> getSearchTutor(@Query("key") String search);
 }
 

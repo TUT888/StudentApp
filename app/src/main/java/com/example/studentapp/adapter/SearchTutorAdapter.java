@@ -7,7 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
+import com.example.studentapp.api.LoadImageInternet;
 import com.example.studentapp.app_interface.IClickPostObjectListener;
 import com.example.studentapp.app_interface.IClickTutorObjectListener;
 import com.example.studentapp.model.Tutor;
@@ -27,7 +30,8 @@ public class SearchTutorAdapter extends RecyclerView.Adapter<SearchTutorAdapter.
         notifyDataSetChanged();
     }
 
-    public SearchTutorAdapter(IClickTutorObjectListener mListener) {
+    public SearchTutorAdapter(ArrayList<Tutor> tutorList, IClickTutorObjectListener mListener) {
+        this.tutorList = tutorList;
         this.mListener = mListener;
     }
 
@@ -50,6 +54,7 @@ public class SearchTutorAdapter extends RecyclerView.Adapter<SearchTutorAdapter.
         }else{
             holder.tvGioiTinh.setText("Nữ");
         }
+        new LoadImageInternet(holder.imgAvatar).execute(MainActivity.URL_IMAGE +  tutor.getAvatar());
         holder.tvKhuVuc.setText(tutor.getAreas());
         holder.tvChuyenMon.setText(tutor.getFields());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
