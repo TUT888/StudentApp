@@ -24,7 +24,7 @@ public interface APIService {
             .setLenient()
             .create();
     APIService apiService = new Retrofit.Builder()
-            .baseUrl(MainActivity.url +"/api/")
+            .baseUrl(MainActivity.mURL +"/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(APIService.class);
@@ -56,5 +56,10 @@ public interface APIService {
 
     @GET("rate/get_rating_by_classID.php")
     Call<ResultAPI> getRatingByClassID(@Query("classID") String classID);
+
+    @FormUrlEncoded
+    @POST("user/login.php")
+    Call<ResultObjectAPI> userLogin(@Field("phoneNumber") String phoneNumber,
+                                    @Field("password") String password);
 }
 

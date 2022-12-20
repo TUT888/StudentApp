@@ -15,10 +15,10 @@ public class User implements Serializable {
     private int gender;
     private String birthday;
     private String email;
-    private int avatar;
+    private String avatar;
     private String password;
 
-    public User(String phoneNumber, String name, int status, String address, int gender, String birthday, String email, int avatar, String password) {
+    public User(String phoneNumber, String name, int status, String address, int gender, String birthday, String email, String avatar, String password) {
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.status = status;
@@ -28,6 +28,18 @@ public class User implements Serializable {
         this.email = email;
         this.avatar = avatar;
         this.password = password;
+    }
+
+    public User(String phoneNumber, String name, int status, String address, int gender, String birthday, String email, String password) {
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.status = status;
+        this.address = address;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.email = email;
+        this.password = password;
+        this.avatar = "";
     }
 
     public User() {
@@ -92,11 +104,11 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public int getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(int avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
