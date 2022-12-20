@@ -58,8 +58,7 @@ public class SearchPostFragment extends Fragment {
         searchPostAdapter = new SearchPostAdapter(searchPostArrayList, new IClickPostObjectListener() {
             @Override
             public void onClickPostObject(Post post) {
-//                mMainActivity.goToPostDetailFragment(post, name, avatar, SearchPostFragment.class.getSimpleName());
-                mMainActivity.goToPostDetailFragment(post, SearchPostFragment.class.getSimpleName());
+//
             }
 
             @Override
@@ -78,6 +77,13 @@ public class SearchPostFragment extends Fragment {
                         });
                 builder.show();
             }
+
+            @Override
+            public void onClickPostObjectSearch(Post post, String userName, String userRole, String userAvatar) {
+                // mMainActivity.goToPostDetailFragment(post, name, avatar, SearchPostFragment.class.getSimpleName());
+                mMainActivity.goToPostDetailFragment(post, SearchPostFragment.class.getSimpleName(), userName, userRole, userAvatar);
+            }
+
         });
         rcvSearchPost.setAdapter(searchPostAdapter);
         svSearchPost = mView.findViewById(R.id.svSearchPost);

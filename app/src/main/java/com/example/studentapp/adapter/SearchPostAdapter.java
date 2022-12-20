@@ -1,5 +1,6 @@
 package com.example.studentapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,7 @@ public class SearchPostAdapter extends RecyclerView.Adapter<SearchPostAdapter.Se
 
 
     @Override
-    public void onBindViewHolder(@NonNull SearchPostAdapter.SearchPostViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchPostAdapter.SearchPostViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Post post = posts.get(position);
         if (post == null) {
             return;
@@ -87,7 +88,7 @@ public class SearchPostAdapter extends RecyclerView.Adapter<SearchPostAdapter.Se
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mIClickPostObjectListener.onClickPostObject(post);
+                mIClickPostObjectListener.onClickPostObjectSearch(post, names.get(position), holder.tvRole.getText().toString(), avatars.get(position));
             }
         });
         holder.btnAnBaiDang.setOnClickListener(new View.OnClickListener() {

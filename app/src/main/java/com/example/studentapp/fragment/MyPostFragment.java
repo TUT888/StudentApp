@@ -70,6 +70,11 @@ public class MyPostFragment extends Fragment {
             public void onClickBtnHidePost(Post post) {
 
             }
+
+            @Override
+            public void onClickPostObjectSearch(Post post, String userName, String userRole, String userAvatar) {
+
+            }
         });
         rcvMyPosts.setAdapter(myPostAdapter);
         if (currentUser!=null) {
