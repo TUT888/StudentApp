@@ -2,54 +2,48 @@ package com.example.studentapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.api.APIService;
-import com.example.studentapp.api.ResultAPI;
 import com.example.studentapp.api.ResultObjectAPI;
-import com.example.studentapp.app_interface.IClickBtnRating;
-import com.example.studentapp.extra_fragment.PostDetailFragment;
+import com.example.studentapp.api.ResultStringAPI;
+import com.example.studentapp.app_interface.IClickBtnRatingListener;
 import com.example.studentapp.R;
 import com.example.studentapp.model.ClassObject;
 import com.example.studentapp.model.Rate;
-import com.google.android.material.card.MaterialCardView;
 import com.google.gson.JsonObject;
 
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import retrofit2.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder>{
 
     private List<ClassObject> classes;
-    private IClickBtnRating iClickBtnRating;
-    private Context mainActivity;
+    private IClickBtnRatingListener iClickBtnRatingListener;
+    private MainActivity mainActivity;
 
-    public ClassAdapter (IClickBtnRating iClickBtnRating) {
-        this.iClickBtnRating = iClickBtnRating;
+    public ClassAdapter (IClickBtnRatingListener iClickBtnRatingListener) {
+        this.iClickBtnRatingListener = iClickBtnRatingListener;
     }
 
     public void setData(List<ClassObject> classesList) {
@@ -75,7 +69,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         format.setMaximumFractionDigits(0);
         format.setCurrency(Currency.getInstance("VND"));
 
-        this.mainActivity = (Context) holder.classField.getContext();
+        this.mainActivity = (MainActivity) holder.classField.getContext();
         getTutorInfo(mClass.getTutorPhone(), holder);
 
         holder.className.setText(mClass.getClassName());
@@ -121,7 +115,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
             @Override
             public void onClick(View view) {
                 if (mClass.getStatus() == 1) {
-                    iClickBtnRating.rateClass(mClass, holder.getBindingAdapterPosition());
+                    iClickBtnRatingListener.rateClass(mClass, holder.getBindingAdapterPosition());
                 }
                 else {
                     getRating(mClass.getId());
@@ -139,8 +133,32 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
     }
 
     public void changeClassStatus (int position) {
-        classes.get(position).setStatus(2);
-        notifyItemChanged(position);
+        ClassObject classObject = classes.get(position);
+        Map<String,String> body = new HashMap<String, String>();
+        body.put("id", classObject.getId());
+        body.put("status", ""+2);
+        APIService.apiService.updateStatus(body).enqueue(new Callback<ResultStringAPI>() {
+            @Override
+            public void onResponse(Call<ResultStringAPI> call, Response<ResultStringAPI> response) {
+                ResultStringAPI resultAPI = response.body();
+                if (response.isSuccessful() && resultAPI != null) {
+                    if (resultAPI.getCode() == 0) {
+                        Log.d("onResponse:", "Successfully added new rating");
+                        classes.get(position).setStatus(2);
+                        notifyItemChanged(position);
+                    }
+                    else {
+                        Log.d("onFailure:", "Change class status: " + resultAPI.getMessage());
+                        Toast.makeText(mainActivity, "Đổi status thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResultStringAPI> call, Throwable t) {
+
+            }
+        });
     }
 
     public class ClassViewHolder extends RecyclerView.ViewHolder {
@@ -198,7 +216,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
                         JsonObject jsonObject = resultAPI.getData().getAsJsonObject();
                         Rate rate = new Rate(jsonObject.get("classID").getAsString(), jsonObject.get("rate").getAsFloat(),
                                 jsonObject.get("comment").getAsString(), jsonObject.get("date").getAsString());
-                        iClickBtnRating.seeRateDetail(rate);
+                        iClickBtnRatingListener.seeRateDetail(rate);
                     }
                 }
             }

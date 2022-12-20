@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="@drawable/bg_time_table"
             android:text="Lịch học"
             android:textSize="30sp"
             android:gravity="center"
@@ -27,8 +28,8 @@
             android:layout_height="0dp"
             android:layout_weight="8"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:background="@drawable/bg_time_table">
+            android:background="@drawable/time_table_border"
+            android:visibility="gone">
             <TableLayout
                 android:id="@+id/thu2"
                 android:layout_width="350dp"
@@ -204,13 +205,13 @@
             android:layout_height="0dp"
             android:layout_weight="12"
             android:text="Hiện tại không có khóa học nào"
-            android:background="@drawable/bg_time_table"
             android:gravity="center"
             android:textAlignment="center"
             android:textColor="@color/primary_color"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:visibility="visible"/>
+            android:visibility="visible"
+            android:background="@drawable/time_table_border"/>
     </LinearLayout>
 
 </ScrollView>

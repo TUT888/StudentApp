@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".extra_fragment.AllRatingsFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:padding="5dp"
+        android:background="@drawable/time_table_border">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -34,9 +36,19 @@
             android:textColor="@color/primary_color"
             android:textStyle="bold" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/txtViewRate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Gia sư này hiện chưa có đánh giá nào"
+        android:textColor="@color/primary_color"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rvAllRatings"/>
+        android:id="@+id/rvAllRatings"
+        android:visibility="gone"/>
 
 </LinearLayout>

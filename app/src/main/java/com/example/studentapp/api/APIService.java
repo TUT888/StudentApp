@@ -45,6 +45,9 @@ public interface APIService {
     @GET("class/get_class_by_id.php")
     Call<ResultObjectAPI> getClassById(@Query("classID") String classID);
 
+    @GET("class/get_active_class.php")
+    Call<ResultAPI> getActiveClass(@Query("studentPhone") String studentPhone);
+
     @Headers({"Content-Type: application/json"})
     @PUT("class/update_status.php")
     Call<ResultStringAPI> updateStatus(@Body Map<String,String> body);

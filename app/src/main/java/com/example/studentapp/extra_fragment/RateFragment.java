@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.Editable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +16,19 @@ import android.widget.Toast;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
-import com.example.studentapp.app_interface.IClickBtnSaveRating;
-import com.example.studentapp.fragment.MyPostFragment;
+import com.example.studentapp.api.APIService;
+import com.example.studentapp.api.ResultObjectAPI;
+import com.example.studentapp.app_interface.IClickBtnSaveRatingListener;
 import com.example.studentapp.model.ClassObject;
-import com.example.studentapp.model.Post;
+import com.example.studentapp.model.Rate;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.JsonObject;
+
+import java.time.LocalDate;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RateFragment extends Fragment {
 
@@ -30,11 +38,11 @@ public class RateFragment extends Fragment {
     EditText rtCmt;
     MaterialButton btnSaveRate;
     MainActivity mainActivity;
-    IClickBtnSaveRating iClickBtnSaveRating;
+    IClickBtnSaveRatingListener iClickBtnSaveRatingListener;
     ImageButton ibBack;
 
-    public RateFragment(IClickBtnSaveRating iClickBtnSaveRating) {
-        this.iClickBtnSaveRating = iClickBtnSaveRating;
+    public RateFragment(IClickBtnSaveRatingListener iClickBtnSaveRatingListener) {
+        this.iClickBtnSaveRatingListener = iClickBtnSaveRatingListener;
     }
 
     @Override
@@ -62,18 +70,43 @@ public class RateFragment extends Fragment {
             classObject = (ClassObject) bundle.getSerializable("class_object");
         }
         rtClassName.setText(classObject.getClassName());
-        rtTutor.setText(classObject.getTutorPhone());
-
+        getTutorName(classObject.getTutorPhone());
         btnSaveRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean check = validate();
                 if (check == true) {
-                    iClickBtnSaveRating.saveAndReturnToClassFragment();
+                    if (rtCmt.getText() == null) {
+                        rtCmt.setText("");
+                    }
+                    iClickBtnSaveRatingListener.saveAndReturnToClassFragment(new Rate(classObject.getId(),
+                            ratingBar.getRating(), rtCmt.getText().toString(), LocalDate.now().toString()));
                 }
             }
         });
         return view;
+    }
+
+    void getTutorName (String tutorPhone) {
+        APIService.apiService.getUser(tutorPhone).enqueue(new Callback<ResultObjectAPI>() {
+            @Override
+            public void onResponse(Call<ResultObjectAPI> call, Response<ResultObjectAPI> response) {
+                ResultObjectAPI resultAPI = response.body();
+                if(response.isSuccessful() && resultAPI != null){
+                    if (resultAPI.getCode() == 0){
+                        JsonObject jsonObject = resultAPI.getData().getAsJsonObject();
+                        String tutorName = jsonObject.get("name").getAsString();
+                        rtTutor.setText(tutorName);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResultObjectAPI> call, Throwable t) {
+                Toast.makeText(mainActivity, "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+                Log.d("onFailure", "onFailure: " + t.getMessage());
+            }
+        });
     }
 
     private boolean validate() {

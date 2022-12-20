@@ -20,10 +20,8 @@ import com.example.studentapp.R;
 import com.example.studentapp.adapter.ClassAdapter;
 import com.example.studentapp.api.APIService;
 import com.example.studentapp.api.ResultAPI;
-import com.example.studentapp.api.ResultObjectAPI;
-import com.example.studentapp.app_interface.IClickBtnRating;
+import com.example.studentapp.app_interface.IClickBtnRatingListener;
 import com.example.studentapp.model.ClassObject;
-import com.example.studentapp.model.Post;
 import com.example.studentapp.model.Rate;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -35,10 +33,10 @@ public class ClassFragment extends Fragment {
 
     RecyclerView rvClasses;
     ClassAdapter classAdapter;
-    List<ClassObject> classObjects = new ArrayList<>();
     MainActivity mainActivity;
     int adapterPosition = -1;
     ImageButton ibBack;
+    boolean check = false;
 
     public ClassFragment() {
         // Required empty public constructor
@@ -62,18 +60,7 @@ public class ClassFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
         rvClasses.setLayoutManager(linearLayoutManager);
         mainActivity = (MainActivity) getActivity();
-        mainActivity.getSupportFragmentManager().setFragmentResultListener("getAdapterPosition", getViewLifecycleOwner(),
-                new FragmentResultListener() {
-                    @Override
-                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                        adapterPosition = (int) result.getInt("adapter_position");
-                        if (adapterPosition != -1) {
-                            rvClasses.scrollToPosition(adapterPosition);
-                            classAdapter.changeClassStatus(adapterPosition);
-                        }
-                    }
-                });
-        classAdapter = new ClassAdapter(new IClickBtnRating() {
+        classAdapter = new ClassAdapter(new IClickBtnRatingListener() {
             @Override
             public void rateClass(ClassObject classObject, int adapterPosition) {
                 mainActivity.goToRateFragment(classObject, adapterPosition);
@@ -87,11 +74,11 @@ public class ClassFragment extends Fragment {
         Bundle bundle = getArguments();
         getData(mainActivity.getCurrentLoginUser().getPhoneNumber(), bundle);
         rvClasses.setAdapter(classAdapter);
-
         return view;
     }
 
     private void getData(String studentPhone, Bundle bundle){
+        List<ClassObject> classObjects = new ArrayList<>();
         APIService.apiService.getClasses(studentPhone).enqueue(new retrofit2.Callback<ResultAPI>() {
             @Override
             public void onResponse(retrofit2.Call<ResultAPI> call, retrofit2.Response<ResultAPI> response) {
@@ -124,6 +111,17 @@ public class ClassFragment extends Fragment {
                                 rvClasses.scrollToPosition(adapterPosition);
                             }
                         }
+                        mainActivity.getSupportFragmentManager().setFragmentResultListener("getAdapterPosition", getViewLifecycleOwner(),
+                                new FragmentResultListener() {
+                                    @Override
+                                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                                        adapterPosition = (int) result.getInt("adapter_position");
+                                        if (adapterPosition != -1) {
+                                            rvClasses.scrollToPosition(adapterPosition);
+                                            classAdapter.changeClassStatus(adapterPosition);
+                                        }
+                                    }
+                                });
                     }
                 }
             }
