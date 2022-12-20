@@ -1,6 +1,7 @@
 package com.example.studentapp.api;
 
 import com.example.studentapp.MainActivity;
+import com.example.studentapp.model.Post;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -24,13 +25,13 @@ public interface APIService {
             .setLenient()
             .create();
     APIService apiService = new Retrofit.Builder()
-            .baseUrl(MainActivity.url +"/api/")
+            .baseUrl(MainActivity.URL +"/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(APIService.class);
 
     @GET("post/get_search_post.php")
-    Call<ResultAPI> getSearchPost(@Query("key") String search);
+    Call<ResultObjectAPI> getSearchPost(@Query("key") String search);
 
     @GET("user/get_user.php")
     Call<ResultObjectAPI> getUser(@Query("phoneNumber") String id);
@@ -56,5 +57,14 @@ public interface APIService {
 
     @GET("rate/get_rating_by_classID.php")
     Call<ResultAPI> getRatingByClassID(@Query("classID") String classID);
+
+    @FormUrlEncoded
+    @POST("user/login.php")
+    Call<ResultObjectAPI> userLogin(@Field("phoneNumber") String phoneNumber,
+                                    @Field("password") String password);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("post/add_new_post.php")
+    Call<ResultStringAPI> addNewPost(@Body Post newPost);
 }
 

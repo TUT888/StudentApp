@@ -36,11 +36,12 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
-    public final static String URL = "http://192.168.1.9:8080"; // San url
+//    public final static String URL = "http://192.168.1.8:8282"; // Tam url
+//    public final static String url = "http://10.35.48.79"; ///Tien url
+//    public final static String URL = "http://172.16.12.110"; ///Tien url
+
     public static final String PROFILE_FRAGMENT_TAG = "PROFILE_FRAGMENT_TAG";
     public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT_TAG";
-
-    public final static String url = "http://10.35.48.79"; ///Tien url
 
     public static final String KEY_USER_LOGIN_HISTORY = "KEY_USER_LOGIN_HISTORY";
     public static final String[] PLACES_TO_CHOOSE = {
@@ -157,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
     public void goToAddNewPostFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
-        Bundle bundle = new Bundle();
-        detailFragment.setArguments(bundle);
+        //Bundle bundle = new Bundle();
+        //detailFragment.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
         fragmentTransaction.addToBackStack(null);
@@ -285,8 +286,6 @@ public class MainActivity extends AppCompatActivity {
         return currentUser;
     }
 
-
-
     public void savedLoginUser(User user) {
         SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -294,17 +293,6 @@ public class MainActivity extends AppCompatActivity {
         String json = gson.toJson(user);
         editor.putString(KEY_USER_LOGIN_HISTORY, json);
         editor.apply();
-
-        //For reset
-        /*
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        List<DownloadFile> tmp = new ArrayList<>();
-        String json = gson.toJson(tmp);
-        editor.putString(KEY_DOWNLOAD_HISTORY, json);
-        editor.apply();
-         */
     }
 
     public void logOut() {

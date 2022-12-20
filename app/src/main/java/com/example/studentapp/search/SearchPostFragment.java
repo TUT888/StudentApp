@@ -9,15 +9,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
 import com.example.studentapp.adapter.SearchPostAdapter;
+import com.example.studentapp.api.APIService;
+import com.example.studentapp.api.ResultAPI;
+import com.example.studentapp.api.ResultObjectAPI;
 import com.example.studentapp.app_interface.IClickPostObjectListener;
 import com.example.studentapp.model.Post;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
@@ -30,6 +36,8 @@ public class SearchPostFragment extends Fragment {
     private ArrayList<Post> searchPostArrayList;
     private SearchPostAdapter searchPostAdapter;
     private SearchView svSearchPost;
+    private ArrayList<Post> filteredList;
+    private ArrayList<String> nameList;
 
     public SearchPostFragment() {
         // Required empty public constructor
@@ -67,12 +75,12 @@ public class SearchPostFragment extends Fragment {
                             }
                         });
                 builder.show();
-
             }
         });
         rcvSearchPost.setAdapter(searchPostAdapter);
         svSearchPost = mView.findViewById(R.id.svSearchPost);
-//        svSearchPost.clearFocus();
+        svSearchPost.clearFocus();
+
         svSearchPost.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -91,33 +99,54 @@ public class SearchPostFragment extends Fragment {
 
     public ArrayList<Post> initPost() {
         ArrayList<Post> arrayList = new ArrayList<>();
-        arrayList.add(new Post("01", "Tìm gia sư toán", 0,
-                "0998776755",
-                "Toan lop 12", "Toán",
-                "Thứ 2:9h-12h, Thứ 3: 15h-17h", "Q1, Q2",
-                "offline", 200000, "Hoc Toan bao dau dai hoc", "12/12/2022", ""));
-        arrayList.add(new Post("02", "Tìm gia sư văn", 0,
-                "0998876654",
-                "Văn lớp 12", "Văn",
-                "Thứ 2:9h-12h, Thứ 3: 15h-17h", "Q1, Q2",
-                "offline", 200000, "Hoc Toan bao dau dai hoc", "12/12/2022", ""));
+
         return arrayList;
     }
 
+
+
     public void filterList(String text){
-        ArrayList<Post> filteredList = new ArrayList<>();
-        for(Post post : searchPostArrayList){
-            if(post.getSubject().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(post);
-            }
-            else if(post.getTitle().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(post);
-            }
-            else if (post.getLearningPlaces().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(post);
+        filteredList = new ArrayList<>();
+        nameList = new ArrayList<>();
+        APIService.apiService.getSearchPost(text).enqueue(new retrofit2.Callback<ResultObjectAPI>() {
+            @Override
+            public void onResponse(retrofit2.Call<ResultObjectAPI> call, retrofit2.Response<ResultObjectAPI> response) {
+                ResultObjectAPI resultAPI = response.body();
+                if(response.isSuccessful() && resultAPI != null){
+                    if (resultAPI.getCode() == 0){
+                        for (int i = 0; i < resultAPI.getData().get("post").getAsJsonArray().size(); i++){
+                            JsonObject jsonObject = resultAPI.getData().get("post").getAsJsonArray().get(i).getAsJsonObject();
+                            String name = resultAPI.getData().get("name").getAsJsonArray().get(i).getAsString();
+                            Post post = new Post(jsonObject.get("id").getAsString(),
+                                    jsonObject.get("title").getAsString(),
+                                    jsonObject.get("status").getAsInt(),
+                                    jsonObject.get("idUser").getAsString(),
+                                    jsonObject.get("subject").getAsString(),
+                                    jsonObject.get("field").getAsString(),
+                                    jsonObject.get("dateTimesLearning").getAsString(),
+                                    jsonObject.get("learningPlaces").getAsString(),
+                                    jsonObject.get("method").getAsString(),
+                                    jsonObject.get("tuition").getAsInt(),
+                                    jsonObject.get("description").getAsString(),
+                                    jsonObject.get("postDate").getAsString(),
+                                    jsonObject.get("hideFrom").getAsString());
+                            filteredList.add(post);
+                            nameList.add(name);
+                        }
+                        searchPostAdapter.setData(filteredList);
+                        searchPostAdapter.setNames(nameList);
+                    }
+                }
+
             }
 
-        }
-        searchPostAdapter.setData(filteredList);
+            @Override
+            public void onFailure(retrofit2.Call<ResultObjectAPI> call, Throwable t) {
+                Toast.makeText(getContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+                Log.d("onFailure", "onFailure: " + t.getMessage());
+            }
+        });
     }
+
+
 }

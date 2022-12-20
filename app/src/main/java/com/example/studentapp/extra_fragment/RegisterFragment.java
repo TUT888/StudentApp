@@ -141,8 +141,8 @@ public class RegisterFragment extends Fragment {
         } else if (area.equals("")) {
             Toast.makeText(mMainActivity, "Hãy nhập nơi ở", Toast.LENGTH_SHORT).show();
         } else {
-            User newUser = new User(phoneNumber, name, 0, area,
-                    gender, birthday, email, R.drawable.ic_default_user, pass);
+            //User newUser = new User(phoneNumber, name, 0, area,
+            //        gender, birthday, email, R.drawable.ic_default_user, pass);
             //Call Register API
         }
     }

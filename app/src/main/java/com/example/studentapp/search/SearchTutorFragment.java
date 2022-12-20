@@ -91,8 +91,8 @@ public class SearchTutorFragment extends Fragment {
 
     private ArrayList<Tutor> initTutor() {
         ArrayList <Tutor> tutors = new ArrayList<>();
-        tutors.add(new Tutor("0916876678", "Nguyễn Trần Trung Quân", 1, "Quận 1", 0, "12/09/1990", "nttq@gmail.com", 1, "nttq1998", "Đại học Tôn Đức Thắng", "Thạc Sĩ", "Công nghệ Thông Tin, Toán", "Quận 1, Quận 2, Quận 3"));
-        tutors.add(new Tutor("0887665431", "Lan Hương", 1, "Quận Tân Bình", 1, "08/09/2001", "lh@gmail.com", 1, "ln@@@", "Đại học KHHH và Nhân Văn", "Sinh Viên", "Ngoại ngữ", "Quận Tân Bình, Quận Thủ Đức"));
+        tutors.add(new Tutor("0916876678", "Nguyễn Trần Trung Quân", 1, "Quận 1", 0, "12/09/1990", "nttq@gmail.com", "nttq1998", "Đại học Tôn Đức Thắng", "Thạc Sĩ", "Công nghệ Thông Tin, Toán", "Quận 1, Quận 2, Quận 3"));
+        tutors.add(new Tutor("0887665431", "Lan Hương", 1, "Quận Tân Bình", 1, "08/09/2001", "lh@gmail.com", "ln@@@", "Đại học KHHH và Nhân Văn", "Sinh Viên", "Ngoại ngữ", "Quận Tân Bình, Quận Thủ Đức"));
         return tutors;
     }
 

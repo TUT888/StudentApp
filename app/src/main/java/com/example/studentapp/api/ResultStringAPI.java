@@ -8,4 +8,12 @@ public class ResultStringAPI {
     public int getCode() {
         return code;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getData() {
+        return data;
+    }
 }
