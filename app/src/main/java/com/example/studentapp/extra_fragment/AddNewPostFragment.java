@@ -368,7 +368,7 @@ public class AddNewPostFragment extends Fragment {
                 String dateCreate = DateTimeFormatter.ofPattern("dd-mm-yyyy").format(LocalDateTime.now());
                 //Post newPost = new Post(id, );
             }
-            getChildFragmentManager().popBackStack();
+            getActivity().getSupportFragmentManager().popBackStack();
             mMainActivity.resetViewPagerUI(2);
         }
     }

@@ -16,6 +16,7 @@ import com.example.studentapp.adapter.ViewPagerAdapter;
 import com.example.studentapp.app_interface.IClickBtnSaveRating;
 import com.example.studentapp.extra_fragment.AccountInfoFragment;
 import com.example.studentapp.extra_fragment.AddNewPostFragment;
+import com.example.studentapp.extra_fragment.ChangePasswordFragment;
 import com.example.studentapp.extra_fragment.LoginFragment;
 import com.example.studentapp.extra_fragment.PostDetailFragment;
 import com.example.studentapp.extra_fragment.RegisterFragment;
@@ -35,6 +36,7 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
+    public final static String URL = "http://192.168.1.9:8080"; // San url
     public static final String PROFILE_FRAGMENT_TAG = "PROFILE_FRAGMENT_TAG";
     public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT_TAG";
 
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     //ViewPager settings
     private void setUpViewPager() {
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle());
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle(), this);
         mViewPager.setAdapter(viewPagerAdapter);
 
         mViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -177,13 +179,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void goToRateDetailFragment(Rate rate, String previousFragment) {
+    public void goToRateDetailFragment(Rate rate) {
         //Example: previousFragment = MyPostFragment.class.getSimpleName() = "MyPostFragment"
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         RatingDetailFragment ratingDetailFragment = new RatingDetailFragment(); //Child fragment
         Bundle bundle = new Bundle();
         bundle.putSerializable("rate", (Serializable) rate);
-        bundle.putString("previous", previousFragment);
 
         ratingDetailFragment.setArguments(bundle);
 
@@ -193,16 +194,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void returnToClassFragment(int adapterPosition) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        ClassFragment classFragment = new ClassFragment(); //Child fragment
         Bundle bundle = new Bundle();
         bundle.putInt("adapter_position", adapterPosition);
-
-        classFragment.setArguments(bundle);
-
-        fragmentTransaction.replace(R.id.main_activity_content, classFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        getSupportFragmentManager().setFragmentResult("getAdapterPosition", bundle);
+        getSupportFragmentManager().popBackStack();
     }
 
     public void goToRateFragment(ClassObject classObject, int adapterPosition) {
@@ -245,11 +240,13 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void goToClassFragment() {
+    public void goToClassFragment(ClassObject classObject) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         ClassFragment classFragment = new ClassFragment(); //Child fragment
         Bundle bundle = new Bundle();
-        bundle.putInt("adapter_position", -1);
+        if (classObject != null) {
+            bundle.putSerializable("class", classObject);
+        }
         classFragment.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.main_activity_content, classFragment);
@@ -269,7 +266,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToChangePasswordFragment() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        changePasswordFragment.setArguments(bundle);
 
+        fragmentTransaction.replace(R.id.main_activity_content, changePasswordFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     public User getCurrentLoginUser() {
@@ -282,8 +286,6 @@ public class MainActivity extends AppCompatActivity {
         return currentUser;
     }
 
-
-
     public void savedLoginUser(User user) {
         SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -291,17 +293,6 @@ public class MainActivity extends AppCompatActivity {
         String json = gson.toJson(user);
         editor.putString(KEY_USER_LOGIN_HISTORY, json);
         editor.apply();
-
-        //For reset
-        /*
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        List<DownloadFile> tmp = new ArrayList<>();
-        String json = gson.toJson(tmp);
-        editor.putString(KEY_DOWNLOAD_HISTORY, json);
-        editor.apply();
-         */
     }
 
     public void logOut() {

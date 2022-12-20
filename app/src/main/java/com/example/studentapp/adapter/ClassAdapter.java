@@ -103,8 +103,8 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
                     iClickBtnRating.rateClass(mClass, holder.getBindingAdapterPosition());
                 }
                 else {
-//                    Rate rate = getRateByClassId();
-//                    iClickBtnRating.seeRateDetail(rate);
+                    Rate rate = new Rate ("01", (float)2.0, "Bình luận", "05/12/2001");
+                    iClickBtnRating.seeRateDetail(rate);
                 }
             }
         });

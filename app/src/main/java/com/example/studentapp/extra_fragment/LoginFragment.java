@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.studentapp.MainActivity;
@@ -24,6 +25,7 @@ public class LoginFragment extends Fragment {
     private ImageButton ibBack;
     private EditText etPhoneNumber, etPassword;
     private MaterialButton btnLogin;
+    private TextView tvRegister;
     // Data
     private User userData;
 
@@ -43,6 +45,7 @@ public class LoginFragment extends Fragment {
         etPassword = mView.findViewById(R.id.etPassword);
         btnLogin = mView.findViewById(R.id.btnLogin);
         ibBack = mView.findViewById(R.id.ibBack);
+        tvRegister = mView.findViewById(R.id.tvRegister);
 
         // Set OnClickListener
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +57,14 @@ public class LoginFragment extends Fragment {
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().popBackStack();
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+        tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+                mMainActivity.goToRegisterFragment();
             }
         });
 

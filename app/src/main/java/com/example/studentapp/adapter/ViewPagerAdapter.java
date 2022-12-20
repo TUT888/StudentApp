@@ -6,15 +6,20 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.studentapp.MainActivity;
+import com.example.studentapp.app_interface.IClickTimeTableObject;
 import com.example.studentapp.fragment.PendingClassFragment;
 import com.example.studentapp.fragment.HomeFragment;
 import com.example.studentapp.fragment.MyPostFragment;
 import com.example.studentapp.fragment.ProfileFragment;
 import com.example.studentapp.fragment.SearchFragment;
+import com.example.studentapp.model.ClassObject;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
-    public ViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    MainActivity mainActivity;
+    public ViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, MainActivity mainActivity) {
         super(fragmentManager, lifecycle);
+        this.mainActivity = mainActivity;
     }
 
     @NonNull
@@ -30,7 +35,12 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
             case 4:
                 return new ProfileFragment();
             default:
-                return new HomeFragment();
+                return new HomeFragment(new IClickTimeTableObject() {
+                    @Override
+                    public void switchToClassFragment(ClassObject classObject) {
+                        mainActivity.goToClassFragment(classObject);
+                    }
+                });
         }
     }
 
