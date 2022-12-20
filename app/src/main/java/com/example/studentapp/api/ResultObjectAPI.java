@@ -7,8 +7,7 @@ public class ResultObjectAPI {
     private int code;
     private String message;
     private JsonObject data;
-
-
+    
     public int getCode() {
         return code;
     }
@@ -33,11 +32,4 @@ public class ResultObjectAPI {
         return data;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
 }
