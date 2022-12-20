@@ -13,14 +13,16 @@
         <ImageButton
             android:id="@+id/ibBack"
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:src="@drawable/ic_back"
             android:backgroundTint="@color/white"
             android:scaleType="fitCenter"/>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="5"
             android:orientation="vertical"
             android:layout_gravity="center_vertical">
             <TextView
@@ -30,7 +32,7 @@
                 android:text="Tên khóa học"
                 android:textColor="@color/primary_color"
                 android:textStyle="bold"
-                android:textSize="20sp"/>
+                android:textSize="25sp"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,16 +42,26 @@
                     android:layout_height="wrap_content"
                     android:text="Gia sư: "
                     android:textColor="@color/primary_color"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/ratedClassTutor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nguyễn Văn A"
-                    android:textColor="@color/text_color"/>
+                    android:textColor="@color/text_color"
+                    android:textSize="18sp"/>
             </LinearLayout>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/ratedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:gravity="end|center_vertical"
+            android:text="05/12/2001"
+            android:textSize="18sp" />
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -66,7 +78,8 @@
             android:layout_height="wrap_content"
             android:text="Đánh giá: "
             android:textColor="@color/primary_color"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="18sp"/>
         <RatingBar
             android:id="@+id/ratedBar"
             android:layout_width="wrap_content"
@@ -85,7 +98,8 @@
         android:layout_height="wrap_content"
         android:text="Bình luận: "
         android:textColor="@color/primary_color"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textSize="18sp"/>
     <TextView
         android:id="@+id/ratedCmt"
         android:layout_width="match_parent"
@@ -96,6 +110,7 @@
         android:background="@drawable/bg_cmt"
         android:padding="10dp"
         android:layout_marginBottom="5dp"
-        android:justificationMode="inter_word"/>
+        android:justificationMode="inter_word"
+        android:textSize="18sp"/>
 
 </LinearLayout>

@@ -24,8 +24,13 @@ public class AllRatingAdapter extends RecyclerView.Adapter<AllRatingAdapter.Rati
 
     private List<Rate> ratings;
 
-    public AllRatingAdapter (List<Rate> ratings) {
+    public AllRatingAdapter () {
+
+    }
+
+    public void setData (List<Rate> ratings) {
         this.ratings = ratings;
+        notifyDataSetChanged();
     }
 
     @NonNull

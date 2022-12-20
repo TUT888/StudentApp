@@ -53,12 +53,6 @@ public class HomeFragment extends Fragment {
         thu6 = view.findViewById(R.id.thu6);
         thu7 = view.findViewById(R.id.thu7);
         cn = view.findViewById(R.id.cn);
-        classes.add(new ClassObject("02", "Name2", "012888813", "054683123", "TP.HCM",
-                0, 200000, "Thứ 2: 9h - 10h", "18/12/2022", "24/12/2022", "Online",
-                "CNTT", "CNTT"));
-        classes.add(new ClassObject("03", "Name2", "012888813", "054683123", "TP.HCM",
-                0, 200000, "Thứ 3: 9h - 10h", "18/12/2022", "24/12/2022", "Online",
-                "CNTT", "CNTT"));
         if (classes.size() != 0) {
             linearLayoutHome.setVisibility(View.VISIBLE);
             txtViewHome.setVisibility(View.GONE);
@@ -74,6 +68,17 @@ public class HomeFragment extends Fragment {
                     addSchedule(classTime, classObject);
                 }
             }
+        }
+        else {
+            linearLayoutHome.setVisibility(View.GONE);
+            txtViewHome.setVisibility(View.VISIBLE);
+            thu2.setVisibility(View.GONE);
+            thu3.setVisibility(View.GONE);
+            thu4.setVisibility(View.GONE);
+            thu5.setVisibility(View.GONE);
+            thu6.setVisibility(View.GONE);
+            thu7.setVisibility(View.GONE);
+            cn.setVisibility(View.GONE);
         }
         return view;
     }

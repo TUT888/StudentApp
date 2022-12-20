@@ -12,6 +12,10 @@ public class ResultAPI {
         return code;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
     public JsonArray getData() {
         return data;
     }

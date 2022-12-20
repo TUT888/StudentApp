@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,15 @@ import android.widget.Toast;
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
 import com.example.studentapp.adapter.ClassAdapter;
+import com.example.studentapp.api.APIService;
+import com.example.studentapp.api.ResultAPI;
+import com.example.studentapp.api.ResultObjectAPI;
 import com.example.studentapp.app_interface.IClickBtnRating;
 import com.example.studentapp.model.ClassObject;
+import com.example.studentapp.model.Post;
 import com.example.studentapp.model.Rate;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +61,6 @@ public class ClassFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
         rvClasses.setLayoutManager(linearLayoutManager);
-        getData();
         mainActivity = (MainActivity) getActivity();
         mainActivity.getSupportFragmentManager().setFragmentResultListener("getAdapterPosition", getViewLifecycleOwner(),
                 new FragmentResultListener() {
@@ -67,21 +73,7 @@ public class ClassFragment extends Fragment {
                         }
                     }
                 });
-
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            ClassObject classObject = (ClassObject) bundle.getSerializable("class");
-            adapterPosition = classObjects.indexOf(classObject);
-            for (ClassObject classObject1 : classObjects) {
-                if (classObject1.equalsTo(classObject)) {
-                    adapterPosition = classObjects.indexOf(classObject1);
-                }
-            }
-            if (adapterPosition != -1) {
-                rvClasses.scrollToPosition(adapterPosition);
-            }
-        }
-        classAdapter = new ClassAdapter(classObjects, new IClickBtnRating() {
+        classAdapter = new ClassAdapter(new IClickBtnRating() {
             @Override
             public void rateClass(ClassObject classObject, int adapterPosition) {
                 mainActivity.goToRateFragment(classObject, adapterPosition);
@@ -92,38 +84,55 @@ public class ClassFragment extends Fragment {
                 mainActivity.goToRateDetailFragment(rate);
             }
         });
+        Bundle bundle = getArguments();
+        getData(mainActivity.getCurrentLoginUser().getPhoneNumber(), bundle);
         rvClasses.setAdapter(classAdapter);
 
         return view;
     }
 
-    void getData() {
-        classObjects.add(new ClassObject("01", "Name1", "012888813", "054683123", "TP.HCM",
-                0, 200000, "Thứ 2: 9h - 10h", "18/12/2022", "24/12/2022", "Online",
-                "CNTT", "CNTT"));
-        classObjects.add(new ClassObject("02", "Name2", "012888813", "054683123", "TP.HCM",
-                0, 200000, "Thứ 2: 9h - 10h", "18/12/2022", "24/12/2022", "Online",
-                "CNTT", "CNTT"));
-        classObjects.add(new ClassObject("03", "Name3", "012888813", "054683123", "TP.HCM",
-                2, 200000, "23h31p 18/12/2022", "18/12/2022", "18/12/2022", "Online",
-                "CNTT", "CNTT"));
-        classObjects.add(new ClassObject("04", "Name4", "012888813", "054683123", "TP.HCM",
-                0, 200000, "23h31p 18/12/2022", "18/12/2022", "18/12/2022", "Online",
-                "CNTT", "CNTT"));
-        classObjects.add(new ClassObject("05", "Name5", "012888813", "054683123", "TP.HCM",
-                1, 200000, "23h31p 18/12/2022", "18/12/2022", "18/12/2022", "Online",
-                "CNTT", "CNTT"));
-        classObjects.add(new ClassObject("06", "Name6", "012888813", "054683123", "TP.HCM",
-                2, 200000, "23h31p 18/12/2022", "18/12/2022", "18/12/2022", "Online",
-                "CNTT", "CNTT"));
-        classObjects.add(new ClassObject("07", "Name7", "012888813", "054683123", "TP.HCM",
-                0, 200000, "23h31p 18/12/2022", "18/12/2022", "19/12/2022", "Online",
-                "CNTT", "CNTT"));
-        classObjects.add(new ClassObject("08", "Name8", "012888813", "054683123", "TP.HCM",
-                1, 200000, "23h31p 18/12/2022", "18/12/2022", "18/12/2022", "Online",
-                "CNTT", "CNTT"));
-        classObjects.add(new ClassObject("09", "Name9", "012888813", "054683123", "TP.HCM",
-                2, 200000, "23h31p 18/12/2022", "18/12/2022", "18/12/2022", "Online",
-                "CNTT", "CNTT"));
+    private void getData(String studentPhone, Bundle bundle){
+        APIService.apiService.getClasses(studentPhone).enqueue(new retrofit2.Callback<ResultAPI>() {
+            @Override
+            public void onResponse(retrofit2.Call<ResultAPI> call, retrofit2.Response<ResultAPI> response) {
+                ResultAPI resultAPI = response.body();
+                if(response.isSuccessful() && resultAPI != null){
+                    if (resultAPI.getCode() == 0){
+                        JsonArray jsonArray = resultAPI.getData().getAsJsonArray();
+                        for (int i = 0; i < jsonArray.size(); i++){
+                            JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
+                            ClassObject classObject = new ClassObject(jsonObject.get("id").getAsString(),
+                                    jsonObject.get("className").getAsString(), jsonObject.get("tutorPhone").getAsString(),
+                                    jsonObject.get("studentPhone").getAsString(), jsonObject.get("place").getAsString(),
+                                    jsonObject.get("status").getAsInt(), jsonObject.get("fee").getAsInt(),
+                                    jsonObject.get("dateTime").getAsString(), jsonObject.get("startDate").getAsString(),
+                                    jsonObject.get("endDate").getAsString(), jsonObject.get("method").getAsString(),
+                                    jsonObject.get("subject").getAsString(), jsonObject.get("field").getAsString());
+                            classObjects.add(classObject);
+                        }
+                        classAdapter.setData(classObjects);
+                        if (bundle != null) {
+                            ClassObject classObject = (ClassObject) bundle.getSerializable("class");
+                            if (classObjects != null && classObject != null) {
+                                for (ClassObject classObject1 : classObjects) {
+                                    if (classObject1.equalsTo(classObject)) {
+                                        adapterPosition = classObjects.indexOf(classObject1);
+                                    }
+                                }
+                            }
+                            if (adapterPosition != -1) {
+                                rvClasses.scrollToPosition(adapterPosition);
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<ResultAPI> call, Throwable t) {
+                Toast.makeText(getContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+                Log.d("onFailure", "onFailure: " + t.getMessage());
+            }
+        });
     }
 }

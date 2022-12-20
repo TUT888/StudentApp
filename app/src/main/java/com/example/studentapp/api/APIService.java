@@ -43,7 +43,7 @@ public interface APIService {
     Call<ResultAPI> getClassRatedFromTutor(@Query("tutorPhone") String tutorPhone);
 
     @GET("class/get_class_by_id.php")
-    Call<ResultAPI> getClassById(@Query("classID") String classID);
+    Call<ResultObjectAPI> getClassById(@Query("classID") String classID);
 
     @Headers({"Content-Type: application/json"})
     @PUT("class/update_status.php")
@@ -56,7 +56,7 @@ public interface APIService {
                                        @Field("date") String date);
 
     @GET("rate/get_rating_by_classID.php")
-    Call<ResultAPI> getRatingByClassID(@Query("classID") String classID);
+    Call<ResultObjectAPI> getRatingByClassID(@Query("classID") String classID);
 
     @FormUrlEncoded
     @POST("user/login.php")
