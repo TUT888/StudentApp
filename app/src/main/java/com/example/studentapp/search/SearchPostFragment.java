@@ -38,6 +38,7 @@ public class SearchPostFragment extends Fragment {
     private SearchView svSearchPost;
     private ArrayList<Post> filteredList;
     private ArrayList<String> nameList;
+    private ArrayList<String> avatarList;
 
     public SearchPostFragment() {
         // Required empty public constructor
@@ -53,10 +54,11 @@ public class SearchPostFragment extends Fragment {
         rcvSearchPost = mView.findViewById(R.id.rcvSearchPost);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcvSearchPost.setLayoutManager(linearLayoutManager);
-        searchPostArrayList = initPost();
+        initPost();
         searchPostAdapter = new SearchPostAdapter(searchPostArrayList, new IClickPostObjectListener() {
             @Override
             public void onClickPostObject(Post post) {
+//                mMainActivity.goToPostDetailFragment(post, name, avatar, SearchPostFragment.class.getSimpleName());
                 mMainActivity.goToPostDetailFragment(post, SearchPostFragment.class.getSimpleName());
             }
 
@@ -97,10 +99,8 @@ public class SearchPostFragment extends Fragment {
         return mView;
     }
 
-    public ArrayList<Post> initPost() {
-        ArrayList<Post> arrayList = new ArrayList<>();
-
-        return arrayList;
+    public void initPost() {
+        filterList("");
     }
 
 
@@ -108,6 +108,7 @@ public class SearchPostFragment extends Fragment {
     public void filterList(String text){
         filteredList = new ArrayList<>();
         nameList = new ArrayList<>();
+        avatarList = new ArrayList<>();
         APIService.apiService.getSearchPost(text).enqueue(new retrofit2.Callback<ResultObjectAPI>() {
             @Override
             public void onResponse(retrofit2.Call<ResultObjectAPI> call, retrofit2.Response<ResultObjectAPI> response) {
@@ -117,6 +118,7 @@ public class SearchPostFragment extends Fragment {
                         for (int i = 0; i < resultAPI.getData().get("post").getAsJsonArray().size(); i++){
                             JsonObject jsonObject = resultAPI.getData().get("post").getAsJsonArray().get(i).getAsJsonObject();
                             String name = resultAPI.getData().get("name").getAsJsonArray().get(i).getAsString();
+                            String avatar = resultAPI.getData().get("avatar").getAsJsonArray().get(i).getAsString();
                             Post post = new Post(jsonObject.get("id").getAsString(),
                                     jsonObject.get("title").getAsString(),
                                     jsonObject.get("status").getAsInt(),
@@ -132,9 +134,11 @@ public class SearchPostFragment extends Fragment {
                                     jsonObject.get("hideFrom").getAsString());
                             filteredList.add(post);
                             nameList.add(name);
+                            avatarList.add(avatar);
                         }
                         searchPostAdapter.setData(filteredList);
                         searchPostAdapter.setNames(nameList);
+                        searchPostAdapter.setAvatars(avatarList);
                     }
                 }
 

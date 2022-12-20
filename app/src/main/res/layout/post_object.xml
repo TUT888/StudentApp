@@ -26,9 +26,9 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgAvatar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:layout_width="@dimen/avatarImageTutorAdapter"
+                    android:layout_height="@dimen/avatarImageTutorAdapter"
+                    android:src="@mipmap/ic_launcher" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

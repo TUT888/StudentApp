@@ -8,6 +8,8 @@ public class Post implements Serializable {
     public static final int POST_STATUS_CREATED_CLASS = 1;
     public static final int POST_STATUS_CANCELLED = -1;
     public static final int POST_STATUS_EDITED = 2;
+    public static final int POST_ROLE_TUTOR = 1;
+    public static final int POST_ROLE_STUDENT = 0;
 
     private String id;
     private String title;
@@ -24,6 +26,7 @@ public class Post implements Serializable {
     private String description;
     private String postDate;
     private String hideFrom;
+
 
     public Post(String id, String title, int status, String idUser, String subject, String field, String dateTimesLearning, String learningPlaces, String method, int tuition, String description, String postDate, String hideFrom) {
         this.id = id;

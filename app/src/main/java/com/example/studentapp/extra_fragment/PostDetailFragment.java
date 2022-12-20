@@ -2,6 +2,8 @@ package com.example.studentapp.extra_fragment;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -66,6 +68,15 @@ public class PostDetailFragment extends Fragment {
         ibBack = mView.findViewById(R.id.ibBack);
         ibPostOption = mView.findViewById(R.id.ibPostOption);
         tvStatus = mView.findViewById(R.id.tvStatus);
+
+        mbContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + post.getIdUser()));
+                startActivity(intent);
+            }
+        });
 
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +189,7 @@ public class PostDetailFragment extends Fragment {
         tvArea.setText(post.getLearningPlaces());
         tvDesc.setText(post.getDescription());
     }
-    
+
     private void createClassFromPost() {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
         alertBuilder.setTitle("Xác nhận tạo lớp học");

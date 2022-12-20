@@ -1,8 +1,12 @@
 package com.example.studentapp.extra_fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
-import com.example.studentapp.fragment.MyPostFragment;
-import com.example.studentapp.model.Post;
+import com.example.studentapp.api.LoadImageInternet;
 import com.example.studentapp.model.Tutor;
 import com.google.android.material.button.MaterialButton;
 
@@ -23,11 +27,14 @@ public class TutorDetailFragment extends Fragment {
 
     private View mView;
     private CircleImageView civAvatar;
-    private TextView tvName, tvRole, tvEmail, tvSDT, tvGioiTinh, tvLinhVuc, tvKhuVuc, tvHocVan, tvTruong;
-    private MaterialButton mbFollow;
+    private TextView tvName, tvRole, tvEmail, tvSDT, tvGioiTinh, tvLinhVuc, tvKhuVuc, tvHocVan, tvTruong, tvDanhGia;
+    private MaterialButton mbContact;
     private ImageButton ibBack;
     private Tutor tutor;
     private String previousFragment;
+    private RecyclerView rvDanhGia;
+
+
     public TutorDetailFragment() {
         // Required empty public constructor
     }
@@ -48,8 +55,13 @@ public class TutorDetailFragment extends Fragment {
         tvKhuVuc = mView.findViewById(R.id.tvKhuVuc);
         tvHocVan = mView.findViewById(R.id.tvHocVan);
         tvTruong = mView.findViewById(R.id.tvTruong);
-        mbFollow = mView.findViewById(R.id.mbContact);
+        mbContact = mView.findViewById(R.id.mbContact);
         ibBack = mView.findViewById(R.id.ibBack);
+        tvDanhGia = mView.findViewById(R.id.tvDanhGia);
+        rvDanhGia = mView.findViewById(R.id.rvDanhGia);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        rvDanhGia.setLayoutManager(linearLayoutManager);
 
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,11 +76,20 @@ public class TutorDetailFragment extends Fragment {
             previousFragment = bundle.getString("previous", "");
         }
 
+        mbContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + tutor.getPhoneNumber()));
+                startActivity(intent);
+            }
+        });
+
         if (tutor != null){
             tvName.setText(tutor.getName());
-            tvRole.setText("Gia sư");
             tvEmail.setText(tutor.getEmail());
             tvSDT.setText(tutor.getPhoneNumber());
+            new LoadImageInternet(civAvatar).execute(MainActivity.URL_IMAGE +  tutor.getAvatar());
             if (tutor.getGender() == 0){
                 tvGioiTinh.setText("Nam");
             }else {
@@ -82,4 +103,6 @@ public class TutorDetailFragment extends Fragment {
 
         return mView;
     }
+
+
 }
