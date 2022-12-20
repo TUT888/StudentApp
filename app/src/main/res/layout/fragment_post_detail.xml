@@ -20,33 +20,45 @@
             android:layout_margin="5dp">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageButton
                     android:id="@+id/ibBack"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_back"
                     android:backgroundTint="@color/white"
                     android:scaleType="fitCenter"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
+                    android:layout_height="wrap_content"
+                    android:text="CHI TIẾT BÀI ĐĂNG"
+                    android:textSize="25sp"
+                    android:textColor="@color/primary_color"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/mediumSpace"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
             </LinearLayout>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Tiêu đề"
-                android:textSize="25sp"
-                android:textColor="@color/primary_color"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_gravity="center"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"/>
+
         </LinearLayout>
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tiêu đề"
+            android:textSize="25sp"
+            android:textColor="@color/text_color"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/mediumSpace"/>
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -81,6 +93,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="5dp">
                             <TextView
+                                android:id="@+id/tvName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Nguyễn Văn A"
@@ -88,9 +101,10 @@
                                 android:textStyle="bold"
                                 android:textColor="@color/primary_color"/>
                             <TextView
+                                android:id="@+id/tvRole"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Gia sư"
+                                android:text="Role"
                                 android:textSize="20sp"
                                 android:textColor="@color/text_color"/>
                         </LinearLayout>
@@ -155,6 +169,7 @@
                             android:textColor="@color/primary_color"
                             android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/tvSubject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Môn toán"
@@ -174,6 +189,7 @@
                             android:textColor="@color/primary_color"
                             android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/tvField"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Toán học"
@@ -194,6 +210,7 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/tvDateTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="T2-T7 từ 7h30-9h10"
@@ -214,6 +231,7 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/tvTuition"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="300.000 VNĐ"
@@ -234,6 +252,7 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/tvMethod"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Offline"
@@ -253,6 +272,7 @@
                             android:textColor="@color/primary_color"
                             android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/tvArea"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="TP.HCM"
@@ -278,6 +298,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/primary_color"/>
                     <TextView
+                        android:id="@+id/tvDesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textSize="20sp"

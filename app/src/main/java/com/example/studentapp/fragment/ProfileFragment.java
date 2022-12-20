@@ -23,7 +23,7 @@ public class ProfileFragment extends Fragment {
     private LinearLayout loginLayoutProfileHeading, logoutLayoutProfileHeading;
     private LinearLayout loginLayoutProfileContent, logoutLayoutProfileContent;
     private Button btnLogin, btnRegister;
-    TextView tvClasses, tvAccountInfo, tvChangePassword, tvLogout, tvName;
+    TextView tvClasses, tvAccountInfo, tvChangePassword, tvLogout, tvName, tvRole;
     // Object Class & variables
     private User currentUser;
     private boolean fromLoginFragment;
@@ -54,8 +54,10 @@ public class ProfileFragment extends Fragment {
         tvChangePassword = mView.findViewById(R.id.tvChangePassword);
         tvLogout = mView.findViewById(R.id.tvLogout);
         tvName = mView.findViewById(R.id.tvName);
+        tvRole = mView.findViewById(R.id.tvRole);
         if (currentUser!=null) {
             tvName.setText(currentUser.getName());
+            tvRole.setText(MainActivity.CURRENT_LOGIN_ROLE);
         }
 
         btnLogin = mView.findViewById(R.id.btnLogin);

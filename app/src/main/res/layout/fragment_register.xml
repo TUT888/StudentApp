@@ -89,7 +89,7 @@
                         android:textColor="@color/text_color"
                         android:padding="@dimen/mediumSpace"
                         android:inputType="date"
-                        android:hint="dd/mm/yyyy"/>
+                        android:hint="yyyy-MM-dd"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"

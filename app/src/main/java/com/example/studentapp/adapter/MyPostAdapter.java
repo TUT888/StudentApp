@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
 import com.example.studentapp.app_interface.IClickPostObjectListener;
 import com.example.studentapp.model.Post;
@@ -56,9 +58,9 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
         holder.btnAnBaiDang.setVisibility(View.GONE);
         holder.layoutPostOption.setVisibility(View.VISIBLE);
         //holder.imgAvatar.setImageResource(post.getUser().getAvatar());
-        holder.tvName.setText(post.getId());
+        holder.tvName.setText(MainActivity.CURRENT_LOGIN_NAME);
 
-        holder.tvRole.setText("Học viên");
+        holder.tvRole.setText(MainActivity.CURRENT_LOGIN_ROLE);
         holder.tvTitle.setText(post.getTitle());
         holder.tvMonHoc.setText(post.getSubject());
         holder.tvKhuVuc.setText(String.join(", ", post.getLearningPlaces()));

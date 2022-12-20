@@ -7,5 +7,5 @@
     <item android:id="@+id/repost"
         android:title="Đăng lại"/>
     <item android:id="@+id/delete_post"
-        android:title="Xóa bài"/>
+        android:title="Hủy bài"/>
 </menu>
