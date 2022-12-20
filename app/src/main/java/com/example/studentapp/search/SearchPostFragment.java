@@ -53,7 +53,7 @@ public class SearchPostFragment extends Fragment {
         rcvSearchPost = mView.findViewById(R.id.rcvSearchPost);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcvSearchPost.setLayoutManager(linearLayoutManager);
-        searchPostArrayList = initPost();
+        initPost();
         searchPostAdapter = new SearchPostAdapter(searchPostArrayList, new IClickPostObjectListener() {
             @Override
             public void onClickPostObject(Post post) {
@@ -97,10 +97,8 @@ public class SearchPostFragment extends Fragment {
         return mView;
     }
 
-    public ArrayList<Post> initPost() {
-        ArrayList<Post> arrayList = new ArrayList<>();
-
-        return arrayList;
+    public void initPost() {
+        filterList("");
     }
 
     public void filterList(String text){

@@ -3,6 +3,8 @@ package com.example.studentapp.extra_fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
-import com.example.studentapp.fragment.MyPostFragment;
-import com.example.studentapp.model.Post;
+import com.example.studentapp.api.LoadImageInternet;
 import com.example.studentapp.model.Tutor;
 import com.google.android.material.button.MaterialButton;
 
@@ -23,11 +25,14 @@ public class TutorDetailFragment extends Fragment {
 
     private View mView;
     private CircleImageView civAvatar;
-    private TextView tvName, tvRole, tvEmail, tvSDT, tvGioiTinh, tvLinhVuc, tvKhuVuc, tvHocVan, tvTruong;
+    private TextView tvName, tvRole, tvEmail, tvSDT, tvGioiTinh, tvLinhVuc, tvKhuVuc, tvHocVan, tvTruong, tvDanhGia;
     private MaterialButton mbFollow;
     private ImageButton ibBack;
     private Tutor tutor;
     private String previousFragment;
+    private RecyclerView rvDanhGia;
+
+
     public TutorDetailFragment() {
         // Required empty public constructor
     }
@@ -50,6 +55,11 @@ public class TutorDetailFragment extends Fragment {
         tvTruong = mView.findViewById(R.id.tvTruong);
         mbFollow = mView.findViewById(R.id.mbContact);
         ibBack = mView.findViewById(R.id.ibBack);
+        tvDanhGia = mView.findViewById(R.id.tvDanhGia);
+        rvDanhGia = mView.findViewById(R.id.rvDanhGia);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        rvDanhGia.setLayoutManager(linearLayoutManager);
 
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,9 +76,9 @@ public class TutorDetailFragment extends Fragment {
 
         if (tutor != null){
             tvName.setText(tutor.getName());
-            tvRole.setText("Gia sư");
             tvEmail.setText(tutor.getEmail());
             tvSDT.setText(tutor.getPhoneNumber());
+            new LoadImageInternet(civAvatar).execute(MainActivity.URL_IMAGE +  tutor.getAvatar());
             if (tutor.getGender() == 0){
                 tvGioiTinh.setText("Nam");
             }else {
@@ -82,4 +92,6 @@ public class TutorDetailFragment extends Fragment {
 
         return mView;
     }
+
+
 }

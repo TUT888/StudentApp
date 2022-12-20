@@ -10,17 +10,27 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
 import com.example.studentapp.adapter.MyPostAdapter;
+import com.example.studentapp.api.APIService;
+import com.example.studentapp.api.ResultAPI;
+import com.example.studentapp.api.ResultObjectAPI;
 import com.example.studentapp.app_interface.IClickPostObjectListener;
 import com.example.studentapp.model.Field;
 import com.example.studentapp.model.Post;
 import com.example.studentapp.model.User;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyPostFragment extends Fragment {
     private View mView;
@@ -31,6 +41,7 @@ public class MyPostFragment extends Fragment {
     private MyPostAdapter myPostAdapter;
 
     private MaterialButton btnAddNewPost;
+    private User currentUser;
 
     public MyPostFragment() {
         // Required empty public constructor
@@ -41,12 +52,12 @@ public class MyPostFragment extends Fragment {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_post, container, false);
         mMainActivity = (MainActivity) getActivity();
+        currentUser = mMainActivity.getCurrentLoginUser();
 
         rcvMyPosts = mView.findViewById(R.id.rcvMyPosts);
         rcvMyPosts.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //Create empty ArrayList & setup adapter
-        //myPostArrayList = new ArrayList<>();
         myPostArrayList = initPost();
         myPostAdapter = new MyPostAdapter(myPostArrayList, new IClickPostObjectListener() {
             @Override
@@ -61,6 +72,9 @@ public class MyPostFragment extends Fragment {
             }
         });
         rcvMyPosts.setAdapter(myPostAdapter);
+        if (currentUser!=null) {
+            getPosts(currentUser.getPhoneNumber());
+        }
 
         //Get data from database
         //getBooksFromDatabase(getBooksUrl);
@@ -76,18 +90,61 @@ public class MyPostFragment extends Fragment {
         return mView;
     }
 
+    public void getPosts(String phone) {
+        myPostArrayList = new ArrayList<>();
+
+        Call<ResultAPI> apiCall = APIService.apiService.getMyPosts(currentUser.getPhoneNumber());
+        apiCall.enqueue(new Callback<ResultAPI>() {
+            @Override
+            public void onResponse(Call<ResultAPI> call, Response<ResultAPI> response) {
+                ResultAPI resultAPI = response.body();
+                if (response.isSuccessful() && resultAPI != null) {
+                    if (resultAPI.getCode()==0) {
+                        JsonArray jsonArray = resultAPI.getData();
+                        for (int i= 0; i < jsonArray.size(); i++) {
+                            JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
+                            String hideFormOpt = "";
+                            if (jsonObject.get("hideForm")!=null) {
+                                hideFormOpt = jsonObject.get("hideForm").getAsString();
+                            }
+                            myPostArrayList.add(new Post(
+                                    jsonObject.get("id").getAsString(),
+                                    jsonObject.get("title").getAsString(),
+                                    jsonObject.get("status").getAsInt(),
+                                    jsonObject.get("idUser").getAsString(),
+                                    jsonObject.get("subject").getAsString(),
+                                    jsonObject.get("field").getAsString(),
+                                    jsonObject.get("dateTimesLearning").getAsString(),
+                                    jsonObject.get("learningPlaces").getAsString(),
+                                    jsonObject.get("method").getAsString(),
+                                    jsonObject.get("tuition").getAsInt(),
+                                    jsonObject.get("description").getAsString(),
+                                    jsonObject.get("postDate").getAsString(),
+                                    hideFormOpt
+                            ));
+                        }
+                        myPostAdapter.notifyDataSetChanged();
+                    } else {
+                        Log.d("Load Post Result", "Failed!" + resultAPI.getMessage());
+                    }
+                    myPostAdapter.setData(myPostArrayList);
+                    myPostAdapter.notifyDataSetChanged();
+                } else {
+                    Log.d("Response Error", response.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResultAPI> call, Throwable t) {
+                call.cancel();
+                Log.d("Load Post Result", "Failed: " + t);
+            }
+        });
+    }
+
     public ArrayList<Post> initPost() {
         ArrayList<Post> arrayList = new ArrayList<>();
-        arrayList.add(new Post("01", "Tìm gia sư toán", 0,
-                "0998776755",
-                "Toan lop 12", "Toán",
-                "Thứ 2: 9h-12h, Thứ 3: 15h-17h", "Q1, Q2",
-                "offline", 200000, "Hoc Toan bao dau dai hoc", "12/12/2022", ""));
-        arrayList.add(new Post("02", "Tìm gia sư văn", 0,
-                "0998876654",
-                "Văn lớp 12", "Văn",
-                "Thứ 2: 9h-12h, Thứ 3: 15h-17h", "Q1, Q2",
-                "offline", 200000, "Hoc Toan bao dau dai hoc", "12/12/2022", ""));
+
         return arrayList;
     }
 }

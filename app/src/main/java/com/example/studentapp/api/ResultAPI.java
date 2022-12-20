@@ -20,4 +20,7 @@ public class ResultAPI {
         return data;
     }
 
+    public String getMessage() {
+        return message;
+    }
 }

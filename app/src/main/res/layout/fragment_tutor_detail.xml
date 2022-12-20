@@ -76,14 +76,28 @@
                             android:textColor="@color/primary_color"
                             android:textSize="@dimen/extraLargeFontSize"
                             android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvRole"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Gia sư"
-                            android:textColor="@color/text_color"
-                            android:textSize="20sp" />
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Đánh giá: "
+                                android:textColor="@color/text_color"/>
+                            <TextView
+                                android:id="@+id/tvDanhGia"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="4.5"
+                                android:textSize="@dimen/mediumFontSize"/>
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_star"/>
+                        </LinearLayout>
+
+
+
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
@@ -186,7 +200,7 @@
                             android:layout_height="wrap_content"
                             android:text="nguyenvanA@gmail.com"
                             android:layout_weight="1"
-                            android:textSize="20sp"
+                            android:textSize="16sp"
                             android:textColor="@color/text_color"
                             android:layout_marginLeft="5dp"/>
                     </TableRow>
@@ -276,7 +290,17 @@
                             android:textColor="@color/text_color"
                             android:layout_marginLeft="5dp"/>
                     </TableRow>
-
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Đánh giá từ học viên:"
+                            android:textColor="@color/primary_color"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/rvDanhGia"/>
                 </TableLayout>
 
             </LinearLayout>
