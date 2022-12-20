@@ -23,6 +23,9 @@ import android.widget.Toast;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
+import com.example.studentapp.api.APIService;
+import com.example.studentapp.api.ResultObjectAPI;
+import com.example.studentapp.api.ResultStringAPI;
 import com.example.studentapp.fragment.MyPostFragment;
 import com.example.studentapp.model.Post;
 import com.example.studentapp.model.User;
@@ -32,6 +35,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddNewPostFragment extends Fragment {
     // Resources
@@ -66,6 +73,7 @@ public class AddNewPostFragment extends Fragment {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_add_new_post, container, false);
         mMainActivity = (MainActivity) getActivity();
+        currentUser = mMainActivity.getCurrentLoginUser();
         bindView();
 
         Bundle bundle = getArguments();
@@ -168,12 +176,11 @@ public class AddNewPostFragment extends Fragment {
             }
         });
 
-
         // Set On Click Listener
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updatePost(view);
+                updatePostData(view);
             }
         });
         setCheckboxListeners();
@@ -184,6 +191,9 @@ public class AddNewPostFragment extends Fragment {
             }
         });
 
+        if (currentUser==null) {
+            btnPost.setClickable(false);
+        }
     }
 
     private void setCheckboxListeners() {
@@ -266,7 +276,6 @@ public class AddNewPostFragment extends Fragment {
                     selectedPlaces[i] = null;
                     checkedPlaces[i] = false;
                 }
-                Toast.makeText(getContext(), String.valueOf(selectedPlaces.length), Toast.LENGTH_SHORT).show();
             }
         });
         alertBuilder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
@@ -325,7 +334,8 @@ public class AddNewPostFragment extends Fragment {
         alertBuilder.show();
     }
 
-    private void updatePost(View view) {
+    // Option updating post's data: edit post OR add new post
+    private void updatePostData(View view) {
         // Get dates
         String inputTitle = etTitle.getText().toString();
         String inputField = etField.getText().toString();
@@ -366,12 +376,38 @@ public class AddNewPostFragment extends Fragment {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("ddmmyyyy-hhmmss");
                 String id = "P"+dtf.format(LocalDateTime.now());
                 String dateCreate = DateTimeFormatter.ofPattern("dd-mm-yyyy").format(LocalDateTime.now());
-                //Post newPost = new Post(id, );
+                Call<ResultStringAPI> apiCall =  APIService.apiService.addNewPost(new Post(
+                        id, inputTitle, Post.POST_STATUS_WAITING, currentUser.getPhoneNumber(),
+                        inputSubject, inputField, inputDateTime, inputPlace, inputMethod,
+                        inputTuition, inputDesc, dateCreate, ""
+                ));
+                apiCall.enqueue(new Callback<ResultStringAPI>() {
+                    @Override
+                    public void onResponse(Call<ResultStringAPI> call, Response<ResultStringAPI> response) {
+                        ResultStringAPI resultStringAPI = response.body();
+                        if (resultStringAPI.getCode()==0) {
+                            Log.d("Add Post Result", "Successful");
+                            Toast.makeText(mMainActivity, "Thêm bài đăng thành công", Toast.LENGTH_SHORT).show();
+                            getActivity().getSupportFragmentManager().popBackStack();
+                            mMainActivity.resetViewPagerUI(2);
+                        } else {
+                            Log.d("Add Post Result", "Failed: " + resultStringAPI.getMessage());
+                            Toast.makeText(mMainActivity, "Thêm bài đăng thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResultStringAPI> call, Throwable t) {
+                        call.cancel();
+                        Log.d("Add Result", "Failed: " + t);
+                        Toast.makeText(mMainActivity, "Có lỗi xảy ra, vui lòng thử lại sau!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-            getActivity().getSupportFragmentManager().popBackStack();
-            mMainActivity.resetViewPagerUI(2);
         }
     }
+
+
 
     private String getInputDateTimeString() {
         String[] selectedDateTimes = new String[7];
@@ -469,11 +505,4 @@ public class AddNewPostFragment extends Fragment {
             ex.printStackTrace();
         }
     }
-
-    // Fetch API
-    private void getUserData() {
-        User u = new User("0908888338", "Vương Hải Đăng", 1, "Quận 1", 0, "20/12/1998", "vhd@gmail.com", "123456");
-        currentUser = u;
-    }
-
 }

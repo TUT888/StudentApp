@@ -1,6 +1,7 @@
 package com.example.studentapp.api;
 
 import com.example.studentapp.MainActivity;
+import com.example.studentapp.model.Post;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -64,5 +65,12 @@ public interface APIService {
 
     @GET("tutor/get_search_tutor.php")
     Call<ResultAPI> getSearchTutor(@Query("key") String search);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("post/add_new_post.php")
+    Call<ResultStringAPI> addNewPost(@Body Post newPost);
+
+    @GET("post/get_my_posts.php")
+    Call<ResultAPI> getMyPosts(@Query("phoneNumber") String phoneNumber);
 }
 
