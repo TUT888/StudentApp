@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -25,9 +27,19 @@ import android.widget.Toast;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
+import com.example.studentapp.api.APIService;
+import com.example.studentapp.api.LoadImageInternet;
+import com.example.studentapp.api.ResultStringAPI;
 import com.example.studentapp.fragment.MyPostFragment;
 import com.example.studentapp.model.Post;
+import com.example.studentapp.model.User;
+import com.example.studentapp.search.SearchPostFragment;
 import com.google.android.material.button.MaterialButton;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PostDetailFragment extends Fragment {
     // Resources
@@ -36,8 +48,10 @@ public class PostDetailFragment extends Fragment {
     private View mView;
     private ImageButton ibBack, ibPostOption;
     private MaterialButton mbContact;
-    private TextView tvStatus;
+    private TextView tvStatus, tvTitle, tvName, tvRole, tvField, tvDateTime, tvTuition, tvMethod, tvArea, tvDesc, tvSubject;
+    private ImageView imgAvatar;
     // Object Class
+    private User currentUser;
     private Post post;
     private String previousFragment; //MyPostFragment, SearchPostFragment,...
 
@@ -51,6 +65,7 @@ public class PostDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_post_detail, container, false);
         mMainActivity = (MainActivity) getActivity();
+        currentUser = mMainActivity.getCurrentLoginUser();
 
         // Bind View
         layoutPostOption = mView.findViewById(R.id.layoutPostOption);
@@ -71,7 +86,7 @@ public class PostDetailFragment extends Fragment {
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().popBackStack();
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
 
@@ -83,8 +98,10 @@ public class PostDetailFragment extends Fragment {
         if (bundle != null){
             post = (Post) bundle.getSerializable("post");
             previousFragment = bundle.getString("previous", "");
+            bindAndFillDetail();
             // Từ MyPostFragment
             if (previousFragment.equals(MyPostFragment.class.getSimpleName())) {
+                bindUserData(currentUser.getName(), MainActivity.CURRENT_LOGIN_ROLE, currentUser.getAvatar());
                 mbContact.setVisibility(View.GONE);
                 layoutPostOption.setVisibility(View.VISIBLE);
 
@@ -106,6 +123,12 @@ public class PostDetailFragment extends Fragment {
                         tvStatus.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.post_waiting));
                         break;
                 }
+            }
+            if (previousFragment.equals(SearchPostFragment.class.getSimpleName())) {
+                String name = bundle.getString("name", "");
+                String role = bundle.getString("role", "");
+                String avatar = bundle.getString("avatar", "");
+                bindUserData(name, role, avatar);
             }
         }
 
@@ -137,7 +160,7 @@ public class PostDetailFragment extends Fragment {
                                 return true;
                             case R.id.delete_post:
                                 if (post.getStatus()!=Post.POST_STATUS_CREATED_CLASS) {
-                                    deletePost();
+                                    confirmDeletePost();
                                 } else {
                                     Toast.makeText(view.getContext(), "Bài viết đã tạo lớp, không thể xóa", Toast.LENGTH_SHORT).show();
                                 }
@@ -153,7 +176,40 @@ public class PostDetailFragment extends Fragment {
 
         return mView;
     }
-    
+
+    private void bindAndFillDetail() {
+        if (post==null || currentUser==null) {
+            return;
+        }
+        tvTitle = mView.findViewById(R.id.tvTitle);
+        tvField = mView.findViewById(R.id.tvField);
+        tvDateTime = mView.findViewById(R.id.tvDateTime);
+        tvTuition = mView.findViewById(R.id.tvTuition);
+        tvMethod = mView.findViewById(R.id.tvRole);
+        tvArea = mView.findViewById(R.id.tvArea);
+        tvDesc = mView.findViewById(R.id.tvDesc);
+        tvSubject = mView.findViewById(R.id.tvSubject);
+
+        tvTitle.setText(post.getTitle());
+        tvSubject.setText(post.getSubject());
+        tvField.setText(post.getField());
+        tvDateTime.setText(post.getDateTimesLearning());
+        tvTuition.setText(String.valueOf(post.getTuition()));
+        tvMethod.setText(post.getMethod());
+        tvArea.setText(post.getLearningPlaces());
+        tvDesc.setText(post.getDescription());
+    }
+
+    private void bindUserData(String userName, String userRole, String avatar) {
+        tvName = mView.findViewById(R.id.tvName);
+        tvRole = mView.findViewById(R.id.tvRole);
+        imgAvatar = mView.findViewById(R.id.imgAvatar);
+
+        tvName.setText(userName);
+        tvRole.setText(userRole);
+        new LoadImageInternet(imgAvatar).execute(MainActivity.URL_IMAGE +  avatar);
+    }
+
     private void createClassFromPost() {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
         alertBuilder.setTitle("Xác nhận tạo lớp học");
@@ -189,18 +245,15 @@ public class PostDetailFragment extends Fragment {
         alertDialog.show();
     }
 
-    private void deletePost() {
+    private void confirmDeletePost() {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
-        alertBuilder.setTitle("Xác nhận xóa bài viết");
+        alertBuilder.setTitle("Xác nhận hủy bài viết");
         alertBuilder.setMessage("Bạn có chắc muốn hủy bài viết này?");
 
         alertBuilder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // Call API xóa bài
-                Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
-                getActivity().getSupportFragmentManager().popBackStack();
-                mMainActivity.resetViewPagerUI(2);
+                deletePost();
             }
         });
         alertBuilder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -211,5 +264,34 @@ public class PostDetailFragment extends Fragment {
         });
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
+    }
+
+    private void deletePost() {
+        Call<ResultStringAPI> apiCall = APIService.apiService.removeMyPost(post.getId());
+        apiCall.enqueue(new Callback<ResultStringAPI>() {
+            @Override
+            public void onResponse(Call<ResultStringAPI> call, Response<ResultStringAPI> response) {
+                ResultStringAPI resultStringAPI = response.body();
+                if (response.isSuccessful() || resultStringAPI!=null) {
+                    if (resultStringAPI.getCode()==0) {
+                        post.setStatus(Post.POST_STATUS_CANCELLED);
+                        tvStatus.setText("Đã hủy");
+                        tvStatus.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.post_cancelled));
+
+                        Toast.makeText(getContext(), "Hủy thành công", Toast.LENGTH_SHORT).show();
+                        getActivity().getSupportFragmentManager().popBackStack();
+                        mMainActivity.resetViewPagerUI(2);
+                    } else {
+                        Toast.makeText(mMainActivity, "Hủy thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResultStringAPI> call, Throwable t) {
+                call.cancel();
+                Log.d("Remove Post Result", "Failed: " + t);
+            }
+        });
     }
 }

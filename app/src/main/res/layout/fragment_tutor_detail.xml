@@ -91,7 +91,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Nguyễn Văn A"
-                            android:textColor="@color/primary_color"
+                            android:textColor="@color/text_color"
                             android:textSize="@dimen/extraLargeFontSize"
                             android:textStyle="bold" />
                         <TextView
@@ -130,15 +130,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Số điện thoại: "
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textColor="@color/primary_color"
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvSDT"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="0998987987"
-                            android:textSize="20sp"
+                            android:textSize="16sp"
+                            android:layout_gravity="center_vertical"
                             android:textColor="@color/text_color"
                             android:layout_marginLeft="5dp"/>
                     </TableRow>
@@ -150,15 +151,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Giới tính: "
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textColor="@color/primary_color"
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvGioiTinh"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:text="Nam"
-                            android:textSize="20sp"
+                            android:gravity="center_vertical"
+                            android:textSize="16sp"
                             android:textColor="@color/text_color"
                             android:layout_marginLeft="5dp"/>
                     </TableRow>
@@ -170,15 +172,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ngày sinh: "
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textColor="@color/primary_color"
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvNgaySinh"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="11/11/2000"
-                            android:textSize="20sp"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="16sp"
                             android:textColor="@color/text_color"
                             android:layout_marginLeft="5dp"/>
                     </TableRow>
@@ -190,16 +193,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Email: "
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textColor="@color/primary_color"
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvEmail"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="nguyenvanA@gmail.com"
                             android:layout_weight="1"
-                            android:textSize="20sp"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="16sp"
                             android:textColor="@color/text_color"
                             android:layout_marginLeft="5dp"/>
                     </TableRow>
@@ -211,16 +215,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Lĩnh vực: "
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textColor="@color/primary_color"
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvLinhVuc"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="Toán học, Vật lý"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:textSize="20sp"
+                            android:textSize="16sp"
                             android:textColor="@color/text_color"
                             android:layout_marginLeft="5dp"/>
                     </TableRow>
@@ -234,15 +239,16 @@
                             android:layout_height="match_parent"
                             android:text="Khu vực: "
                             android:textColor="@color/primary_color"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvKhuVuc"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="Quận 1, Quận 2, Quận 3, Quận 4"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:textSize="20sp"
+                            android:textSize="16sp"
                             android:textColor="@color/text_color"
                             android:layout_marginLeft="5dp"/>
                     </TableRow>
@@ -256,14 +262,15 @@
                             android:layout_height="wrap_content"
                             android:text="Hiện là: "
                             android:textColor="@color/primary_color"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvHocVan"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="Sinh viên"
-                            android:textSize="20sp"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="16sp"
                             android:textColor="@color/text_color"
                             android:layout_marginLeft="5dp"/>
                     </TableRow>
@@ -277,7 +284,7 @@
                             android:layout_height="match_parent"
                             android:text="Trường: "
                             android:textColor="@color/primary_color"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvTruong"
@@ -285,7 +292,8 @@
                             android:layout_height="wrap_content"
                             android:text="Đại học Tôn Đức Thắng"
                             android:layout_weight="1"
-                            android:textSize="20sp"
+                            android:textSize="16dp"
+                            android:layout_gravity="center_vertical"
                             android:textColor="@color/text_color"
                             android:layout_marginLeft="5dp"/>
                     </TableRow>

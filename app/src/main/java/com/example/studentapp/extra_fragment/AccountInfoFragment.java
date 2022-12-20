@@ -23,7 +23,7 @@ public class AccountInfoFragment extends Fragment {
     private MainActivity mMainActivity;
     private View mView;
     private CircleImageView civAvatar;
-    private TextView tvPhoneNumber, tvArea, tvGender, tvBirthday, tvEmail, tvStatus;
+    private TextView tvName, tvPhoneNumber, tvArea, tvGender, tvBirthday, tvEmail, tvStatus;
     private ImageButton ibBack;
     // Data
     User currentUser;
@@ -46,24 +46,28 @@ public class AccountInfoFragment extends Fragment {
         tvBirthday = mView.findViewById(R.id.tvBirthday);
         tvEmail = mView.findViewById(R.id.tvEmail);
         tvStatus = mView.findViewById(R.id.tvStatus);
+        tvName = mView.findViewById(R.id.tvName);
 
         currentUser = mMainActivity.getCurrentLoginUser();
-        tvPhoneNumber.setText(currentUser.getPhoneNumber());
-        tvArea.setText(currentUser.getAddress());
-        if (currentUser.getGender()==0) {
-            tvGender.setText("Nam");
-        } else {
-            tvGender.setText("Nữ");
-        }
-        tvBirthday.setText(currentUser.getBirthday());
-        tvEmail.setText(currentUser.getEmail());
-        switch (currentUser.getStatus()) {
-            case (User.USER_STATUS_NOT_VERIFIED):
-                tvStatus.setText("Chưa xác thực");
-                break;
-            case (User.USER_STATUS_VERIFIED):
-                tvStatus.setText("Đã xác thực");
-                break;
+        if (currentUser!=null) {
+            tvName.setText(currentUser.getName());
+            tvPhoneNumber.setText(currentUser.getPhoneNumber());
+            tvArea.setText(currentUser.getAddress());
+            if (currentUser.getGender()==0) {
+                tvGender.setText("Nam");
+            } else {
+                tvGender.setText("Nữ");
+            }
+            tvBirthday.setText(currentUser.getBirthday());
+            tvEmail.setText(currentUser.getEmail());
+            switch (currentUser.getStatus()) {
+                case (User.USER_STATUS_NOT_VERIFIED):
+                    tvStatus.setText("Chưa xác thực");
+                    break;
+                case (User.USER_STATUS_VERIFIED):
+                    tvStatus.setText("Đã xác thực");
+                    break;
+            }
         }
 
         ibBack.setOnClickListener(new View.OnClickListener() {

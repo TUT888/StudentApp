@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
+import com.example.studentapp.api.LoadImageInternet;
 import com.example.studentapp.model.User;
 
 
@@ -23,7 +25,8 @@ public class ProfileFragment extends Fragment {
     private LinearLayout loginLayoutProfileHeading, logoutLayoutProfileHeading;
     private LinearLayout loginLayoutProfileContent, logoutLayoutProfileContent;
     private Button btnLogin, btnRegister;
-    TextView tvClasses, tvAccountInfo, tvChangePassword, tvLogout, tvName;
+    private ImageView imgAvatar;
+    TextView tvClasses, tvAccountInfo, tvChangePassword, tvLogout, tvName, tvRole;
     // Object Class & variables
     private User currentUser;
     private boolean fromLoginFragment;
@@ -54,8 +57,13 @@ public class ProfileFragment extends Fragment {
         tvChangePassword = mView.findViewById(R.id.tvChangePassword);
         tvLogout = mView.findViewById(R.id.tvLogout);
         tvName = mView.findViewById(R.id.tvName);
+        tvRole = mView.findViewById(R.id.tvRole);
+        imgAvatar = mView.findViewById(R.id.imgAvatar);
+
         if (currentUser!=null) {
             tvName.setText(currentUser.getName());
+            tvRole.setText(MainActivity.CURRENT_LOGIN_ROLE);
+            new LoadImageInternet(imgAvatar).execute(MainActivity.URL_IMAGE +  MainActivity.CURRENT_LOGIN_AVATAR);
         }
 
         btnLogin = mView.findViewById(R.id.btnLogin);
