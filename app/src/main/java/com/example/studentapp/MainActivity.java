@@ -36,11 +36,12 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
-    //    public final static String URL = "http://192.168.1.8:8282"; // Tam url
+//        public final static String URL = "http://192.168.1.8:8282"; // Tam url
         public final static String URL = "http://10.35.55.201"; ///Tien url
 //    public final static String URL = "http://172.16.212.73"; ///Tien url
 
     public final static String URL_IMAGE = URL +  "/image/";
+    public static String CURRENT_LOGIN_AVATAR = "";
     public static String CURRENT_LOGIN_NAME = "";
     public static final String CURRENT_LOGIN_ROLE = "Học viên";
     public static final String PROFILE_FRAGMENT_TAG = "PROFILE_FRAGMENT_TAG";
@@ -73,12 +74,13 @@ public class MainActivity extends AppCompatActivity {
 
         User u = getCurrentLoginUser();
         if (u!=null) {
-            setCurrentUserName(u.getName());
+            setCurrentUserData(u.getName(), u.getAvatar());
         }
     }
 
-    private static void setCurrentUserName(String name) {
+    private static void setCurrentUserData(String name, String avatar) {
         CURRENT_LOGIN_NAME = name;
+        CURRENT_LOGIN_AVATAR = avatar;
     }
 
     //ViewPager settings
@@ -154,6 +156,24 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("post", (Serializable) post);
         bundle.putString("previous", previousFragment);
+
+        detailFragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    public void goToPostDetailFragment(Post post, String previousFragment, String name, String role, String avatar) {
+        //Example: previousFragment = MyPostFragment.class.getSimpleName() = "MyPostFragment"
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        PostDetailFragment detailFragment = new PostDetailFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("post", (Serializable) post);
+        bundle.putString("previous", previousFragment);
+        bundle.putString("name", name);
+        bundle.putString("role", role);
+        bundle.putString("avatar", avatar);
 
         detailFragment.setArguments(bundle);
 

@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -27,12 +28,15 @@ import android.widget.Toast;
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
 import com.example.studentapp.api.APIService;
+import com.example.studentapp.api.LoadImageInternet;
 import com.example.studentapp.api.ResultStringAPI;
 import com.example.studentapp.fragment.MyPostFragment;
 import com.example.studentapp.model.Post;
 import com.example.studentapp.model.User;
+import com.example.studentapp.search.SearchPostFragment;
 import com.google.android.material.button.MaterialButton;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,7 +48,8 @@ public class PostDetailFragment extends Fragment {
     private View mView;
     private ImageButton ibBack, ibPostOption;
     private MaterialButton mbContact;
-    private TextView tvStatus, tvTitle, tvName, tvRole, tvField, tvDateTime, tvTuition, tvMethod, tvArea, tvDesc;
+    private TextView tvStatus, tvTitle, tvName, tvRole, tvField, tvDateTime, tvTuition, tvMethod, tvArea, tvDesc, tvSubject;
+    private ImageView imgAvatar;
     // Object Class
     private User currentUser;
     private Post post;
@@ -96,6 +101,7 @@ public class PostDetailFragment extends Fragment {
             bindAndFillDetail();
             // Từ MyPostFragment
             if (previousFragment.equals(MyPostFragment.class.getSimpleName())) {
+                bindUserData(currentUser.getName(), MainActivity.CURRENT_LOGIN_ROLE, currentUser.getAvatar());
                 mbContact.setVisibility(View.GONE);
                 layoutPostOption.setVisibility(View.VISIBLE);
 
@@ -117,6 +123,12 @@ public class PostDetailFragment extends Fragment {
                         tvStatus.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.post_waiting));
                         break;
                 }
+            }
+            if (previousFragment.equals(SearchPostFragment.class.getSimpleName())) {
+                String name = bundle.getString("name", "");
+                String role = bundle.getString("role", "");
+                String avatar = bundle.getString("avatar", "");
+                bindUserData(name, role, avatar);
             }
         }
 
@@ -170,24 +182,32 @@ public class PostDetailFragment extends Fragment {
             return;
         }
         tvTitle = mView.findViewById(R.id.tvTitle);
-        tvName = mView.findViewById(R.id.tvName);
-        tvRole = mView.findViewById(R.id.tvRole);
         tvField = mView.findViewById(R.id.tvField);
         tvDateTime = mView.findViewById(R.id.tvDateTime);
         tvTuition = mView.findViewById(R.id.tvTuition);
         tvMethod = mView.findViewById(R.id.tvRole);
         tvArea = mView.findViewById(R.id.tvArea);
         tvDesc = mView.findViewById(R.id.tvDesc);
+        tvSubject = mView.findViewById(R.id.tvSubject);
 
         tvTitle.setText(post.getTitle());
-        tvName.setText(currentUser.getName());
-        tvRole.setText(MainActivity.CURRENT_LOGIN_ROLE);
+        tvSubject.setText(post.getSubject());
         tvField.setText(post.getField());
         tvDateTime.setText(post.getDateTimesLearning());
         tvTuition.setText(String.valueOf(post.getTuition()));
         tvMethod.setText(post.getMethod());
         tvArea.setText(post.getLearningPlaces());
         tvDesc.setText(post.getDescription());
+    }
+
+    private void bindUserData(String userName, String userRole, String avatar) {
+        tvName = mView.findViewById(R.id.tvName);
+        tvRole = mView.findViewById(R.id.tvRole);
+        imgAvatar = mView.findViewById(R.id.imgAvatar);
+
+        tvName.setText(userName);
+        tvRole.setText(userRole);
+        new LoadImageInternet(imgAvatar).execute(MainActivity.URL_IMAGE +  avatar);
     }
 
     private void createClassFromPost() {
