@@ -57,11 +57,7 @@ public class TutorDetailFragment extends Fragment {
         tvTruong = mView.findViewById(R.id.tvTruong);
         mbContact = mView.findViewById(R.id.mbContact);
         ibBack = mView.findViewById(R.id.ibBack);
-        tvDanhGia = mView.findViewById(R.id.tvDanhGia);
-        rvDanhGia = mView.findViewById(R.id.rvDanhGia);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        rvDanhGia.setLayoutManager(linearLayoutManager);
 
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
