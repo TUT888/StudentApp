@@ -1,12 +1,10 @@
 package com.example.studentapp.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,10 +19,16 @@ import java.util.ArrayList;
 public class SearchPostAdapter extends RecyclerView.Adapter<SearchPostAdapter.SearchPostViewHolder> {
 
     private ArrayList<Post> posts;
+    private ArrayList<String> names;
     private IClickPostObjectListener mIClickPostObjectListener;
 
     public void setData(ArrayList<Post> list) {
         this.posts = list;
+        notifyDataSetChanged();
+    }
+
+    public void setNames(ArrayList<String> names) {
+        this.names = names;
         notifyDataSetChanged();
     }
 
@@ -37,6 +41,8 @@ public class SearchPostAdapter extends RecyclerView.Adapter<SearchPostAdapter.Se
         posts = postsList;
         mIClickPostObjectListener = iClickPostObjectListener;
     }
+
+
 
     @NonNull
     @Override
@@ -53,7 +59,7 @@ public class SearchPostAdapter extends RecyclerView.Adapter<SearchPostAdapter.Se
             return;
         }
         //holder.imgAvatar.setImageResource(post.getUser().getAvatar());
-        holder.tvName.setText(post.getId());
+        holder.tvName.setText(names.get(position));
 
         holder.tvRole.setText("Gia sư");
         holder.tvTitle.setText(post.getTitle());
@@ -61,6 +67,7 @@ public class SearchPostAdapter extends RecyclerView.Adapter<SearchPostAdapter.Se
         holder.tvKhuVuc.setText(String.join(", ", post.getLearningPlaces()));
 
         holder.tvNgayHoc.setText(post.getDateTimesLearning());
+
 
         holder.tvHinhThuc.setText(post.getMethod());
         holder.tvHocPhi.setText(String.valueOf(post.getTuition()));
