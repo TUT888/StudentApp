@@ -28,7 +28,7 @@ public class TutorDetailFragment extends Fragment {
 
     private View mView;
     private CircleImageView civAvatar;
-    private TextView tvName, tvRole, tvEmail, tvSDT, tvGioiTinh, tvLinhVuc, tvKhuVuc, tvHocVan, tvTruong;
+    private TextView tvName, tvRole, tvEmail, tvSDT, tvGioiTinh, tvLinhVuc, tvKhuVuc, tvHocVan, tvTruong, tvDate;
     private MaterialButton mbContact, mbRating;
     private ImageButton ibBack;
     private Tutor tutor;
@@ -51,6 +51,7 @@ public class TutorDetailFragment extends Fragment {
         tvRole = mView.findViewById(R.id.tvRole);
         tvEmail = mView.findViewById(R.id.tvEmail);
         tvSDT = mView.findViewById(R.id.tvSDT);
+        tvDate = mView.findViewById(R.id.tvBirthday);
         tvGioiTinh = mView.findViewById(R.id.tvGioiTinh);
         tvLinhVuc = mView.findViewById(R.id.tvLinhVuc);
         tvKhuVuc = mView.findViewById(R.id.tvKhuVuc);
@@ -84,6 +85,7 @@ public class TutorDetailFragment extends Fragment {
 
         if (tutor != null){
             tvName.setText(tutor.getName());
+            tvDate.setText(tutor.getBirthday());
             tvEmail.setText(tutor.getEmail());
             tvSDT.setText(tutor.getPhoneNumber());
             new LoadImageInternet(civAvatar).execute(MainActivity.URL_IMAGE +  tutor.getAvatar());

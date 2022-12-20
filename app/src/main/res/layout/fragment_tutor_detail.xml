@@ -176,7 +176,7 @@
                             android:textColor="@color/primary_color"
                             android:textStyle="bold" />
                         <TextView
-                            android:id="@+id/tvNgaySinh"
+                            android:id="@+id/tvBirthday"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="11/11/2000"
