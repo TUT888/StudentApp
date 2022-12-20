@@ -33,6 +33,10 @@ public class AllRatingAdapter extends RecyclerView.Adapter<AllRatingAdapter.Rati
         notifyDataSetChanged();
     }
 
+    public void addData (Rate rate) {
+        this.ratings.add(rate);
+    }
+
     @NonNull
     @Override
     public RatingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

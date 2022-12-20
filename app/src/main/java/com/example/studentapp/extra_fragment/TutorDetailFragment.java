@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
 import com.example.studentapp.api.LoadImageInternet;
+import com.example.studentapp.app_interface.IClickTutorBtnListener;
 import com.example.studentapp.model.Tutor;
 import com.google.android.material.button.MaterialButton;
 
@@ -26,15 +27,15 @@ public class TutorDetailFragment extends Fragment {
     private View mView;
     private CircleImageView civAvatar;
     private TextView tvName, tvRole, tvEmail, tvSDT, tvGioiTinh, tvLinhVuc, tvKhuVuc, tvHocVan, tvTruong, tvDanhGia;
-    private MaterialButton mbFollow;
+    private MaterialButton mbContact, mbRating;
     private ImageButton ibBack;
     private Tutor tutor;
     private String previousFragment;
-    private RecyclerView rvDanhGia;
+    private IClickTutorBtnListener iClickTutorBtnListener;
 
 
-    public TutorDetailFragment() {
-        // Required empty public constructor
+    public TutorDetailFragment(IClickTutorBtnListener iClickTutorBtnListener) {
+        this.iClickTutorBtnListener = iClickTutorBtnListener;
     }
 
 
@@ -53,13 +54,10 @@ public class TutorDetailFragment extends Fragment {
         tvKhuVuc = mView.findViewById(R.id.tvKhuVuc);
         tvHocVan = mView.findViewById(R.id.tvHocVan);
         tvTruong = mView.findViewById(R.id.tvTruong);
-        mbFollow = mView.findViewById(R.id.mbContact);
+        mbContact = mView.findViewById(R.id.mbContact);
         ibBack = mView.findViewById(R.id.ibBack);
         tvDanhGia = mView.findViewById(R.id.tvDanhGia);
-        rvDanhGia = mView.findViewById(R.id.rvDanhGia);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        rvDanhGia.setLayoutManager(linearLayoutManager);
+        mbRating = mView.findViewById(R.id.mbRating);
 
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +86,12 @@ public class TutorDetailFragment extends Fragment {
             tvKhuVuc.setText(tutor.getAreas());
             tvHocVan.setText(tutor.getAcademicLevel());
             tvTruong.setText(tutor.getSchool());
+            mbRating.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    iClickTutorBtnListener.openAllRatingsFragment(tutor.getPhoneNumber());
+                }
+            });
         }
 
         return mView;

@@ -14,8 +14,10 @@ import android.widget.Toast;
 import com.example.studentapp.R;
 import com.example.studentapp.adapter.ViewPagerAdapter;
 import com.example.studentapp.app_interface.IClickBtnSaveRating;
+import com.example.studentapp.app_interface.IClickTutorBtnListener;
 import com.example.studentapp.extra_fragment.AccountInfoFragment;
 import com.example.studentapp.extra_fragment.AddNewPostFragment;
+import com.example.studentapp.extra_fragment.AllRatingsFragment;
 import com.example.studentapp.extra_fragment.ChangePasswordFragment;
 import com.example.studentapp.extra_fragment.LoginFragment;
 import com.example.studentapp.extra_fragment.PostDetailFragment;
@@ -37,9 +39,9 @@ import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 //    public final static String URL = "http://192.168.1.8:8282"; // Tam url
-//    public final static String url = "http://10.35.48.79"; ///Tien url
+//    public final static String URL = "http://10.35.48.79"; ///Tien url
 //    public final static String URL = "http://172.16.12.110"; ///Tien url
-//    public final static String URL = "http://192.168.1.9:8080"; /// San url
+    public final static String URL = "http://192.168.1.9:8080"; /// San url
 
     public final static String URL_IMAGE = URL +  "/image/";
 
@@ -255,6 +257,18 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void goToAllRatingsFragment(String tutorPhone) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        AllRatingsFragment allRatingsFragment = new AllRatingsFragment(); //Child fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("tutorPhone", tutorPhone);
+        allRatingsFragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.main_activity_content, allRatingsFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     public void goToAccountInfoFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         AccountInfoFragment accountInfoFragment = new AccountInfoFragment(); //Child fragment
@@ -307,7 +321,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToTutorDetailFragment(Tutor tutor, String previousFragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        TutorDetailFragment detailFragment = new TutorDetailFragment(); //Child fragment
+        TutorDetailFragment detailFragment = new TutorDetailFragment(new IClickTutorBtnListener() {
+            @Override
+            public void openAllRatingsFragment(String tutorPhone) {
+                goToAllRatingsFragment(tutorPhone);
+            }
+        }); //Child fragment
         Bundle bundle = new Bundle();
         bundle.putSerializable("tutor", (Serializable) tutor);
         bundle.putString("previous", previousFragment);

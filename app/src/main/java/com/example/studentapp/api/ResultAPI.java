@@ -19,8 +19,4 @@ public class ResultAPI {
     public JsonArray getData() {
         return data;
     }
-
-    public String getMessage() {
-        return message;
-    }
 }
