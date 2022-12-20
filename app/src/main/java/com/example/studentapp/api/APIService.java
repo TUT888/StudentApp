@@ -24,7 +24,7 @@ public interface APIService {
             .setLenient()
             .create();
     APIService apiService = new Retrofit.Builder()
-            .baseUrl(MainActivity.url +"/api/")
+            .baseUrl(MainActivity.URL +"/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(APIService.class);
