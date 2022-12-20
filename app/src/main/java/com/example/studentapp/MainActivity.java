@@ -36,8 +36,8 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
-        public final static String URL = "http://192.168.1.8:8282"; // Tam url
-//        public final static String URL = "http://10.35.55.201"; ///Tien url
+//        public final static String URL = "http://192.168.1.8:8282"; // Tam url
+        public final static String URL = "http://10.35.55.201"; ///Tien url
 //    public final static String URL = "http://172.16.212.73"; ///Tien url
 
     public final static String URL_IMAGE = URL +  "/image/";
