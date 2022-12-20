@@ -36,9 +36,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
-    //    public final static String URL = "http://192.168.1.8:8282"; // Tam url
-    //    public final static String url = "http://10.35.48.79"; ///Tien url
-    //    public final static String URL = "http://172.16.12.110"; ///Tien url
+//    public final static String URL = "http://192.168.1.8:8282"; // Tam url
+//    public final static String url = "http://10.35.48.79"; ///Tien url
+//    public final static String URL = "http://172.16.12.110"; ///Tien url
 
     public static final String PROFILE_FRAGMENT_TAG = "PROFILE_FRAGMENT_TAG";
     public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT_TAG";
@@ -158,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
     public void goToAddNewPostFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         AddNewPostFragment detailFragment = new AddNewPostFragment(); //Child fragment
-        Bundle bundle = new Bundle();
-        detailFragment.setArguments(bundle);
+        //Bundle bundle = new Bundle();
+        //detailFragment.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.main_activity_content, detailFragment);
         fragmentTransaction.addToBackStack(null);

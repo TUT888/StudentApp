@@ -1,6 +1,7 @@
 package com.example.studentapp.api;
 
 import com.example.studentapp.MainActivity;
+import com.example.studentapp.model.Post;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -61,5 +62,9 @@ public interface APIService {
     @POST("user/login.php")
     Call<ResultObjectAPI> userLogin(@Field("phoneNumber") String phoneNumber,
                                     @Field("password") String password);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("post/add_new_post.php")
+    Call<ResultStringAPI> addNewPost(@Body Post newPost);
 }
 
