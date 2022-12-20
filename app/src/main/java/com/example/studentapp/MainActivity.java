@@ -69,9 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setUpBottomNavigationView();
 
         User u = getCurrentLoginUser();
-        if (u == null) {
-            Toast.makeText(this, "You did not login", Toast.LENGTH_SHORT).show();
-        }
+
     }
 
     //ViewPager settings

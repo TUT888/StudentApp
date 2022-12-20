@@ -32,6 +32,10 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
         mIClickPostObjectListener = listener;
     }
 
+    public void setData(List<Post> listPosts) {
+        this.mPostList = listPosts;
+    }
+
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -92,6 +96,9 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
 
     @Override
     public int getItemCount() {
+        if (mPostList==null) {
+            return 0;
+        }
         return mPostList.size();
     }
 

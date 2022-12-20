@@ -66,5 +66,8 @@ public interface APIService {
     @Headers({"Content-Type: application/json"})
     @POST("post/add_new_post.php")
     Call<ResultStringAPI> addNewPost(@Body Post newPost);
+
+    @GET("post/get_my_posts.php")
+    Call<ResultAPI> getMyPosts(@Query("phoneNumber") String phoneNumber);
 }
 

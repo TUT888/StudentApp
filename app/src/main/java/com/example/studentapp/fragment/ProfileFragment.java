@@ -23,7 +23,7 @@ public class ProfileFragment extends Fragment {
     private LinearLayout loginLayoutProfileHeading, logoutLayoutProfileHeading;
     private LinearLayout loginLayoutProfileContent, logoutLayoutProfileContent;
     private Button btnLogin, btnRegister;
-    TextView tvClasses, tvAccountInfo, tvChangePassword, tvLogout;
+    TextView tvClasses, tvAccountInfo, tvChangePassword, tvLogout, tvName;
     // Object Class & variables
     private User currentUser;
     private boolean fromLoginFragment;
@@ -39,6 +39,8 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_profile, container, false);
         mMainActivity = (MainActivity) getActivity();
+        currentUser = mMainActivity.getCurrentLoginUser();
+
         // Check login/logout ==> display corresponding view
 
         loginLayoutProfileHeading = mView.findViewById(R.id.loginLayoutProfileHeading);
@@ -51,6 +53,10 @@ public class ProfileFragment extends Fragment {
         tvAccountInfo = mView.findViewById(R.id.tvAccountInfo);
         tvChangePassword = mView.findViewById(R.id.tvChangePassword);
         tvLogout = mView.findViewById(R.id.tvLogout);
+        tvName = mView.findViewById(R.id.tvName);
+        if (currentUser!=null) {
+            tvName.setText(currentUser.getName());
+        }
 
         btnLogin = mView.findViewById(R.id.btnLogin);
         btnRegister = mView.findViewById(R.id.btnRegister);
