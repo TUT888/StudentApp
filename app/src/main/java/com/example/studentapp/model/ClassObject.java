@@ -5,10 +5,13 @@ import androidx.annotation.Nullable;
 import java.io.Serializable;
 
 public class ClassObject implements Serializable {
+
+    public static final int CLASS_STATUS_REJECTED = -2;
     public static final int CLASS_STATUS_PENDING = -1;
     public static final int CLASS_STATUS_AVAILABLE = 0;
     public static final int CLASS_STATUS_ARCHIVED = 1;
     public static final int CLASS_STATUS_RATED = 2;
+
     String id;
     String className;
     String tutorPhone;
@@ -23,6 +26,9 @@ public class ClassObject implements Serializable {
     private String method; // online or offline
     private String subject;
     private String field;
+
+    public ClassObject() {
+    }
 
     public ClassObject(String id, String className, String tutorPhone, String studentPhone, String place, int status, int fee, String dateTime, String startDate, String endDate, String method, String subject, String field) {
         this.id = id;
