@@ -81,8 +81,19 @@
                 android:textColor="@color/text_color"
                 android:padding="@dimen/mediumSpace"
                 android:inputType="textPassword"
-                android:hint="Mật khẩu"/>
+                android:hint="Mật khẩu"
+                android:layout_marginBottom="120dp"/>
 
+            <TextView
+                android:id="@+id/tvErrorMess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/mediumFontSize"
+                android:text="Error Message"
+                android:textColor="@color/cancel"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
@@ -90,18 +101,10 @@
                 app:cornerRadius="@dimen/largeSpace"
                 android:textColor="@color/white"
                 android:textSize="@dimen/largeFontSize"
-                android:layout_marginTop="130dp"
                 android:paddingVertical="@dimen/mediumSpace"
                 android:layout_marginHorizontal="@dimen/mediumSpace"
                 android:text="Đăng nhập"/>
-            <TextView
-                android:id="@+id/tvForgotPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/mediumFontSize"
-                android:text="@string/forgot_passord"
-                android:textStyle="bold"
-                android:layout_gravity="center"/>
+
             <LinearLayout
                 android:id="@+id/layoutRegister"
                 android:layout_width="wrap_content"

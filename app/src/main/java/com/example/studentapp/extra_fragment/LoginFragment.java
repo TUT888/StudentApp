@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,16 @@ import android.widget.Toast;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
+import com.example.studentapp.api.APIService;
+import com.example.studentapp.api.ResultObjectAPI;
+import com.example.studentapp.api.ResultStringAPI;
 import com.example.studentapp.model.User;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.JsonObject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class LoginFragment extends Fragment {
@@ -25,7 +34,7 @@ public class LoginFragment extends Fragment {
     private ImageButton ibBack;
     private EditText etPhoneNumber, etPassword;
     private MaterialButton btnLogin;
-    private TextView tvRegister;
+    private TextView tvRegister, tvErrorMess;
     // Data
     private User userData;
 
@@ -46,6 +55,7 @@ public class LoginFragment extends Fragment {
         btnLogin = mView.findViewById(R.id.btnLogin);
         ibBack = mView.findViewById(R.id.ibBack);
         tvRegister = mView.findViewById(R.id.tvRegister);
+        tvErrorMess = mView.findViewById(R.id.tvErrorMess);
 
         // Set OnClickListener
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -95,8 +105,47 @@ public class LoginFragment extends Fragment {
     // Call API
     private void requestLogin(String phone, String pass) {
         // Giả sử gọi API, query ra user có phone & pass trùng khớp
-        User u = new User("0908888338", "Vương Hải Đăng", 1, "Quận 1", 0, "20/12/1998", "vhd@gmail.com", 7000008, "123456");
-        userData = u;
+        Call<ResultObjectAPI> apiCall = APIService.apiService.userLogin(phone, pass);
+        apiCall.enqueue(new Callback<ResultObjectAPI>() {
+            @Override
+            public void onResponse(Call<ResultObjectAPI> call, Response<ResultObjectAPI> response) {
+                ResultObjectAPI resultObj = response.body();
+                if (resultObj.getCode()==0) {
+                    hideError();
+                    JsonObject jsonUserObject = resultObj.getData().getAsJsonObject();
+                    User user = new User(
+                            jsonUserObject.get("phoneNumber").getAsString(),
+                            jsonUserObject.get("name").getAsString(),
+                            jsonUserObject.get("status").getAsInt(),
+                            jsonUserObject.get("area").getAsString(),
+                            jsonUserObject.get("gender").getAsInt(),
+                            jsonUserObject.get("birthday").getAsString(),
+                            jsonUserObject.get("email").getAsString(),
+                            jsonUserObject.get("avatar").getAsString(),
+                            "");
+                    userData = user;
+                    //
+                } else {
+                    Log.d("Login Result", "Failed!");
+                    showError("Đăng nhập thất bại:\n" + resultObj.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResultObjectAPI> call, Throwable t) {
+                call.cancel();
+                Log.d("Login Result", "Failed: " + t);
+                showError("Có lỗi xảy ra, vui lòng thử lại sau");
+            }
+        });
     }
 
+    private void showError(String errorMess) {
+        tvErrorMess.setText(errorMess);
+        tvErrorMess.setVisibility(View.VISIBLE);
+    }
+    private void hideError() {
+        tvErrorMess.setText("");
+        tvErrorMess.setVisibility(View.GONE);
+    }
 }

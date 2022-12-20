@@ -472,7 +472,7 @@ public class AddNewPostFragment extends Fragment {
 
     // Fetch API
     private void getUserData() {
-        User u = new User("0908888338", "Vương Hải Đăng", 1, "Quận 1", 0, "20/12/1998", "vhd@gmail.com", 7000008, "123456");
+        User u = new User("0908888338", "Vương Hải Đăng", 1, "Quận 1", 0, "20/12/1998", "vhd@gmail.com", "123456");
         currentUser = u;
     }
 

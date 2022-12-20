@@ -11,7 +11,7 @@ public class Tutor extends User implements Serializable {
     public Tutor() {
     }
 
-    public Tutor(String phoneNumber, String name, int status, String address, int gender, String birthday, String email, int avatar, String password, String school, String academicLevel, String fields, String areas) {
+    public Tutor(String phoneNumber, String name, int status, String address, int gender, String birthday, String email, String avatar, String password, String school, String academicLevel, String fields, String areas) {
         super(phoneNumber, name, status, address, gender, birthday, email, avatar, password);
         this.school = school;
         this.academicLevel = academicLevel;
@@ -19,6 +19,13 @@ public class Tutor extends User implements Serializable {
         this.areas = areas;
     }
 
+    public Tutor(String phoneNumber, String name, int status, String address, int gender, String birthday, String email, String password, String school, String academicLevel, String fields, String areas) {
+        super(phoneNumber, name, status, address, gender, birthday, email, password);
+        this.school = school;
+        this.academicLevel = academicLevel;
+        this.fields = fields;
+        this.areas = areas;
+    }
 
     public String getFields() {
         return fields;
