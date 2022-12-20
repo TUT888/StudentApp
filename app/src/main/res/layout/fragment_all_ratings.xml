@@ -45,7 +45,8 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:visibility="visible"/>
+        android:visibility="visible"
+        android:background="@drawable/time_table_border"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
