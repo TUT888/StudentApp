@@ -37,7 +37,6 @@ public class AllRatingsFragment extends Fragment {
     AllRatingAdapter adapter;
     MainActivity mainActivity;
     ImageButton ibBack;
-    float avg_rating = (float)0.0;
 
     public AllRatingsFragment() {
         // Required empty public constructor
@@ -67,7 +66,6 @@ public class AllRatingsFragment extends Fragment {
             getClassFromTutorId(bundle.getString("tutorPhone"));
         }
         rvAllRatings.setAdapter(adapter);
-
         return view;
     }
 
@@ -78,18 +76,20 @@ public class AllRatingsFragment extends Fragment {
                 ResultAPI resultAPI = response.body();
                 if(response.isSuccessful() && resultAPI != null){
                     if (resultAPI.getCode() == 0){
-                        txtViewRate.setVisibility(View.GONE);
-                        rvAllRatings.setVisibility(View.VISIBLE);
                         JsonArray jsonArray = resultAPI.getData().getAsJsonArray();
+                        if (jsonArray.size() != 0) {
+                            txtViewRate.setVisibility(View.GONE);
+                            rvAllRatings.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            txtViewRate.setVisibility(View.VISIBLE);
+                            rvAllRatings.setVisibility(View.GONE);
+                        }
                         for (int i = 0; i < jsonArray.size(); i++){
                             JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
                             String classId = jsonObject.get("id").getAsString();
                             getRatingFromClassId (classId);
                         }
-                    }
-                    else {
-                        txtViewRate.setVisibility(View.VISIBLE);
-                        rvAllRatings.setVisibility(View.GONE);
                     }
                 }
             }

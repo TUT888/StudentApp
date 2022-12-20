@@ -28,7 +28,7 @@ public class TutorDetailFragment extends Fragment {
 
     private View mView;
     private CircleImageView civAvatar;
-    private TextView tvName, tvRole, tvEmail, tvSDT, tvGioiTinh, tvLinhVuc, tvKhuVuc, tvHocVan, tvTruong, tvDanhGia;
+    private TextView tvName, tvRole, tvEmail, tvSDT, tvGioiTinh, tvLinhVuc, tvKhuVuc, tvHocVan, tvTruong;
     private MaterialButton mbContact, mbRating;
     private ImageButton ibBack;
     private Tutor tutor;
@@ -58,7 +58,6 @@ public class TutorDetailFragment extends Fragment {
         tvTruong = mView.findViewById(R.id.tvTruong);
         mbContact = mView.findViewById(R.id.mbContact);
         ibBack = mView.findViewById(R.id.ibBack);
-        tvDanhGia = mView.findViewById(R.id.tvDanhGia);
         mbRating = mView.findViewById(R.id.mbRating);
 
         ibBack.setOnClickListener(new View.OnClickListener() {
