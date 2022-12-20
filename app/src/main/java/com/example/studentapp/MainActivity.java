@@ -294,17 +294,6 @@ public class MainActivity extends AppCompatActivity {
         String json = gson.toJson(user);
         editor.putString(KEY_USER_LOGIN_HISTORY, json);
         editor.apply();
-
-        //For reset
-        /*
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        List<DownloadFile> tmp = new ArrayList<>();
-        String json = gson.toJson(tmp);
-        editor.putString(KEY_DOWNLOAD_HISTORY, json);
-        editor.apply();
-         */
     }
 
     public void logOut() {
