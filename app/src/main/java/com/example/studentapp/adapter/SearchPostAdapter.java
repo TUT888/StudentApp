@@ -10,7 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
+import com.example.studentapp.api.LoadImageInternet;
 import com.example.studentapp.app_interface.IClickPostObjectListener;
 import com.example.studentapp.model.Post;
 
@@ -20,6 +22,8 @@ public class SearchPostAdapter extends RecyclerView.Adapter<SearchPostAdapter.Se
 
     private ArrayList<Post> posts;
     private ArrayList<String> names;
+    private ArrayList<String> avatars;
+
     private IClickPostObjectListener mIClickPostObjectListener;
 
     public void setData(ArrayList<Post> list) {
@@ -29,6 +33,11 @@ public class SearchPostAdapter extends RecyclerView.Adapter<SearchPostAdapter.Se
 
     public void setNames(ArrayList<String> names) {
         this.names = names;
+        notifyDataSetChanged();
+    }
+
+    public void setAvatars(ArrayList<String> avatars) {
+        this.avatars = avatars;
         notifyDataSetChanged();
     }
 
@@ -58,6 +67,8 @@ public class SearchPostAdapter extends RecyclerView.Adapter<SearchPostAdapter.Se
         if (post == null) {
             return;
         }
+        new LoadImageInternet(holder.imgAvatar).execute(MainActivity.URL_IMAGE +  avatars.get(position));
+
         //holder.imgAvatar.setImageResource(post.getUser().getAvatar());
         holder.tvName.setText(names.get(position));
 
