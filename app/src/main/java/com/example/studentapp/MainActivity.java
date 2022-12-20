@@ -285,8 +285,6 @@ public class MainActivity extends AppCompatActivity {
         return currentUser;
     }
 
-
-
     public void savedLoginUser(User user) {
         SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
