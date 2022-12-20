@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
 //    public final static String URL = "http://172.16.212.73"; ///Tien url
 
     public final static String URL_IMAGE = URL +  "/image/";
-
+    public static String CURRENT_LOGIN_NAME = "";
+    public static final String CURRENT_LOGIN_ROLE = "Học viên";
     public static final String PROFILE_FRAGMENT_TAG = "PROFILE_FRAGMENT_TAG";
     public static final String LOGIN_FRAGMENT_TAG = "LOGIN_FRAGMENT_TAG";
 
@@ -71,7 +72,13 @@ public class MainActivity extends AppCompatActivity {
         setUpBottomNavigationView();
 
         User u = getCurrentLoginUser();
+        if (u!=null) {
+            setCurrentUserName(u.getName());
+        }
+    }
 
+    private static void setCurrentUserName(String name) {
+        CURRENT_LOGIN_NAME = name;
     }
 
     //ViewPager settings

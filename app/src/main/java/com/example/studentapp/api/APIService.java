@@ -59,7 +59,7 @@ public interface APIService {
     Call<ResultAPI> getRatingByClassID(@Query("classID") String classID);
 
     @FormUrlEncoded
-    @POST("user/login.php")
+    @POST("user/login_student.php")
     Call<ResultObjectAPI> userLogin(@Field("phoneNumber") String phoneNumber,
                                     @Field("password") String password);
 
@@ -75,5 +75,8 @@ public interface APIService {
 
     @GET("class/get_pending_class.php")
     Call<ResultAPI> getPendingClass(@Query("phoneNumber") String search);
+
+    @GET("post/remove_my_post.php")
+    Call<ResultStringAPI> removeMyPost(@Query("postID") String postID);
 }
 

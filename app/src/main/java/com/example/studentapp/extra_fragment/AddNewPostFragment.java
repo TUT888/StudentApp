@@ -373,9 +373,9 @@ public class AddNewPostFragment extends Fragment {
                 // update action
             } else {
                 // ad action
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("ddmmyyyy-hhmmss");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("ddMMyyyy-hhmmss");
                 String id = "P"+dtf.format(LocalDateTime.now());
-                String dateCreate = DateTimeFormatter.ofPattern("dd-mm-yyyy").format(LocalDateTime.now());
+                String dateCreate = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
                 Call<ResultStringAPI> apiCall =  APIService.apiService.addNewPost(new Post(
                         id, inputTitle, Post.POST_STATUS_WAITING, currentUser.getPhoneNumber(),
                         inputSubject, inputField, inputDateTime, inputPlace, inputMethod,
