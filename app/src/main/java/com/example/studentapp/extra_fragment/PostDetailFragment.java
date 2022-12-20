@@ -162,7 +162,7 @@ public class PostDetailFragment extends Fragment {
                     - If exists, change the status of post & class
                      */
                     Toast.makeText(getContext(), "Đã tạo lớp, đợi đối phương chấp nhận", Toast.LENGTH_SHORT).show();
-                    getChildFragmentManager().popBackStack();
+                    getActivity().getSupportFragmentManager().popBackStack();
                     mMainActivity.resetViewPagerUI(2);
                 }
             }
@@ -187,7 +187,7 @@ public class PostDetailFragment extends Fragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Call API xóa bài
                 Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
-                getChildFragmentManager().popBackStack();
+                getActivity().getSupportFragmentManager().popBackStack();
                 mMainActivity.resetViewPagerUI(2);
             }
         });
