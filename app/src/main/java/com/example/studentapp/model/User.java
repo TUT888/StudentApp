@@ -39,7 +39,7 @@ public class User implements Serializable {
         this.birthday = birthday;
         this.email = email;
         this.password = password;
-        this.avatar = "";
+        this.avatar = "avatar.jpg";
     }
 
     public User() {
