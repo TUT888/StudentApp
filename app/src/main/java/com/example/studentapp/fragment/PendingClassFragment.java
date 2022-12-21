@@ -43,6 +43,7 @@ public class PendingClassFragment extends Fragment {
     private ArrayList<ClassObject> pendingClassArrayList;
     private PendingClassAdapter pendingClassAdapter;
     private TextView tvLoginRequest;
+    private ArrayList<Integer> roles;
 
 
     private MainActivity mMainActivity;
@@ -168,6 +169,7 @@ public class PendingClassFragment extends Fragment {
     }
 
     private void initClass() {
+        roles = new ArrayList<>();
         pendingClassArrayList = new ArrayList<>();
         Log.d("currentUser", "initClass: " + currentUser.getPhoneNumber());
         APIService.apiService.getPendingClass(currentUser.getPhoneNumber()).enqueue(new retrofit2.Callback<ResultAPI>() {
@@ -179,6 +181,7 @@ public class PendingClassFragment extends Fragment {
                     if (resultAPI.getCode() == 0){
                         for (int i = 0; i < resultAPI.getData().getAsJsonArray().size(); i++){
                             JsonObject jsonObject = resultAPI.getData().getAsJsonArray().get(i).getAsJsonObject();
+                            Log.d("jsonObject", "onResponse: " + jsonObject);
                             ClassObject classObject = new ClassObject();
                             classObject.setId(jsonObject.get("id").getAsString());
                             classObject.setClassName(jsonObject.get("className").getAsString());
@@ -186,7 +189,7 @@ public class PendingClassFragment extends Fragment {
                             classObject.setTutorPhone(jsonObject.get("tutorPhone").getAsString());
                             classObject.setStudentPhone(jsonObject.get("studentPhone").getAsString());
                             classObject.setPlace(jsonObject.get("place").getAsString());
-                            classObject.setStatus(jsonObject.get("status").getAsInt());
+                            classObject.setStatus(jsonObject.get("class_status").getAsInt());
                             classObject.setStartDate(jsonObject.get("startDate").getAsString());
                             classObject.setEndDate(jsonObject.get("endDate").getAsString());
                             classObject.setFee(jsonObject.get("fee").getAsInt());
@@ -194,8 +197,10 @@ public class PendingClassFragment extends Fragment {
                             classObject.setMethod(jsonObject.get("method").getAsString());
                             classObject.setField(jsonObject.get("field").getAsString());
                             pendingClassArrayList.add(classObject);
+                            roles.add(jsonObject.get("role").getAsInt());
                         }
                         pendingClassAdapter.setData(pendingClassArrayList);
+                        pendingClassAdapter.setRoles(roles);
                     }
                 }
 
