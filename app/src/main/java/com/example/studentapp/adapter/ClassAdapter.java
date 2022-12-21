@@ -81,13 +81,13 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         holder.classMethod.setText(mClass.getMethod());
         holder.classSubject.setText(mClass.getSubject());
         holder.classField.setText(mClass.getField());
-        if (mClass.getStatus() == 1) {
+        if (mClass.getStatus() == ClassObject.CLASS_STATUS_ARCHIVED) {
             holder.classStatus.setTextColor(ContextCompat.getColor(holder.className.getContext(), R.color.waiting));
             holder.classStatus.setText("Lưu trữ");
             holder.classRate.setText("Đánh giá");
             holder.classRate.setVisibility(View.VISIBLE);
         }
-        else if (mClass.getStatus() == 2) {
+        else if (mClass.getStatus() == ClassObject.CLASS_STATUS_RATED) {
             holder.classStatus.setTextColor(ContextCompat.getColor(holder.className.getContext(), R.color.close));
             holder.classStatus.setText("Đã đánh giá");
             holder.classRate.setText("Xem đánh giá");
@@ -95,7 +95,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         }
         else {
             holder.classStatus.setTextColor(ContextCompat.getColor(holder.className.getContext(), R.color.active));
-            holder.classStatus.setText("Đang học");
+            holder.classStatus.setText("Đang họạt động");
             holder.classRate.setVisibility(View.INVISIBLE);
         }
 
@@ -103,11 +103,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         LocalDate endDate = LocalDate.parse(mClass.getEndDate(), formatter);
         if (LocalDate.now().isAfter(endDate)) {
             if (mClass.getStatus() == 0) {
-                mClass.setStatus(1);
-                holder.classStatus.setTextColor(ContextCompat.getColor(holder.className.getContext(), R.color.waiting));
-                holder.classStatus.setText("Lưu trữ");
-                holder.classRate.setText("Đánh giá");
-                holder.classRate.setVisibility(View.VISIBLE);
+                changeClassStatus(position, 1);
             }
         }
 
@@ -132,11 +128,11 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         return 0;
     }
 
-    public void changeClassStatus (int position) {
+    public void changeClassStatus (int position, int status) {
         ClassObject classObject = classes.get(position);
         Map<String,String> body = new HashMap<String, String>();
         body.put("id", classObject.getId());
-        body.put("status", ""+2);
+        body.put("status", ""+status);
         APIService.apiService.updateStatus(body).enqueue(new Callback<ResultStringAPI>() {
             @Override
             public void onResponse(Call<ResultStringAPI> call, Response<ResultStringAPI> response) {
@@ -144,7 +140,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
                 if (response.isSuccessful() && resultAPI != null) {
                     if (resultAPI.getCode() == 0) {
                         Log.d("onResponse:", "Successfully added new rating");
-                        classes.get(position).setStatus(2);
+                        classes.get(position).setStatus(status);
                         notifyItemChanged(position);
                     }
                     else {
