@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
+import com.example.studentapp.api.LoadImageInternet;
 import com.example.studentapp.fragment.MyPostFragment;
 import com.example.studentapp.model.Post;
 import com.example.studentapp.model.User;
@@ -22,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AccountInfoFragment extends Fragment {
     private MainActivity mMainActivity;
     private View mView;
-    private CircleImageView civAvatar;
+    private ImageView civAvatar;
     private TextView tvName, tvPhoneNumber, tvArea, tvGender, tvBirthday, tvEmail, tvStatus;
     private ImageButton ibBack;
     // Data
@@ -41,15 +43,17 @@ public class AccountInfoFragment extends Fragment {
 
         ibBack = mView.findViewById(R.id.ibBack);
         tvPhoneNumber = mView.findViewById(R.id.tvPhoneNumber);
-        tvArea = mView.findViewById(R.id.tvPhoneNumber);
+        tvArea = mView.findViewById(R.id.tvArea);
         tvGender = mView.findViewById(R.id.tvGender);
         tvBirthday = mView.findViewById(R.id.tvBirthday);
         tvEmail = mView.findViewById(R.id.tvEmail);
         tvStatus = mView.findViewById(R.id.tvStatus);
         tvName = mView.findViewById(R.id.tvName);
+        civAvatar = mView.findViewById(R.id.civAvatar);
 
         currentUser = mMainActivity.getCurrentLoginUser();
         if (currentUser!=null) {
+            new LoadImageInternet(civAvatar).execute(MainActivity.URL_IMAGE +  currentUser.getAvatar());
             tvName.setText(currentUser.getName());
             tvPhoneNumber.setText(currentUser.getPhoneNumber());
             tvArea.setText(currentUser.getAddress());

@@ -354,6 +354,8 @@ public class MainActivity extends AppCompatActivity {
         String json = gson.toJson(null);
         editor.putString(KEY_USER_LOGIN_HISTORY, json);
         editor.apply();
+
+        resetViewPagerUI(4);
     }
 
     public void goToTutorDetailFragment(Tutor tutor, String previousFragment){
