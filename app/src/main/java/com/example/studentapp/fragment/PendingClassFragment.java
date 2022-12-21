@@ -75,7 +75,11 @@ public class PendingClassFragment extends Fragment {
             rcvPendingClass.setVisibility(View.VISIBLE);
             tvLoginRequest.setVisibility(View.GONE);
 
-            initClass();
+            if (currentUser==null) {
+                pendingClassArrayList = new ArrayList<>();
+            } else {
+                initClass();
+            }
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
             rcvPendingClass.setLayoutManager(linearLayoutManager);
 

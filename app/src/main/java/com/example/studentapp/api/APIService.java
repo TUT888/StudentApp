@@ -3,6 +3,7 @@ package com.example.studentapp.api;
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.model.ClassObject;
 import com.example.studentapp.model.Post;
+import com.example.studentapp.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -97,4 +98,8 @@ public interface APIService {
     @POST("user/change_password.php")
     Call<ResultStringAPI> changePassword(@Field("phoneNumber") String phoneNumber,
                                          @Field("newPassword") String newPassword);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("user/student_register.php")
+    Call<ResultStringAPI> register(@Body User newUser);
 }

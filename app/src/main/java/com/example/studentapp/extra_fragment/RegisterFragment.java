@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,15 @@ import android.widget.Toast;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
+import com.example.studentapp.api.APIService;
+import com.example.studentapp.api.ResultStringAPI;
+import com.example.studentapp.model.Post;
 import com.example.studentapp.model.User;
 import com.google.android.material.button.MaterialButton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RegisterFragment extends Fragment {
@@ -49,7 +57,7 @@ public class RegisterFragment extends Fragment {
 
         etName = mView.findViewById(R.id.etName);
         etPhoneNumber = mView.findViewById(R.id.etPhoneNumber);
-        etPassword = mView.findViewById(R.id.etName);
+        etPassword = mView.findViewById(R.id.etPassword);
         etEmail = mView.findViewById(R.id.etEmail);
         etBirthday = mView.findViewById(R.id.etBirthday);
         etArea = mView.findViewById(R.id.etArea);
@@ -130,8 +138,6 @@ public class RegisterFragment extends Fragment {
             Toast.makeText(mMainActivity, "Hãy nhập họ và tên", Toast.LENGTH_SHORT).show();
         } else if (birthday.equals("")) {
             Toast.makeText(mMainActivity, "Hãy nhập ngày sinh", Toast.LENGTH_SHORT).show();
-        } else if (birthday.split("/").length != 3) {
-            Toast.makeText(mMainActivity, "Ngày sinh không hợp lệ", Toast.LENGTH_SHORT).show();
         } else if (phoneNumber.equals("")) {
             Toast.makeText(mMainActivity, "Hãy nhập số điện thoại", Toast.LENGTH_SHORT).show();
         } else if (pass.equals("")) {
@@ -144,6 +150,30 @@ public class RegisterFragment extends Fragment {
             //User newUser = new User(phoneNumber, name, 0, area,
             //        gender, birthday, email, R.drawable.ic_default_user, pass);
             //Call Register API
+            User newUser = new User(phoneNumber, name, User.USER_STATUS_NOT_VERIFIED, area, gender, birthday, email, pass);
+            Call<ResultStringAPI> apiCall =  APIService.apiService.register(newUser);
+            apiCall.enqueue(new Callback<ResultStringAPI>() {
+                @Override
+                public void onResponse(Call<ResultStringAPI> call, Response<ResultStringAPI> response) {
+                    ResultStringAPI resultStringAPI = response.body();
+                    if (resultStringAPI.getCode()==0) {
+                        Log.d("Register Result", "Successful");
+                        Toast.makeText(mMainActivity, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
+                        getActivity().getSupportFragmentManager().popBackStack();
+                        mMainActivity.resetViewPagerUI(4);
+                    } else {
+                        Log.d("Register Result", "Failed: " + resultStringAPI.getMessage());
+                        Toast.makeText(mMainActivity, "Đăng ký tài khoản thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResultStringAPI> call, Throwable t) {
+                    call.cancel();
+                    Log.d("Register Result", "Failed: " + t);
+                    Toast.makeText(mMainActivity, "Có lỗi xảy ra, vui lòng thử lại sau!", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

@@ -85,6 +85,9 @@ public class MyPostFragment extends Fragment {
         //getBooksFromDatabase(getBooksUrl);
 
         btnAddNewPost = mView.findViewById(R.id.btnAddNewPost);
+        if (currentUser==null) {
+            btnAddNewPost.setClickable(false);
+        }
         btnAddNewPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,6 +161,8 @@ public class MyPostFragment extends Fragment {
         super.onResume();
         Log.d("My Post Fragment", "On Resume: Refresh & Get Data Again");
         myPostArrayList = initPost();
-        getPosts(currentUser.getPhoneNumber());
+        if (currentUser!=null) {
+            getPosts(currentUser.getPhoneNumber());
+        }
     }
 }

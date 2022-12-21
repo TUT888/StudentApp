@@ -17,13 +17,16 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
 import com.example.studentapp.api.APIService;
+import com.example.studentapp.api.LoadImageInternet;
 import com.example.studentapp.api.ResultObjectAPI;
 import com.example.studentapp.api.ResultStringAPI;
 import com.example.studentapp.fragment.MyPostFragment;
@@ -53,6 +56,8 @@ public class AddNewPostFragment extends Fragment {
     private CheckBox cbMonday, cbTuesday, cbWednesday, cbThursday, cbFriday, cbSaturday, cbSunday;
     private EditText etTimeMonday, etTimeTuesday, etTimeWednesday, etTimeThursday, etTimeFriday, etTimeSaturday, etTimeSunday;
 
+    private TextView tvName;
+    private ImageView imgAvatar;
     // Data
     private String action;
     private User currentUser;
@@ -76,6 +81,13 @@ public class AddNewPostFragment extends Fragment {
         mMainActivity = (MainActivity) getActivity();
         currentUser = mMainActivity.getCurrentLoginUser();
         bindView();
+
+        tvName = mView.findViewById(R.id.tvName);
+        imgAvatar = mView.findViewById(R.id.imgAvatar);
+        if (currentUser!=null) {
+            tvName.setText(currentUser.getName());
+            new LoadImageInternet(imgAvatar).execute(MainActivity.URL_IMAGE +  currentUser.getAvatar());
+        }
 
         Bundle bundle = getArguments();
         if (bundle != null) {
