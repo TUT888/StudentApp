@@ -33,7 +33,7 @@ public interface APIService {
             .create(APIService.class);
 
     @GET("post/get_search_post.php")
-    Call<ResultObjectAPI> getSearchPost(@Query("key") String search);
+    Call<ResultObjectAPI> getSearchPost(@Query("key") String search, @Query("user_id") String user_id);
 
     @GET("user/get_user.php")
     Call<ResultObjectAPI> getUser(@Query("phoneNumber") String id);
@@ -100,4 +100,8 @@ public interface APIService {
     @Headers({"Content-Type: application/json"})
     @POST("user/student_register.php")
     Call<ResultStringAPI> register(@Body User newUser);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("post/update_hideFrom.php")
+    Call<ResultStringAPI> updateHideFrom(@Body Map<String,String> body);
 }
