@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.studentapp.MainActivity;
@@ -42,6 +43,8 @@ public class MyPostFragment extends Fragment {
 
     private MaterialButton btnAddNewPost;
     private User currentUser;
+
+    private TextView notLoginPostView;
 
     public MyPostFragment() {
         // Required empty public constructor
@@ -85,6 +88,7 @@ public class MyPostFragment extends Fragment {
         //getBooksFromDatabase(getBooksUrl);
 
         btnAddNewPost = mView.findViewById(R.id.btnAddNewPost);
+        notLoginPostView = mView.findViewById(R.id.notLoginPostView);
         if (currentUser==null) {
             btnAddNewPost.setClickable(false);
         }
@@ -162,7 +166,16 @@ public class MyPostFragment extends Fragment {
         Log.d("My Post Fragment", "On Resume: Refresh & Get Data Again");
         myPostArrayList = initPost();
         if (currentUser!=null) {
+            btnAddNewPost.setClickable(true);
+            btnAddNewPost.setVisibility(View.VISIBLE);
+            rcvMyPosts.setVisibility(View.VISIBLE);
+            notLoginPostView.setVisibility(View.GONE);
             getPosts(currentUser.getPhoneNumber());
+        } else {
+            btnAddNewPost.setClickable(false);
+            btnAddNewPost.setVisibility(View.GONE);
+            rcvMyPosts.setVisibility(View.GONE);
+            notLoginPostView.setVisibility(View.VISIBLE);
         }
     }
 }
