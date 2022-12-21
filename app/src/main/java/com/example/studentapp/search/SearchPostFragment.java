@@ -145,7 +145,11 @@ public class SearchPostFragment extends Fragment {
         filteredList = new ArrayList<>();
         nameList = new ArrayList<>();
         avatarList = new ArrayList<>();
-        APIService.apiService.getSearchPost(text, loginUser.getPhoneNumber()).enqueue(new retrofit2.Callback<ResultObjectAPI>() {
+        String phone = "";
+        if (loginUser != null) {
+            phone = loginUser.getPhoneNumber();
+        }
+        APIService.apiService.getSearchPost(text, phone).enqueue(new retrofit2.Callback<ResultObjectAPI>() {
             @Override
             public void onResponse(retrofit2.Call<ResultObjectAPI> call, retrofit2.Response<ResultObjectAPI> response) {
                 ResultObjectAPI resultAPI = response.body();

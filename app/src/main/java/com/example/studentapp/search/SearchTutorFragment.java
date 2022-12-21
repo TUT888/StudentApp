@@ -61,23 +61,6 @@ public class SearchTutorFragment extends Fragment {
                 mMainActivity.goToTutorDetailFragment(tutor, SearchTutorFragment.class.getSimpleName());
 
             }
-
-            @Override
-            public void onClickBtnHideTutor(Tutor tutor) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage("Bạn có muốn ẩn người dùng này không?")
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                searchTutorAdapter.remove(tutor);
-                            }
-                        })
-                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                            }
-                        });
-                builder.show();
-            }
         });
         rcvSearchTutor.setAdapter(searchTutorAdapter);
 

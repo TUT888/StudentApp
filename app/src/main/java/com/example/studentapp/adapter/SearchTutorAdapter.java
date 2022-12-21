@@ -25,10 +25,6 @@ public class SearchTutorAdapter extends RecyclerView.Adapter<SearchTutorAdapter.
         notifyDataSetChanged();
     }
 
-    public void remove(Tutor tutor){
-        tutorList.remove(tutor);
-        notifyDataSetChanged();
-    }
 
     public SearchTutorAdapter(ArrayList<Tutor> tutorList, IClickTutorObjectListener mListener) {
         this.tutorList = tutorList;
@@ -63,12 +59,7 @@ public class SearchTutorAdapter extends RecyclerView.Adapter<SearchTutorAdapter.
                 mListener.onClickTutorObject(tutor);
             }
         });
-        holder.btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onClickBtnHideTutor(tutor);
-            }
-        });
+
     }
     @Override
     public int getItemCount() {
@@ -79,7 +70,7 @@ public class SearchTutorAdapter extends RecyclerView.Adapter<SearchTutorAdapter.
     }
     public class SearchTutorViewHolder extends RecyclerView.ViewHolder {
         private TextView tvName, tvRole, tvGioiTinh, tvKhuVuc, tvChuyenMon;
-        private ImageView imgAvatar, btnClose;
+        private ImageView imgAvatar;
         public SearchTutorViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvName);
@@ -88,7 +79,6 @@ public class SearchTutorAdapter extends RecyclerView.Adapter<SearchTutorAdapter.
             tvKhuVuc = itemView.findViewById(R.id.tvKhuVuc);
             tvChuyenMon = itemView.findViewById(R.id.tvChuyenMon);
             imgAvatar = itemView.findViewById(R.id.imgAvatar);
-            btnClose = itemView.findViewById(R.id.btnClose);
         }
     }
 }
