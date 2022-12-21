@@ -56,6 +56,7 @@ public class AddNewPostFragment extends Fragment {
     // Data
     private String action;
     private User currentUser;
+    private Post baseUpdatePost;
     private String[] choiceOfPlaces = MainActivity.PLACES_TO_CHOOSE;
     private boolean[] checkedPlaces = new boolean[choiceOfPlaces.length];
     private String[] selectedPlaces = new String[choiceOfPlaces.length];
@@ -83,6 +84,7 @@ public class AddNewPostFragment extends Fragment {
             fillViewInfo(basePost);
             if (action.equals("update")) {
                 btnPost.setText("Thay đổi");
+                baseUpdatePost = basePost;
             }
         } else {
             action = "";
@@ -371,8 +373,37 @@ public class AddNewPostFragment extends Fragment {
             // Check action
             if (action.equals("update")) {
                 // update action
+                Post postUpdated = new Post(
+                        baseUpdatePost.getId(), inputTitle, Post.POST_STATUS_EDITED, currentUser.getPhoneNumber(),
+                        inputSubject, inputField, inputDateTime, inputPlace, inputMethod,
+                        inputTuition, inputDesc, baseUpdatePost.getPostDate(), baseUpdatePost.getHideFrom()
+                );
+                Call<ResultStringAPI> apiCall =  APIService.apiService.updatePost(postUpdated);
+                apiCall.enqueue(new Callback<ResultStringAPI>() {
+                    @Override
+                    public void onResponse(Call<ResultStringAPI> call, Response<ResultStringAPI> response) {
+                        ResultStringAPI resultStringAPI = response.body();
+                        if (resultStringAPI.getCode()==0) {
+                            Log.d("Update post Result", "Successful");
+                            Toast.makeText(mMainActivity, "Cập nhật bài đăng thành công", Toast.LENGTH_SHORT).show();
+                            getActivity().getSupportFragmentManager().popBackStack();
+                            getActivity().getSupportFragmentManager().popBackStack();
+                            mMainActivity.resetViewPagerUI(2);
+                        } else {
+                            Log.d("Update Post Result", "Failed: " + resultStringAPI.getMessage());
+                            Toast.makeText(mMainActivity, "Cập nhật bài đăng thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResultStringAPI> call, Throwable t) {
+                        call.cancel();
+                        Log.d("Update Result", "Failed: " + t);
+                        Toast.makeText(mMainActivity, "Có lỗi xảy ra, vui lòng thử lại sau!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             } else {
-                // ad action
+                // add action
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("ddMMyyyy-hhmmss");
                 String id = "P"+dtf.format(LocalDateTime.now());
                 String dateCreate = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
@@ -406,8 +437,6 @@ public class AddNewPostFragment extends Fragment {
             }
         }
     }
-
-
 
     private String getInputDateTimeString() {
         String[] selectedDateTimes = new String[7];

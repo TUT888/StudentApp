@@ -56,9 +56,9 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.PostViewHo
         if (post == null) {
             return;
         }
-        new LoadImageInternet(holder.imgAvatar).execute(MainActivity.URL_IMAGE +  MainActivity.CURRENT_LOGIN_AVATAR);
         holder.btnAnBaiDang.setVisibility(View.GONE);
         holder.layoutPostOption.setVisibility(View.VISIBLE);
+        new LoadImageInternet(holder.imgAvatar).execute(MainActivity.URL_IMAGE +  MainActivity.CURRENT_LOGIN_AVATAR);
 
         holder.tvName.setText(MainActivity.CURRENT_LOGIN_NAME);
 

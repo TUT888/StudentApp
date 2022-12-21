@@ -1,6 +1,7 @@
 package com.example.studentapp.api;
 
 import com.example.studentapp.MainActivity;
+import com.example.studentapp.model.ClassObject;
 import com.example.studentapp.model.Post;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -70,6 +71,14 @@ public interface APIService {
     @POST("post/add_new_post.php")
     Call<ResultStringAPI> addNewPost(@Body Post newPost);
 
+    @Headers({"Content-Type: application/json"})
+    @POST("post/update_post.php")
+    Call<ResultStringAPI> updatePost(@Body Post updatePost);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("class/add_new_class.php")
+    Call<ResultStringAPI> addNewClass(@Body ClassObject newClass);
+
     @GET("post/get_my_posts.php")
     Call<ResultAPI> getMyPosts(@Query("phoneNumber") String phoneNumber);
 
@@ -79,4 +88,3 @@ public interface APIService {
     @GET("post/remove_my_post.php")
     Call<ResultStringAPI> removeMyPost(@Query("postID") String postID);
 }
-

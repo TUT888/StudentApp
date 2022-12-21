@@ -153,5 +153,11 @@ public class MyPostFragment extends Fragment {
         return arrayList;
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("My Post Fragment", "On Resume: Refresh & Get Data Again");
+        myPostArrayList = initPost();
+        getPosts(currentUser.getPhoneNumber());
+    }
 }

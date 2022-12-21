@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/mediumSpace">
+    android:padding="@dimen/largeSpace">
 
     <TextView
         android:layout_width="match_parent"
@@ -18,7 +18,37 @@
         android:hint="Số điện thoại"
         android:background="@drawable/bg_add_post"
         android:padding="@dimen/mediumSpace"
-        android:inputType="phone"/>
+        android:inputType="phone"
+        android:layout_marginBottom="@dimen/mediumSpace"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nhập ngày bắt đầu học"
+        android:textSize="18sp"
+        android:textColor="@color/text_color"/>
+    <EditText
+        android:id="@+id/etStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="yyyy-MM-dd"
+        android:background="@drawable/bg_add_post"
+        android:padding="@dimen/mediumSpace"
+        android:inputType="date"
+        android:layout_marginBottom="@dimen/mediumSpace"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nhập ngày kết thúc"
+        android:textSize="18sp"
+        android:textColor="@color/text_color"/>
+    <EditText
+        android:id="@+id/etEndDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="yyyy-MM-dd"
+        android:background="@drawable/bg_add_post"
+        android:padding="@dimen/mediumSpace"
+        android:inputType="date"/>
 </LinearLayout>

@@ -31,6 +31,7 @@ import com.example.studentapp.api.APIService;
 import com.example.studentapp.api.LoadImageInternet;
 import com.example.studentapp.api.ResultStringAPI;
 import com.example.studentapp.fragment.MyPostFragment;
+import com.example.studentapp.model.ClassObject;
 import com.example.studentapp.model.Post;
 import com.example.studentapp.model.User;
 import com.example.studentapp.search.SearchPostFragment;
@@ -146,7 +147,7 @@ public class PostDetailFragment extends Fragment {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.create_class:
-                                createClassFromPost();
+                                confirmCreateClassFromPost();
                                 return true;
                             case R.id.edit_post:
                                 if (post.getStatus()!=Post.POST_STATUS_CREATED_CLASS) {
@@ -210,28 +211,30 @@ public class PostDetailFragment extends Fragment {
         new LoadImageInternet(imgAvatar).execute(MainActivity.URL_IMAGE +  avatar);
     }
 
-    private void createClassFromPost() {
+    private void confirmCreateClassFromPost() {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
         alertBuilder.setTitle("Xác nhận tạo lớp học");
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_create_class_diaglog, null);
         alertBuilder.setView(dialogView);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText etUserPhone = dialogView.findViewById(R.id.etUserPhone);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText etStartDate = dialogView.findViewById(R.id.etStartDate);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText etEndDate = dialogView.findViewById(R.id.etEndDate);
 
         alertBuilder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Tạo lớp
-                String phone = etUserPhone.getText().toString();
-                if (phone.equals("")) {
-                    Toast.makeText(getContext(), "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                String tutorPhone = etUserPhone.getText().toString();
+                String startDate = etStartDate.getText().toString();
+                String endDate = etEndDate.getText().toString();
+                if (tutorPhone.equals("") || startDate.equals("") || endDate.equals("")) {
+                    Toast.makeText(getContext(), "Thông tin không hợp lệ", Toast.LENGTH_SHORT).show();
                 } else {
                     /* Call API:
                     - Select * from where exist this user
                     - If exists, change the status of post & class
                      */
-                    Toast.makeText(getContext(), "Đã tạo lớp, đợi đối phương chấp nhận", Toast.LENGTH_SHORT).show();
-                    getActivity().getSupportFragmentManager().popBackStack();
-                    mMainActivity.resetViewPagerUI(2);
+                    createClassFromPost(tutorPhone, startDate, endDate);
                 }
             }
         });
@@ -243,6 +246,45 @@ public class PostDetailFragment extends Fragment {
         });
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
+    }
+
+    public void createClassFromPost(String tutorPhone, String startDate, String endDate) {
+        ClassObject classObject = new ClassObject(
+                post.getId(), post.getSubject(), tutorPhone,
+                currentUser.getPhoneNumber(), post.getLearningPlaces(),
+                ClassObject.CLASS_STATUS_PENDING, post.getTuition(),
+                post.getDateTimesLearning(), startDate, endDate,
+                post.getMethod(), post.getSubject(), post.getField()
+        );
+
+        Call<ResultStringAPI> apiCall =  APIService.apiService.addNewClass(classObject);
+        apiCall.enqueue(new Callback<ResultStringAPI>() {
+            @Override
+            public void onResponse(Call<ResultStringAPI> call, Response<ResultStringAPI> response) {
+                ResultStringAPI resultStringAPI = response.body();
+                if (response.isSuccessful() || resultStringAPI!=null) {
+                    if (resultStringAPI.getCode()==0) {
+                        post.setStatus(Post.POST_STATUS_CREATED_CLASS);
+                        tvStatus.setText("Đã tạo lớp");
+                        tvStatus.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.post_created_class));
+
+                        Toast.makeText(getContext(), "Đã tạo lớp, đợi đối phương chấp nhận", Toast.LENGTH_SHORT).show();
+                        getActivity().getSupportFragmentManager().popBackStack();
+                        mMainActivity.resetViewPagerUI(2);
+                    } else {
+                        Log.d("Add Class Result", "Failed: " + resultStringAPI.getMessage());
+                        Toast.makeText(mMainActivity, "Tạo lớp thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResultStringAPI> call, Throwable t) {
+                call.cancel();
+                Log.d("Add Result", "Failed: " + t);
+                Toast.makeText(mMainActivity, "Có lỗi xảy ra, vui lòng thử lại sau!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void confirmDeletePost() {
