@@ -31,10 +31,12 @@ public interface APIService {
             .build()
             .create(APIService.class);
 
+//    @GET("post/get_search_post.php")
+//    Call<ResultObjectAPI> getSearchPost(@Query("key") String search);
     @GET("post/get_search_post.php")
-    Call<ResultObjectAPI> getSearchPost(@Query("key") String search);
+    Call<ResultObjectAPI> getSearchPost(@Query("key") String search, @Query("user_id") String user_id);
 
-    @GET("user/get_user.php")
+        @GET("user/get_user.php")
     Call<ResultObjectAPI> getUser(@Query("phoneNumber") String id);
 
     @GET("class/get_classes.php")

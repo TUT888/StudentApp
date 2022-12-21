@@ -23,6 +23,7 @@ import com.example.studentapp.api.ResultAPI;
 import com.example.studentapp.api.ResultObjectAPI;
 import com.example.studentapp.app_interface.IClickPostObjectListener;
 import com.example.studentapp.model.Post;
+import com.example.studentapp.model.User;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class SearchPostFragment extends Fragment {
     private ArrayList<Post> filteredList;
     private ArrayList<String> nameList;
     private ArrayList<String> avatarList;
+    private User loginUser;
 
     public SearchPostFragment() {
         // Required empty public constructor
@@ -51,6 +53,7 @@ public class SearchPostFragment extends Fragment {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_search_post, container, false);
         mMainActivity = (MainActivity) getActivity();
+        loginUser = mMainActivity.getCurrentLoginUser();
         rcvSearchPost = mView.findViewById(R.id.rcvSearchPost);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcvSearchPost.setLayoutManager(linearLayoutManager);
@@ -113,7 +116,7 @@ public class SearchPostFragment extends Fragment {
         filteredList = new ArrayList<>();
         nameList = new ArrayList<>();
         avatarList = new ArrayList<>();
-        APIService.apiService.getSearchPost(text).enqueue(new retrofit2.Callback<ResultObjectAPI>() {
+        APIService.apiService.getSearchPost(text, loginUser.getPhoneNumber()).enqueue(new retrofit2.Callback<ResultObjectAPI>() {
             @Override
             public void onResponse(retrofit2.Call<ResultObjectAPI> call, retrofit2.Response<ResultObjectAPI> response) {
                 ResultObjectAPI resultAPI = response.body();
