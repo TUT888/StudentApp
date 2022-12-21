@@ -27,7 +27,8 @@ public class ClassObject implements Serializable {
     private String subject;
     private String field;
 
-    public ClassObject() {
+    public ClassObject(){
+
     }
 
     public ClassObject(String id, String className, String tutorPhone, String studentPhone, String place, int status, int fee, String dateTime, String startDate, String endDate, String method, String subject, String field) {

@@ -109,8 +109,6 @@ public class SearchPostFragment extends Fragment {
         filterList("");
     }
 
-
-
     public void filterList(String text){
         filteredList = new ArrayList<>();
         nameList = new ArrayList<>();

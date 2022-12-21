@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.studentapp.MainActivity;
 import com.example.studentapp.R;
 import com.example.studentapp.api.LoadImageInternet;
+import com.example.studentapp.app_interface.IClickTutorBtnListener;
 import com.example.studentapp.model.Tutor;
 import com.google.android.material.button.MaterialButton;
 
@@ -27,16 +28,16 @@ public class TutorDetailFragment extends Fragment {
 
     private View mView;
     private CircleImageView civAvatar;
-    private TextView tvName, tvRole, tvEmail, tvSDT, tvGioiTinh, tvLinhVuc, tvKhuVuc, tvHocVan, tvTruong, tvDanhGia;
-    private MaterialButton mbContact;
+    private TextView tvName, tvRole, tvEmail, tvSDT, tvGioiTinh, tvLinhVuc, tvKhuVuc, tvHocVan, tvTruong, tvDate;
+    private MaterialButton mbContact, mbRating;
     private ImageButton ibBack;
     private Tutor tutor;
     private String previousFragment;
-    private RecyclerView rvDanhGia;
+    private IClickTutorBtnListener iClickTutorBtnListener;
 
 
-    public TutorDetailFragment() {
-        // Required empty public constructor
+    public TutorDetailFragment(IClickTutorBtnListener iClickTutorBtnListener) {
+        this.iClickTutorBtnListener = iClickTutorBtnListener;
     }
 
 
@@ -50,6 +51,7 @@ public class TutorDetailFragment extends Fragment {
         tvRole = mView.findViewById(R.id.tvRole);
         tvEmail = mView.findViewById(R.id.tvEmail);
         tvSDT = mView.findViewById(R.id.tvSDT);
+        tvDate = mView.findViewById(R.id.tvBirthday);
         tvGioiTinh = mView.findViewById(R.id.tvGioiTinh);
         tvLinhVuc = mView.findViewById(R.id.tvLinhVuc);
         tvKhuVuc = mView.findViewById(R.id.tvKhuVuc);
@@ -57,7 +59,7 @@ public class TutorDetailFragment extends Fragment {
         tvTruong = mView.findViewById(R.id.tvTruong);
         mbContact = mView.findViewById(R.id.mbContact);
         ibBack = mView.findViewById(R.id.ibBack);
-
+        mbRating = mView.findViewById(R.id.mbRating);
 
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +85,7 @@ public class TutorDetailFragment extends Fragment {
 
         if (tutor != null){
             tvName.setText(tutor.getName());
+            tvDate.setText(tutor.getBirthday());
             tvEmail.setText(tutor.getEmail());
             tvSDT.setText(tutor.getPhoneNumber());
             new LoadImageInternet(civAvatar).execute(MainActivity.URL_IMAGE +  tutor.getAvatar());
@@ -95,6 +98,12 @@ public class TutorDetailFragment extends Fragment {
             tvKhuVuc.setText(tutor.getAreas());
             tvHocVan.setText(tutor.getAcademicLevel());
             tvTruong.setText(tutor.getSchool());
+            mbRating.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    iClickTutorBtnListener.openAllRatingsFragment(tutor.getPhoneNumber());
+                }
+            });
         }
 
         return mView;

@@ -12,11 +12,11 @@ public class ResultAPI {
         return code;
     }
 
-    public JsonArray getData() {
-        return data;
-    }
-
     public String getMessage() {
         return message;
+    }
+
+    public JsonArray getData() {
+        return data;
     }
 }
