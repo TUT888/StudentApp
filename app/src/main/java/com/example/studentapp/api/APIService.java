@@ -87,4 +87,9 @@ public interface APIService {
 
     @GET("post/remove_my_post.php")
     Call<ResultStringAPI> removeMyPost(@Query("postID") String postID);
+
+    @FormUrlEncoded
+    @POST("user/change_password.php")
+    Call<ResultStringAPI> changePassword(@Field("phoneNumber") String phoneNumber,
+                                         @Field("newPassword") String newPassword);
 }

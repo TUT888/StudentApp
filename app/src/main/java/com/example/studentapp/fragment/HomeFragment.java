@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -288,5 +289,11 @@ public class HomeFragment extends Fragment {
             });
             cn.addView(tbr, childNum);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("Home Fragment", "On Resume: Refresh & Get Data Again");
     }
 }

@@ -141,6 +141,7 @@ public class PostDetailFragment extends Fragment {
                 if (post.getStatus()==Post.POST_STATUS_CREATED_CLASS) {
                     pm.getMenu().removeItem(R.id.delete_post);
                     pm.getMenu().removeItem(R.id.edit_post);
+                    pm.getMenu().removeItem(R.id.create_class);
                 }
                 pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override

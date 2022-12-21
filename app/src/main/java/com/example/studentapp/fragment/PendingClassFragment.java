@@ -204,4 +204,12 @@ public class PendingClassFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("Pending Class Fragment", "On Resume: Refresh & Get Data Again");
+        initClass();
+        pendingClassAdapter.notifyDataSetChanged();
+    }
 }
