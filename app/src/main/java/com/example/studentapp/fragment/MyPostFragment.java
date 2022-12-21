@@ -158,6 +158,8 @@ public class MyPostFragment extends Fragment {
         super.onResume();
         Log.d("My Post Fragment", "On Resume: Refresh & Get Data Again");
         myPostArrayList = initPost();
-        getPosts(currentUser.getPhoneNumber());
+        if (currentUser!=null) {
+            getPosts(currentUser.getPhoneNumber());
+        }
     }
 }
