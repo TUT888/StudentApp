@@ -150,7 +150,7 @@ public class SearchPostFragment extends Fragment {
 
             @Override
             public void onFailure(retrofit2.Call<ResultObjectAPI> call, Throwable t) {
-                Toast.makeText(getContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mMainActivity, "Lỗi kết nối", Toast.LENGTH_SHORT).show();
                 Log.d("onFailure", "onFailure: " + t.getMessage());
             }
         });
