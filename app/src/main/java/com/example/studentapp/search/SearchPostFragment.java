@@ -149,7 +149,7 @@ public class SearchPostFragment extends Fragment {
         if (loginUser != null) {
             phone = loginUser.getPhoneNumber();
         }
-        APIService.apiService.getSearchPost(text, phone).enqueue(new retrofit2.Callback<ResultObjectAPI>() {
+        APIService.apiService.getSearchPost(text, phone, 0).enqueue(new retrofit2.Callback<ResultObjectAPI>() {
             @Override
             public void onResponse(retrofit2.Call<ResultObjectAPI> call, retrofit2.Response<ResultObjectAPI> response) {
                 ResultObjectAPI resultAPI = response.body();
