@@ -95,7 +95,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         }
         else {
             holder.classStatus.setTextColor(ContextCompat.getColor(holder.className.getContext(), R.color.active));
-            holder.classStatus.setText("Đang học");
+            holder.classStatus.setText("Đang họạt động");
             holder.classRate.setVisibility(View.INVISIBLE);
         }
 
