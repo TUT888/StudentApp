@@ -78,28 +78,32 @@ public class SearchPostFragment extends Fragment {
                 builder.setMessage("Bạn có muốn ẩn bài đăng này không?")
                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Map<String,String> body = new HashMap<String, String>();
-                                body.put("id",post.getId());
-                                body.put("id_user",loginUser.getPhoneNumber());
-                                APIService.apiService.updateHideFrom(body).enqueue(new Callback<ResultStringAPI>() {
-                                    @Override
-                                    public void onResponse(Call<ResultStringAPI> call, Response<ResultStringAPI> response) {
-                                        ResultStringAPI resultAPI = response.body();
-                                        Log.d("resultAPI", "onResponse: "+ resultAPI);
-                                        if(resultAPI.getCode() == 0){
-                                            searchPostAdapter.remove(post);
-                                            searchPostAdapter.notifyDataSetChanged();
-                                            Toast.makeText(getContext(), "Đã ẩn bài đăng này", Toast.LENGTH_SHORT).show();
+                                if (loginUser == null){
+                                    searchPostAdapter.remove(post);
+                                }else{
+                                    Map<String,String> body = new HashMap<String, String>();
+                                    body.put("id",post.getId());
+                                    body.put("id_user",loginUser.getPhoneNumber());
+                                    APIService.apiService.updateHideFrom(body).enqueue(new Callback<ResultStringAPI>() {
+                                        @Override
+                                        public void onResponse(Call<ResultStringAPI> call, Response<ResultStringAPI> response) {
+                                            ResultStringAPI resultAPI = response.body();
+                                            Log.d("resultAPI", "onResponse: "+ resultAPI);
+                                            if(resultAPI.getCode() == 0){
+                                                searchPostAdapter.remove(post);
+                                                searchPostAdapter.notifyDataSetChanged();
+                                                Toast.makeText(getContext(), "Đã ẩn bài đăng này", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onFailure(Call<ResultStringAPI> call, Throwable t) {
-                                        Toast.makeText(getContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
-                                        Log.d("onFailure 2", "onFailure: " + t.getMessage());
-                                    }
-                                });
-                                searchPostAdapter.remove(post);
+                                        @Override
+                                        public void onFailure(Call<ResultStringAPI> call, Throwable t) {
+                                            Toast.makeText(getContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+                                            Log.d("onFailure 2", "onFailure: " + t.getMessage());
+                                        }
+                                    });
+                                    searchPostAdapter.remove(post);
+                                }
                             }
                         })
                         .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -149,7 +153,7 @@ public class SearchPostFragment extends Fragment {
         if (loginUser != null) {
             phone = loginUser.getPhoneNumber();
         }
-        APIService.apiService.getSearchPost(text, phone, 0).enqueue(new retrofit2.Callback<ResultObjectAPI>() {
+        APIService.apiService.getSearchPost(text, phone, 1).enqueue(new retrofit2.Callback<ResultObjectAPI>() {
             @Override
             public void onResponse(retrofit2.Call<ResultObjectAPI> call, retrofit2.Response<ResultObjectAPI> response) {
                 ResultObjectAPI resultAPI = response.body();
