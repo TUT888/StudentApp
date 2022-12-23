@@ -21,9 +21,15 @@ public class PendingClassAdapter extends RecyclerView.Adapter<PendingClassAdapte
     private ArrayList<ClassObject> classes;
     private ArrayList<Integer> roles;
     private IClickPendingClassListener mIClickPendingClassListener;
+    private ArrayList<String> names;
 
     public PendingClassAdapter(IClickPendingClassListener mIClickPendingClassListener) {
         this.mIClickPendingClassListener  = mIClickPendingClassListener;
+    }
+
+    public void setNames(ArrayList<String> names) {
+        this.names = names;
+        notifyDataSetChanged();
     }
 
     public void setData(ArrayList<ClassObject> list) {
@@ -57,8 +63,8 @@ public class PendingClassAdapter extends RecyclerView.Adapter<PendingClassAdapte
         }
         //holder.imgAvatar.setImageResource(post.getUser().getAvatar());
         holder.className.setText(classObject.getClassName());
-        holder.classTutor.setText(getTutorName(classObject.getTutorPhone()));
-        holder.classFee.setText(classObject.getFee() + "");
+        holder.classTutor.setText(names.get(position));
+        holder.classFee.setText(classObject.getFee()+ "");
         holder.classStartDate.setText(classObject.getStartDate());
         holder.classEndDate.setText(classObject.getEndDate());
         holder.classTime.setText(classObject.getDateTime());

@@ -48,9 +48,9 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 //    public final static String URL = "http://192.168.1.8:8282"; // Tam url
-//    public final static String URL = "http://192.168.137.249"; ///Tien url
+//public final static String URL = "http://10.0.136.237"; ///Tien url
 //    public final static String URL = "http://172.16.12.110"; ///Tien url
-    public final static String URL = "http://172.31.98.11:8080"; /// San url
+public static String URL = "http://172.31.98.225"; ///Tien url
 
     public final static String URL_IMAGE = URL +  "/image/";
     public static String CURRENT_LOGIN_AVATAR = "";
@@ -334,7 +334,9 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String jsonString = sharedPref.getString(KEY_USER_LOGIN_HISTORY, null);
         User currentUser = gson.fromJson(jsonString, User.class);
-
+        if (currentUser!=null) {
+            setCurrentUserData(currentUser.getName(), currentUser.getAvatar());
+        }
         return currentUser;
     }
 

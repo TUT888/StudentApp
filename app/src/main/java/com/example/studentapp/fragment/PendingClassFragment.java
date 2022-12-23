@@ -24,6 +24,7 @@ import com.example.studentapp.adapter.PendingClassAdapter;
 import com.example.studentapp.adapter.SearchViewPagerAdapter;
 import com.example.studentapp.api.APIService;
 import com.example.studentapp.api.ResultAPI;
+import com.example.studentapp.api.ResultObjectAPI;
 import com.example.studentapp.api.ResultStringAPI;
 import com.example.studentapp.app_interface.IClickPendingClassListener;
 import com.example.studentapp.extra_fragment.LoginFragment;
@@ -44,6 +45,7 @@ public class PendingClassFragment extends Fragment {
     private PendingClassAdapter pendingClassAdapter;
     private TextView tvLoginRequest;
     private ArrayList<Integer> roles;
+    private ArrayList<String> names;
 
 
     private MainActivity mMainActivity;
@@ -171,17 +173,18 @@ public class PendingClassFragment extends Fragment {
     private void initClass() {
         roles = new ArrayList<>();
         pendingClassArrayList = new ArrayList<>();
+        names = new ArrayList<>();
         Log.d("currentUser", "initClass: " + currentUser.getPhoneNumber());
-        APIService.apiService.getPendingClass(currentUser.getPhoneNumber()).enqueue(new retrofit2.Callback<ResultAPI>() {
+        APIService.apiService.getPendingClass(currentUser.getPhoneNumber()).enqueue(new retrofit2.Callback<ResultObjectAPI>() {
             @Override
-            public void onResponse(retrofit2.Call<ResultAPI> call, retrofit2.Response<ResultAPI> response) {
-                ResultAPI resultAPI = response.body();
+            public void onResponse(retrofit2.Call<ResultObjectAPI> call, retrofit2.Response<ResultObjectAPI> response) {
+                ResultObjectAPI resultAPI = response.body();
                 Log.d("resultAPI", "onResponse: " + resultAPI);
                 if(response.isSuccessful() && resultAPI != null){
                     if (resultAPI.getCode() == 0){
-                        for (int i = 0; i < resultAPI.getData().getAsJsonArray().size(); i++){
-                            JsonObject jsonObject = resultAPI.getData().getAsJsonArray().get(i).getAsJsonObject();
-                            Log.d("jsonObject", "onResponse: " + jsonObject);
+                        for (int i = 0; i < resultAPI.getData().get("class").getAsJsonArray().size(); i++){
+                            JsonObject jsonObject = resultAPI.getData().get("class").getAsJsonArray().get(i).getAsJsonObject();
+                            String name = resultAPI.getData().get("name").getAsJsonArray().get(i).getAsString();
                             ClassObject classObject = new ClassObject();
                             classObject.setId(jsonObject.get("id").getAsString());
                             classObject.setClassName(jsonObject.get("className").getAsString());
@@ -198,16 +201,18 @@ public class PendingClassFragment extends Fragment {
                             classObject.setField(jsonObject.get("field").getAsString());
                             pendingClassArrayList.add(classObject);
                             roles.add(jsonObject.get("role").getAsInt());
+                            names.add(name);
                         }
                         pendingClassAdapter.setData(pendingClassArrayList);
                         pendingClassAdapter.setRoles(roles);
+                        pendingClassAdapter.setNames(names);
                     }
                 }
 
             }
 
             @Override
-            public void onFailure(retrofit2.Call<ResultAPI> call, Throwable t) {
+            public void onFailure(retrofit2.Call<ResultObjectAPI> call, Throwable t) {
                 Toast.makeText(getContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
                 Log.d("onFailure", "onFailure: " + t.getMessage());
             }
