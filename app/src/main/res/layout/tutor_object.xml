@@ -63,9 +63,10 @@
                                 android:textStyle="bold"/>
                             <TextView
                                 android:id="@+id/tvGioiTinh"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Nam"/>
+                                android:text="Nam"
+                                android:layout_weight="1"/>
                         </TableRow>
                         <TableRow>
                             <TextView
@@ -76,9 +77,10 @@
                             <TextView
                                 android:id="@+id/tvKhuVuc"
                                 android:singleLine="true"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Quận 1, Quận 2"/>
+                                android:text="Quận 1, Quận 2"
+                                android:layout_weight="1"/>
                         </TableRow>
                         <TableRow>
                             <TextView
@@ -88,10 +90,11 @@
                                 android:textStyle="bold"/>
                             <TextView
                                 android:id="@+id/tvChuyenMon"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:text="Toán, Lý, Hóa"/>
+                                android:text="Toán, Lý, Hóa"
+                                android:layout_weight="1"/>
                         </TableRow>
                     </TableLayout>
                 </LinearLayout>
