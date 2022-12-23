@@ -111,6 +111,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Quận 1, Quận 2"
+                        android:singleLine="true"
                         android:textSize="@dimen/largeFontSize"
                         android:textColor="@color/text_color"/>
                 </TableRow>
@@ -128,6 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Thứ 2:9h-12h, Thứ 4:15h-17h30"
+                        android:singleLine="true"
                         android:textSize="@dimen/largeFontSize"
                         android:textColor="@color/text_color"/>
                 </TableRow>

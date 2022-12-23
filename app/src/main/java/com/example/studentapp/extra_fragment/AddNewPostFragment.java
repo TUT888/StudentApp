@@ -459,7 +459,7 @@ public class AddNewPostFragment extends Fragment {
                 Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
                 return "";
             } else {
-                selectedDateTimes[0] = "Thứ 2:" + etTimeMonday.getText().toString();
+                selectedDateTimes[0] = "Thứ 2: " + etTimeMonday.getText().toString();
             }
         }
         if (cbTuesday.isChecked()) {
@@ -468,7 +468,7 @@ public class AddNewPostFragment extends Fragment {
                 Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
                 return "";
             } else {
-                selectedDateTimes[0] = "Thứ 3:" + etTimeTuesday.getText().toString();
+                selectedDateTimes[0] = "Thứ 3: " + etTimeTuesday.getText().toString();
             }
         }
         if (cbWednesday.isChecked()) {
@@ -477,7 +477,7 @@ public class AddNewPostFragment extends Fragment {
                 Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
                 return "";
             } else {
-                selectedDateTimes[0] = "Thứ 4:" + etTimeWednesday.getText().toString();
+                selectedDateTimes[0] = "Thứ 4: " + etTimeWednesday.getText().toString();
             }
         }
         if (cbThursday.isChecked()) {
@@ -486,7 +486,7 @@ public class AddNewPostFragment extends Fragment {
                 Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
                 return "";
             } else {
-                selectedDateTimes[0] = "Thứ 5:" + etTimeThursday.getText().toString();
+                selectedDateTimes[0] = "Thứ 5: " + etTimeThursday.getText().toString();
             }
         }
         if (cbFriday.isChecked()) {
@@ -495,7 +495,7 @@ public class AddNewPostFragment extends Fragment {
                 Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
                 return "";
             } else {
-                selectedDateTimes[0] = "Thứ 6:" + etTimeFriday.getText().toString();
+                selectedDateTimes[0] = "Thứ 6: " + etTimeFriday.getText().toString();
             }
         }
         if (cbSaturday.isChecked()) {
@@ -504,7 +504,7 @@ public class AddNewPostFragment extends Fragment {
                 Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
                 return "";
             } else {
-                selectedDateTimes[0] = "Thứ 7:" + etTimeSaturday.getText().toString();
+                selectedDateTimes[0] = "Thứ 7: " + etTimeSaturday.getText().toString();
             }
         }
         if (cbSunday.isChecked()) {
@@ -513,7 +513,7 @@ public class AddNewPostFragment extends Fragment {
                 Toast.makeText(getContext(), errorMess, Toast.LENGTH_SHORT).show();
                 return "";
             } else {
-                selectedDateTimes[0] = "Chủ nhật:" + etTimeSunday.getText().toString();
+                selectedDateTimes[0] = "Chủ nhật: " + etTimeSunday.getText().toString();
             }
         }
 
