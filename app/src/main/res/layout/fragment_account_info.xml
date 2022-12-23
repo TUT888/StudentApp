@@ -47,8 +47,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civAvatar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@mipmap/ic_launcher"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -92,12 +92,13 @@
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/tvPhoneNumber"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0909090909"
                         android:textSize="20sp"
                         android:textColor="@color/text_color"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"/>
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
@@ -112,12 +113,13 @@
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/tvArea"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Quận 7"
                         android:textSize="20sp"
                         android:textColor="@color/text_color"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"/>
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
@@ -133,12 +135,13 @@
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/tvGender"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Nam"
                         android:textSize="20sp"
                         android:textColor="@color/text_color"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"/>
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
@@ -154,12 +157,13 @@
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/tvBirthday"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="22/02/2002"
                         android:textSize="20sp"
                         android:textColor="@color/text_color"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"/>
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
@@ -175,12 +179,13 @@
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/tvEmail"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Email"
                         android:textSize="20sp"
                         android:textColor="@color/text_color"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"/>
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
@@ -196,12 +201,13 @@
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/tvStatus"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Đã xác thực"
                         android:textSize="20sp"
                         android:textColor="@color/text_color"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"/>
                 </TableRow>
 
             </TableLayout>
