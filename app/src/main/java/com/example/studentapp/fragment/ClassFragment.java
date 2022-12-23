@@ -104,6 +104,8 @@ public class ClassFragment extends Fragment {
                             rvClasses.setVisibility(View.GONE);
                         }
                         else {
+                            txtViewClass.setVisibility(View.GONE);
+                            rvClasses.setVisibility(View.VISIBLE);
                             for (int i = 0; i < jsonArray.size(); i++) {
                                 JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
                                 ClassObject classObject = new ClassObject(jsonObject.get("id").getAsString(),
