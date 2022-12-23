@@ -9,8 +9,8 @@
     android:fillViewport="true">
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/mediumSpace"
         android:layout_marginBottom="@dimen/mediumSpace"
         android:orientation="vertical">
@@ -159,7 +159,6 @@
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="1"
                     android:padding="5dp">
                     <TableRow>
                         <TextView
@@ -171,12 +170,13 @@
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvSubject"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Môn toán"
                             android:textSize="20sp"
                             android:textColor="@color/text_color"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"/>
                     </TableRow>
                     <TableRow
                         android:layout_width="match_parent"
@@ -191,15 +191,16 @@
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvField"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Toán học"
                             android:textSize="20sp"
                             android:textColor="@color/text_color"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"/>
                     </TableRow>
                     <TableRow
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
@@ -212,12 +213,14 @@
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvDateTime"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="T2-T7 từ 7h30-9h10"
+                            android:text="T2-T7 từ 7h30-9h100000000000"
                             android:textSize="20sp"
                             android:textColor="@color/text_color"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_marginLeft="5dp"
+                            android:lineSpacingMultiplier="1"
+                            android:layout_weight="1"/>
                     </TableRow>
                     <TableRow
                         android:layout_width="match_parent"
@@ -233,12 +236,13 @@
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvTuition"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="300.000 VNĐ"
                             android:textSize="20sp"
                             android:textColor="@color/text_color"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"/>
                     </TableRow>
                     <TableRow
                         android:layout_width="match_parent"
@@ -254,12 +258,13 @@
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvMethod"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Offline"
                             android:textSize="20sp"
                             android:textColor="@color/text_color"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"/>
                     </TableRow>
                     <TableRow
                         android:layout_width="match_parent"
@@ -274,12 +279,13 @@
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvArea"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="TP.HCM"
                             android:textSize="20sp"
                             android:textColor="@color/text_color"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"/>
                     </TableRow>
                 </TableLayout>
                 <View
