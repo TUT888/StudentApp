@@ -197,15 +197,19 @@ public class HomeFragment extends Fragment {
         if (childNum == 1) {
             addSchedule(childNum, time, classObject, tableLayout);
         } else {
+            boolean check = false;
             for (int i = 1; i < childNum; i++) {
                 Log.d("childNum: ", ""+i);
                 TableRow tableRow = (TableRow) tableLayout.getChildAt(i);
                 TextView textView = (TextView) tableRow.getChildAt(0);
                 String txt = textView.getText().toString();
                 Log.d("txtView: ", txt);
-                if (!txt.contains(time)) {
-                    addSchedule(childNum, time, classObject, tableLayout);
+                if (txt.contains(time)) {
+                    check = true;
                 }
+            }
+            if (check == false) {
+                addSchedule(childNum, time, classObject, tableLayout);
             }
         }
     }
