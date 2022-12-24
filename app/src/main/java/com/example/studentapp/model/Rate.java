@@ -46,4 +46,8 @@ public class Rate implements Serializable {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public String toString() {
+        return "ClassId: " + classId + ", Rate: " + rate + ", Comment: " + comment + ", Date: " + date;
+    }
 }

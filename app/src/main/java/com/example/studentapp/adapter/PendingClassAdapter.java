@@ -39,7 +39,7 @@ public class PendingClassAdapter extends RecyclerView.Adapter<PendingClassAdapte
 
     public void remove(ClassObject classObject){
         classes.remove(classObject);
-        notifyDataSetChanged();
+        notifyItemRemoved(classes.indexOf(classObject));
     }
 
     public void setRoles(ArrayList<Integer> roles) {

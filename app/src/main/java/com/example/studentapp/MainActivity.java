@@ -385,6 +385,7 @@ public static String URL = "http://10.35.63.73"; ///Tien url
     }
 
     private void callAPIToAddRating (Rate rate) {
+        Log.d("rate", "callAPIToAddRating: " + rate.toString());
         APIService.apiService.addNewRating(rate.getClassId(), rate.getRate(), rate.getComment(), rate.getDate())
                 .enqueue(new Callback<ResultStringAPI>() {
                     @Override

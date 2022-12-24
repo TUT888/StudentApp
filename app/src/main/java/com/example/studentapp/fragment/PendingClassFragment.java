@@ -102,7 +102,6 @@ public class PendingClassFragment extends Fragment {
                                             ResultStringAPI resultAPI = response.body();
                                             if(resultAPI.getCode() == 0){
                                                 pendingClassAdapter.remove(classObject);
-                                                pendingClassAdapter.notifyDataSetChanged();
                                                 Toast.makeText(getContext(), "Đã tham gia lớp học", Toast.LENGTH_SHORT).show();
 
                                             }
