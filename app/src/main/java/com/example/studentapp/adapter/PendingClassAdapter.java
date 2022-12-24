@@ -72,7 +72,7 @@ public class PendingClassAdapter extends RecyclerView.Adapter<PendingClassAdapte
         holder.classField.setText(classObject.getField());
         holder.classSubject.setText(classObject.getSubject());
         holder.classMethod.setText(classObject.getMethod());
-        if(roles.get(position) == 0){
+        if(roles.get(position) == 1){
             holder.llButton.setVisibility(View.GONE);
             holder.tvMessage.setVisibility(View.VISIBLE);
         }else{
