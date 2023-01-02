@@ -6,12 +6,11 @@ Dự án gồm 3 ứng dụng chính: <br>
 - Học viên (Android Application), mã nguồn: https://github.com/TUT888/StudentApp
 - Gia sư (Android Application), mã nguồn: https://github.com/TUT888/TutorApp
 - Admin (Web Application)
-<br>
 
 ## Project Description
-**Đây là mã nguồn ứng dụng dành cho học viên** <br><br>
+**Đây là mã nguồn ứng dụng dành cho học viên** <br>
 - Mô tả học viên: Học viên là người có nhu cầu tìm kiếm gia sư thông qua ứng dụng trung gian. 
-- Chức năng học viên: 
+- Chức năng dành cho học viên: 
   - Học viên có thể đăng bài viết tìm kiếm gia sư với các yêu cầu cụ thể, có thể tìm kiếm các bài viết tìm học viên của gia sư đăng lên để xem xét có gia sư nào phù hợp hay không. Nếu gặp gia sư phù hợp, học viên có thể tiến hành liên lạc ngay với gia sư đó để bàn bạc tạo lớp học mới. <br>
   - Sau khi học xong khóa học của gia sư, học viên có thể đánh giá gia sư đang học. Những đánh giá này từ học viên sẽ giúp tăng độ uy tín cho ứng dụng và các gia sư. <br>
 
