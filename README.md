@@ -2,10 +2,10 @@
 Dự án cuối kỳ môn "Phát triển ứng dụng di động"<br>
 Đề tài: Ứng dụng trung gian cung cấp dịch vụ tìm kiếm gia sư <br>
 
-Dự án gồm 3 ứng dụng chính: <br>
+Dự án gồm 3 phần chính: <br>
 - Học viên (Android Application), mã nguồn: https://github.com/TUT888/StudentApp
 - Gia sư (Android Application), mã nguồn: https://github.com/TUT888/TutorApp
-- Admin (Web Application)
+- Backend, mã nguồn: https://github.com/TUT888/BackendStudentApp
 
 ## Project Description
 **Đây là mã nguồn ứng dụng dành cho học viên** <br>
