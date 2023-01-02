@@ -15,8 +15,8 @@ Dự án gồm 3 phần chính: <br>
   - Sau khi học xong khóa học của gia sư, học viên có thể đánh giá gia sư đang học. Những đánh giá này từ học viên sẽ giúp tăng độ uy tín cho ứng dụng và các gia sư. <br>
 
 ## Installation
-Dự án được thực hiện trên `Android Studio Dolphin | 2021.3.1 Patch1` <br>
-Các phiên bản Android Studio thấp hơn có thể sẽ không chạy được dự án
+- Dự án được thực hiện trên `Android Studio Dolphin | 2021.3.1 Patch1`, các phiên bản Android Studio thấp hơn có thể sẽ không chạy được dự án
+- Dự án cài đặt localhost với XAMPP. Để lấy được dữ liệu từ server, cần phải thay đổi địa chỉ IP được lưu ở biến URL tại MainActivity.java thành địa chỉ IPv4 của máy
 
 ## Authors
 Dự án được thực hiện bởi nhóm gồm 3 thành viên:
