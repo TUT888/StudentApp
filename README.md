@@ -1,25 +1,28 @@
 # Student Android Application
-Dự án cuối kỳ môn "Phát triển ứng dụng di động"<br>
-Đề tài: Ứng dụng trung gian cung cấp dịch vụ tìm kiếm gia sư <br>
+[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/TUT888/StudentApp/blob/master/README.md)
+[![vi](https://img.shields.io/badge/lang-vi-red.svg)](https://github.com/TUT888/StudentApp/blob/master/README.vi.md)
 
-Dự án gồm 3 phần chính: <br>
-- Học viên (Android Application), mã nguồn: https://github.com/TUT888/StudentApp
-- Gia sư (Android Application), mã nguồn: https://github.com/TUT888/TutorApp
-- Backend, mã nguồn: https://github.com/TUT888/BackendStudentApp
+Final project of "Mobile Apps Development" - Ton Duc Thang University <br>
+Topic: The intermediary app facilitates the service of finding tutors <br>
+
+Project includes 3 modules: <br>
+- Application for student (Android Application) at: https://github.com/TUT888/StudentApp
+- Application for tutor (Android Application) at: https://github.com/TUT888/TutorApp
+- Backend API at: https://github.com/TUT888/BackendStudentApp
 
 ## Project Description
-**Đây là mã nguồn ứng dụng dành cho học viên** <br>
-- Mô tả học viên: Học viên là người có nhu cầu tìm kiếm gia sư thông qua ứng dụng trung gian. 
-- Chức năng dành cho học viên: 
-  - Học viên có thể đăng bài viết tìm kiếm gia sư với các yêu cầu cụ thể, có thể tìm kiếm các bài viết tìm học viên của gia sư đăng lên để xem xét có gia sư nào phù hợp hay không. Nếu gặp gia sư phù hợp, học viên có thể tiến hành liên lạc ngay với gia sư đó để bàn bạc tạo lớp học mới. <br>
-  - Sau khi học xong khóa học của gia sư, học viên có thể đánh giá gia sư đang học. Những đánh giá này từ học viên sẽ giúp tăng độ uy tín cho ứng dụng và các gia sư. <br>
+**This is the source code for student application** <br>
+- Student description: A student is someone who needs to find a tutor through the intermediary application.
+- Functionalities:
+  - Students can post requests for tutors with specific requirements. They can also search for posts by tutors looking for students to consider whether any tutor is suitable or not. If they find a suitable tutor, students can immediately contact with that tutor to discuss creating a new class.
+  - After completing a course with a tutor, students can evaluate the tutor. These evaluations from students will help increase the credibility of the application and the tutor.
 
 ## Installation
-- Dự án được thực hiện trên `Android Studio Dolphin | 2021.3.1 Patch1`, các phiên bản Android Studio thấp hơn có thể sẽ không chạy được dự án
-- Dự án cài đặt localhost với XAMPP. Để lấy được dữ liệu từ server, cần phải thay đổi địa chỉ IP được lưu ở biến URL tại MainActivity.java thành địa chỉ IPv4 của máy
+- The project is implemented on `Android Studio Dolphin | 2021.3.1 Patch1`. Lower versions of Android Studio may not be able to run the project.
+- The project installs localhost with XAMPP (Backend API). To retrieve data from the server, you need to change the IP address stored in the URL variable in MainActivity.java to the IPv4 address of your machine.
 
 ## Authors
-Dự án được thực hiện bởi nhóm gồm 3 thành viên:
-- Tất Uyển Tâm [Github](https://github.com/TUT888)
-- Dương Thủy Tiên [Github](https://github.com/tienduong-21)
-- Trương Hiểu San [Github](https://github.com/hs0512)
+The project has done by a group of 3 members:
+- Uyen Tam Tat [Github](https://github.com/TUT888)
+- Thuy Tien Duong [Github](https://github.com/tienduong-21)
+- Hieu San Truong [Github](https://github.com/hs0512)
